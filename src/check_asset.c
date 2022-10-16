@@ -12,6 +12,90 @@
 
 #include "../inc/cub3d.h"
 
+int	no(t_data *data, char *tmp)
+{
+	int	fd;
+
+	if (ft_strncmp(tmp, "NO", 2) == SUCCESS)
+	{
+		if (data->check_no == 0)
+		{
+			data->no = ft_strdup(ft_strchr(tmp, (char)'.'));
+			fd = open(data->no, O_RDONLY);
+			if (fd == -1)
+				return (p_error("PARSING ERROR: NO asset won't open\n"));
+			data->check_no = 1;
+			return (SUCCESS);
+		}
+		if (data->check_no == 1)
+			return (p_error("PARSING ERROR: NO asset duplicates\n"));
+	}
+	return (SUCCESS);
+}
+
+int so(t_data *data, char *tmp)
+{
+	int fd;
+
+	if (ft_strncmp(tmp, "SO", 2) == SUCCESS)
+	{
+		if (data->check_so == 0)
+		{
+			data->so = ft_strdup(ft_strchr(tmp, (char)'.'));
+			fd = open(data->so, O_RDONLY);
+			if (fd == -1)
+				return (p_error("PARSING ERROR: SO asset won't open\n"));
+			data->check_so = 1;
+			return (SUCCESS);
+		}
+		if (data->check_so == 1)
+			return (p_error("PARSING ERROR: SO asset duplicates\n"));
+	}
+	return (SUCCESS);
+}
+
+int	we(t_data *data, char *tmp)
+{
+	int fd;
+
+	if (ft_strncmp(tmp, "WE", 2) == SUCCESS)
+	{
+		if (data->check_we == 0)
+		{
+			data->we = ft_strdup(ft_strchr(tmp, (char)'.'));
+			fd = open(data->we, O_RDONLY);
+			if (fd == -1)
+				return (p_error("PARSING ERROR: WE asset won't open\n"));
+			data->check_we = 1;
+			return (SUCCESS);
+		}
+		if (data->check_we == 1)
+			return (p_error("PARSING ERROR: WE asset duplicates\n"));
+	}
+	return (SUCCESS);
+}
+
+int	ea(t_data *data, char *tmp)
+{
+	int fd;
+
+	if (ft_strncmp(tmp, "EA", 2) == SUCCESS)
+	{
+		if (data->check_ea == 0)
+		{
+			data->ea = ft_strdup(ft_strchr(tmp, (char)'.'));
+			fd = open(data->ea, O_RDONLY);
+			if (fd == -1)
+				return (p_error("PARSING ERROR: EA asset won't open\n"));
+			data->check_ea = 1;
+			return (SUCCESS);
+		}
+		if (data->check_ea == 1)
+			return (p_error("PARSING ERROR: EA asset duplicates\n"));
+	}
+	return (SUCCESS);
+}
+
 int   pars_asset(t_data *d, char *tmp)
 {
 	if (no(d, tmp) != SUCCESS)
@@ -22,69 +106,5 @@ int   pars_asset(t_data *d, char *tmp)
 		return (ERROR);
 	if (ea(d, tmp) != SUCCESS)
 		return (ERROR);
-	return (SUCCESS);
-}
-
-int	no(t_data *data, char *tmp)
-{
-	if (ft_strncmp(tmp, "NO", 2) == SUCCESS)
-	{
-		if (data->check_no == 0)
-		{
-			data->no = ft_strdup(ft_strchr(tmp, (char)'.'));
-			data->check_no = 1;
-			return (SUCCESS);
-		}
-		if (data->check_no == 1)
-			return (ERROR);
-	}
-	return (SUCCESS);
-}
-
-int so(t_data *data, char *tmp)
-{
-	if (ft_strncmp(tmp, "SO", 2) == SUCCESS)
-	{
-		if (data->check_so == 0)
-		{
-			data->so = ft_strdup(ft_strchr(tmp, (char)'.'));
-			data->check_so = 1;
-			return (SUCCESS);
-		}
-		if (data->check_so == 1)
-			return (ERROR);
-	}
-	return (SUCCESS);
-}
-
-int	we(t_data *data, char *tmp)
-{
-	if (ft_strncmp(tmp, "WE", 2) == SUCCESS)
-	{
-		if (data->check_we == 0)
-		{
-			data->we = ft_strdup(ft_strchr(tmp, (char)'.'));
-			data->check_we = 1;
-			return (SUCCESS);
-		}
-		if (data->check_we == 1)
-			return (ERROR);
-	}
-	return (SUCCESS);
-}
-
-int	ea(t_data *data, char *tmp)
-{
-	if (ft_strncmp(tmp, "EA", 2) == SUCCESS)
-	{
-		if (data->check_ea == 0)
-		{
-			data->ea = ft_strdup(ft_strchr(tmp, (char)'.'));
-			data->check_ea = 1;
-			return (SUCCESS);
-		}
-		if (data->check_ea == 1)
-			return (ERROR);
-	}
 	return (SUCCESS);
 }
