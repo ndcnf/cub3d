@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   pars_map.c                                         :+:      :+:    :+:   */
@@ -23,7 +23,7 @@ void	len_line(t_data *data, char *tmp)
 
 int	line_map_ok(const char *tmp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while(tmp[i] != '\0')
@@ -37,18 +37,21 @@ int	line_map_ok(const char *tmp)
 	return (SUCCESS);
 }
 
-int	pars_map(t_data *data, int fd)
+int	pars_map(t_data *d, int fd)
 {
-	char		*tmp;
-	tmp = get_next_line(fd);
-	data->len_line_map = 0;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (i <= d->fd_line)
+		tmp = get_next_line(fd);
 	while (tmp != NULL)
 	{
-		tmp = get_next_line(fd);
-		data->nb_line_map++;
+		d->len_line_map = 0;
 		if (line_map_ok(tmp) != SUCCESS)
 			return (ERROR);
-		len_line(data, tmp);
+		len_line(d, tmp);
+		tmp = get_next_line(fd);
 	}
 	return (SUCCESS);
 }

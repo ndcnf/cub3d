@@ -35,6 +35,7 @@
 
 # define SUCCESS 0
 # define ERROR 1
+# define MAP_START 10
 
 typedef struct s_data
 {
@@ -86,6 +87,11 @@ int		pars_f_n_c(t_data *data, char *tmp);
 int		get_asset(t_data *data, char *tmp);
 int		asset_all_good(t_data *d);
 int		asset(t_data *data, int fd);
+/*
+ * asset_floor_celling_utils.c
+ */
+int		map_start(t_data *d, char *tmp);
+void	init_check_asset(t_data *d);
 /*
 * check_asset.c FULL
 */

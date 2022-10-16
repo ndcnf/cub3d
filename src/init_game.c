@@ -29,6 +29,8 @@ int read_map(t_data *data, int fd, const char *map_cub)
 	fd = open(map_cub, O_RDONLY);
 	if (asset(data, fd) != SUCCESS)
 		return (ERROR);
+	close(fd);
+	fd = open(map_cub, O_RDONLY);
 	if (pars_map(data, fd) != SUCCESS)
 		return (ERROR);
 	printf("pars_map(data, fd) OK\n");

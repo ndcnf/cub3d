@@ -54,10 +54,15 @@ int get_asset(t_data *d, char *tmp)
 	(void)d;
 	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
 		return (ERROR);
-	if (pars_asset(d, tmp) != SUCCESS)
-		return (ERROR);
-	if (pars_f_n_c(d, tmp) != SUCCESS)
-		return (ERROR);
+	if (pars_asset(d, tmp) != SUCCESS || pars_f_n_c(d, tmp) != SUCCESS)
+	{
+		if (tmp[0] != '\0')
+			return (SUCCESS);
+		if (tmp[1] == '1')
+			return (MAP_START);
+		else
+			return (ERROR);
+	}
 	return (SUCCESS);
 }
 
@@ -72,21 +77,28 @@ int asset_all_good(t_data *d)
 int	asset(t_data *d, int fd)
 {
 	char	*tmp;
+	int		start;
 
-	d->check_no = 0;
-	d->check_so = 0;
-	d->check_we = 0;
-	d->check_ea = 0;
-	d->check_f = 0;
-	d->check_c = 0;
+	init_check_asset(d);
 	tmp = get_next_line(fd);
+	d->fd_line = 0;
 	while (tmp != NULL)
 	{
-		if (get_asset(d, tmp) != SUCCESS)
+		start = get_asset(d, tmp);
+		if (start != SUCCESS)
+		{
+			if (start == MAP_START)
+			{
+				if (asset_all_good(d) != SUCCESS)
+					return (ERROR);
+				break ;
+			}
 			return (ERROR);
+		}
+		d->fd_line++;
 		tmp = get_next_line(fd);
 	}
-	if (asset_all_good(d) != SUCCESS)
-		return (ERROR);
+	while (tmp != NULL)
+		tmp = get_next_line(fd);
 	return (SUCCESS);
 }
