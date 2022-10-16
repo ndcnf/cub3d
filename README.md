@@ -7,6 +7,7 @@ Projet structure is on [miro](https://miro.com/welcomeonboard/em0wVVFlUEhoVFVCWj
 (<-invitation link while repo is private): 
 </br>
 
+<<<<<<< HEAD
 teammate: [Nadia Full Powa](https://github.com/ndcnf) </br>
 =======
 Projet structure is on miro.
@@ -17,4 +18,8 @@ Projet structure is on [miro](https://miro.com/welcomeonboard/em0wVVFlUEhoVFVCWj
 (<-invitation link while repo is private): 
 </br>
 
+>>>>>>> Update README.md
+=======
+teammate: [Nadia](https://github.com/ndcnf)
+![myImage](https://media.giphy.com/media/XRB1uf2F9bGOA/giphy.gif)
 >>>>>>> Update README.md
