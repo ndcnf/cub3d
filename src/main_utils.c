@@ -21,6 +21,12 @@ void	safe_free(void **x)
 	}
 }
 
+int p_error(char *error)
+{
+	ft_putstr_fd(error, 2);
+	return (ERROR);
+}
+
 int	args_error(int ac)
 {
 	if (ac == 1)
@@ -42,4 +48,15 @@ void free_map(t_data *data)
 	safe_free((void *)&data->so);
 	safe_free((void *)&data->we);
 	safe_free((void *)&data->ea);
+}
+
+int	safe_open_map_name_cub(const char *mn)
+{
+	int len;
+
+	len = (int)ft_strlen(mn);
+	if (mn == NULL || len < 4 || (ft_strncmp(&mn[len - 4], ".cub", 5) != 0))
+		return (-1);
+	else
+		return(open(mn, O_RDONLY));
 }

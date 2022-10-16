@@ -12,6 +12,8 @@
 
 #include "../inc/cub3d.h"
 
+
+
 void	print_asset(t_data *d)
 {
 	printf("NO:%s\n", d->no);
@@ -22,23 +24,16 @@ void	print_asset(t_data *d)
 	printf("C:%s", d->c);
 }
 
-int read_map(t_data *data, const char *mn)
+int read_map(t_data *data, int fd, const char *map_cub)
 {
-	int fd;
-
-	fd = safe_open_mn(mn);
-	if (fd == -1)
-		return (ERROR);
-	printf("safe_open_mn(mn) OK\n");
+	fd = open(map_cub, O_RDONLY);
 	if (asset(data, fd) != SUCCESS)
 		return (ERROR);
-	printf("asset(data, fd) OK\n");
-	print_asset(data);
 	if (pars_map(data, fd) != SUCCESS)
 		return (ERROR);
 	printf("pars_map(data, fd) OK\n");
 	close(fd);
-	fd = open(mn, O_RDONLY);
+	fd = open(map_cub, O_RDONLY);
 	if (stock_map(data, fd) != SUCCESS)
 		return (ERROR);
 	printf("read_map OK\n");
@@ -46,7 +41,7 @@ int read_map(t_data *data, const char *mn)
 
 }
 
-int	load_map(t_data *data, char *map_name)
+int	load_map(t_data *data, int fd, char *map_cub)
 {
 	data->no = NULL;
 	data->so = NULL;
@@ -57,11 +52,12 @@ int	load_map(t_data *data, char *map_name)
 	data->pposx = -1;
 	data->pposy = -1;
 
-	printf("%s\n", map_name);
+	printf("%d\n", fd);
 
-	if (read_map(data, map_name) != SUCCESS)
+	if (read_map(data, fd, map_cub) != SUCCESS)
 	{
 		free_map(data);
+		close(fd);
 		printf("Error: invalid map\n");
 		return (ERROR);
 	}

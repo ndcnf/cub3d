@@ -12,47 +12,8 @@
 
 #include "../inc/cub3d.h"
 
-int	safe_open_mn(const char *mn)
+int error_colors(t_data *data, char *tmp)
 {
-	int len;
-
-	len = (int)ft_strlen(mn);
-	if (mn == NULL || len < 4 || (ft_strncmp(&mn[len - 4], ".cub", 5) != 0))
-		return (-1);
-	else
-		return(open(mn, O_RDONLY));
-}
-
-int get_asset(t_data *d, char *tmp)
-{
-	(void)d;
-	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
-		return (ERROR);
-	if (pars_asset(d, tmp) != SUCCESS)
-		return (ERROR);
-	return (SUCCESS);
-}
-
-int	asset(t_data *d, int fd)
-{
-	char	*tmp;
-
-	d->full_asset = -1;
-	d->check_no = 0;
-	d->check_so = 0;
-	d->check_we = 0;
-	d->check_ea = 0;
-	d->check_f = 0;
-	d->check_c = 0;
-	tmp = get_next_line(fd);
-	while (tmp != NULL)
-	{
-		if (get_asset(d, tmp) != SUCCESS)
-			return (ERROR);
-		if (pars_f_n_c(d, tmp) != SUCCESS)
-			return (ERROR);
-		tmp = get_next_line(fd);
-	}
 	return (SUCCESS);
 }
 
@@ -64,6 +25,8 @@ int pars_f_n_c(t_data *data, char *tmp)
 		if (data->check_f == 0)
 		{
 			data->f = ft_strdup(ft_strtrim(tmp, "F "));
+			if (error_colors(data, tmp) != SUCCESS)
+				return (p_error("PARSING ERROR: colors setting error\n"));
 			data->check_f = 1;
 			return (SUCCESS);
 		}
@@ -75,11 +38,55 @@ int pars_f_n_c(t_data *data, char *tmp)
 		if (data->check_c == 0)
 		{
 			data->c = ft_strdup(ft_strtrim(tmp, "C "));
+			if (error_colors(data, tmp) != SUCCESS)
+				return (p_error("PARSING ERROR: colors setting error\n"));
 			data->check_c = 1;
 			return (SUCCESS);
 		}
 		if (data->check_c == 1)
 			return (ERROR);
 	}
+	return (SUCCESS);
+}
+
+int get_asset(t_data *d, char *tmp)
+{
+	(void)d;
+	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
+		return (ERROR);
+	if (pars_asset(d, tmp) != SUCCESS)
+		return (ERROR);
+	if (pars_f_n_c(d, tmp) != SUCCESS)
+		return (ERROR);
+	return (SUCCESS);
+}
+
+int asset_all_good(t_data *d)
+{
+	if (d->no == NULL || d->so == NULL || d->we == NULL || !d->ea ||
+			d->f == NULL || d->c == NULL)
+		return (p_error("PARSING ERROR: missing assets or colors (floor || celling)\n"));
+	return (SUCCESS);
+}
+
+int	asset(t_data *d, int fd)
+{
+	char	*tmp;
+
+	d->check_no = 0;
+	d->check_so = 0;
+	d->check_we = 0;
+	d->check_ea = 0;
+	d->check_f = 0;
+	d->check_c = 0;
+	tmp = get_next_line(fd);
+	while (tmp != NULL)
+	{
+		if (get_asset(d, tmp) != SUCCESS)
+			return (ERROR);
+		tmp = get_next_line(fd);
+	}
+	if (asset_all_good(d) != SUCCESS)
+		return (ERROR);
 	return (SUCCESS);
 }

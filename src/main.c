@@ -15,11 +15,20 @@
 int    main(int ac, char **av)
 {
 	t_data	data;
+	int		fd;
 
 	printf("Init game\n");
 	ft_bzero(&data, sizeof(t_data));
-	if (args_error(ac) == ERROR)
-		return (SUCCESS);
-	if (load_map(&data, av[1]) == ERROR)
-		return (SUCCESS);
+	if (args_error(ac) != SUCCESS) {
+		return (ERROR);
+	}
+	fd = safe_open_map_name_cub(av[1]);
+	if (fd == -1)
+		return (ERROR);
+	close(fd);
+	if (load_map(&data, fd, av[1]) != SUCCESS)
+		return (ERROR);
+	close(fd);
+	print_asset(&data);
+	return (SUCCESS);
 }
