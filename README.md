@@ -6,4 +6,4 @@ Projet structure is on [miro](https://miro.com/welcomeonboard/em0wVVFlUEhoVFVCWj
 </br>
 
 teammate: [Nadia Full Powa](https://github.com/ndcnf) </br>
-![myImage](https://media2.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif)
+![myImage](https://media2.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif) 
