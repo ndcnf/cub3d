@@ -14,7 +14,7 @@ Projet structure is on miro.
 >>>>>>> Create README.md
 =======
 Projet structure is on [miro](https://miro.com/welcomeonboard/em0wVVFlUEhoVFVCWjlqWVlBZXVUZGM2SG9sRE9PaTNpdUFVVjQ2eFVWYUdaNnBWQmFUT1FZaWJwSVNyS05SOXwzMDc0NDU3MzYxMzI2MDIzMDI5fDI=?share_link_id=22164280791) 
-Invitation link (while repo is private): 
+(<-invitation link while repo is private): 
 </br>
 
 >>>>>>> Update README.md
