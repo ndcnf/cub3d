@@ -1,73 +1,95 @@
-SRCS_DIR	= ./src/
-SRCS_FILES	=  main.c
-#SRCS_FILES	+= init_game.c mapLoading.c map_args.c map_errors.c maputils.c readmap.c ft_tab.c
-#SRCS_FILES	+= gameplay.c minimap.c mouse.c player_moves.c player_lateral_moves.c
-#SRCS_FILES	+= dda.c distances.c draw.c raycasting.c texturing.c texture_loading.c
-#SRCS_FILES	+= ft_atoi.c ft_itoa.c ft_strlen.c get_next_line.c get_next_line_utils.c exit.c time.c
-
-SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
-
-LIBFT		= ./libft
-MAKELIB		= ${MAKE} -C ${LIBFT}
-
-LIBX		= ./mlx
-
-MAKELIBX	= @${MAKE} -C ${LIBX}
 
 
-O_DIR		= ./objs/
-HEADS		= -I./inc/ -I${LIBFT} -I${LIBX}
+#_______________ COLORS
 
-OBJS_FILES	:= ${SRCS_FILES:.c=.o}
-OBJS		:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
+GREEN	= \033[1;32m
+RED 	= \033[1;31m
+ORANGE	= \033[1;33m
+BUILD	= \e[38;5;225m
+SEP		= \e[38;5;120m
+DUCK	= \e[38;5;227m
+RESET	= \033[0m
 
-OBJS		+= ${LIBFT}/libft.a
+#_______________ FOLDER
 
-OBJS		+= ${LIBX}/libmlx.a
+O_DIR           = ./objs/
+SRCS_DIR		= ./src/
+
+#_______________ FILES
+
+SRCS_FILES	= main.c \
+				asset_floor_celling.c \
+				check_asset.c \
+				error_map.c \
+				error_map_utils.c \
+				init_game.c \
+				main_utils.c \
+				pars_map.c \
+               	print_map.c \
+               	stock_map.c
+
+#_______________ OBJS
+
+OBJS_FILES		:= ${SRCS_FILES:.c=.o}
+OBJS			:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
+
+HEADS_DIR		= ./inc/
+
+NAME			= cub3d
+
+LIBUTILS		= ./utils
 
 
+#_______________ RULES
 
-LIBS		= -framework OpenGL -framework AppKit
+MAKELIB			= ${MAKE} -C
+CC				= gcc
+AR              = ar rcs
+MKDIR           = mkdir -p
+RM              = rm -rf
+CFLAGS          = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
+TSEP            = ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=${RESET}
 
-NAME		= cub3D
+#_______________ COMMANDS
 
-CC			= cc
-AR			= ar rcs
-MKDIR		= mkdir
-CP			= cp -f
-RM			= rm -f
+all:			${NAME}
 
-CFLAGS		= -Wall -Wextra -Werror
-
-all:		${NAME}
-
-${NAME}:	${O_DIR} ${OBJS}
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS} -fsanitize=address
+${NAME}:		${O_DIR} ${OBJS}
+				@printf "\n"
+				@${MAKELIB} ${LIBUTILS}
+				@printf "${TSEP}\n"
+				@printf "${GREEN} 💻 Successfully compiled ${NAME} .o's${RESET} ✅\n"
+				@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a
+				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
+				@printf "${TSEP}\n"
 
 ${O_DIR}:
-			${MKDIR} ${O_DIR}
+				@${MKDIR} ${O_DIR}
+				@printf "\n${BUILD}${O_DIR} Directory Created 📎${RESET}\n\n"
 
-${O_DIR}%.o:${SRCS_DIR}%.c | inc/cub3d.h
-			${CC} ${CFLAGS} ${HEADS} -o $@ -c $<
+${O_DIR}%.o:${SRCS_DIR}%.c
+				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
+				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
 
-${LIBFT}/libft.a:
-			${MAKELIB} all
+clean :
+				@${RM} ${O_DIR}
+				@${MAKELIB} ${LIBUTILS} clean
+				@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} ❌\n"
 
-${LIBX}/libmlx.a:
-			@${MAKELIBX} all
+fclean :
+				@${RM} ${O_DIR}
+				@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} ❌\n"
+				@${RM} ${NAME} ${NAME}.dSYM
+				@${MAKELIB} ${LIBUTILS} fclean
+				@printf "${RED} 💥 Deleted ${NAME} files${RESET} ❌\n"
 
-clean:
-			${RM} ${OBJS} ${OBJSB}
-			@${RM} -r ${O_DIR}
-			@${MAKELIB} clean
-			@${MAKELIBX} clean
+re : 			fclean all
 
-fclean:		clean
-			${RM} ${NAME}
-			@${RM} -r ${NAME}.dSYM
-			@${MAKELIB} fclean
+norm :
+				@${MAKELIB} ${LIBUTILS} norm
+				@printf "${DUCK} 🐥 Checking Norm for ${NAME}${RESET}\n"
+				@norminette ${SRCS}
+				@norminette ${HEADS_DIR}
 
-re:			fclean all
-
-.PHONY:		all clean fclean re debug
+.PHONY : all clean fclean re norm

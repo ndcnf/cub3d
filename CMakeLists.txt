@@ -8,8 +8,7 @@ include_directories(.)
 add_executable(r4_cub3d
         inc/cub3d.h
 
-        utils/libft.h
-        utils/get_next_line.c
-        utils/get_next_line_utils.c
-        main.c
+        utils/inc/libft.h
+        utils/src/get_next_line.c
+        utils/src/get_next_line_utils.c
         )

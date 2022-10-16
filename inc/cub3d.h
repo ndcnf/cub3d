@@ -25,10 +25,9 @@
 # include <math.h>
 # include <stddef.h>
 # include <sys/time.h>
-//
-//# include "../utils/libft.h"
-//# include "../utils/get_next_line.h"
-# include "./key_macos.h"
+
+# include "../utils/inc/libft.h"
+# include "key_macos.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 256
@@ -41,11 +40,18 @@ typedef struct s_data
 {
 	void	*mlx;
 	char	*no;
+	int 	check_no;
 	char	*so;
+	int 	check_so;
 	char	*we;
+	int 	check_we;
 	char	*ea;
+	int 	check_ea;
 	char	*f;
+	int 	check_f;
 	char	*c;
+	int 	check_c;
+	int 	full_asset;
 	int 	fd_line;
 	int 	nb_line_map;
 	size_t 	len_line_map;
@@ -55,54 +61,81 @@ typedef struct s_data
 	float 	pposy;
 }			t_data;
 
-
+/*
+ * main.c
+ */
 int    main(int ac, char **av);
-
-	int		args_error(int ac);
-
+/*
+ * main_utils.c
+ */
+int		args_error(int ac);
+void	safe_free(void **x);
+	void 	free_map(t_data *data);
+	/*
+	 * init_game.c
+	 */
 	int	load_map(t_data *data, char *map_name);
 
+		void	print_asset(t_data *d);
+
 		int read_map(t_data *data, const char *mn);
-
+			/*
+			 * asset_floor_celling.c
+			 */
 			int		safe_open_mn(const char *mn);
-
 			int		asset(t_data *data, int fd);
 
-				int		pars_asset(t_data *data, char *tmp);
+				int		get_asset(t_data *data, char *tmp);
+					/*
+					 * check_asset.c
+					 */
+					int	no(t_data *data, char *tmp);
+					int so(t_data *data, char *tmp);
+					int	we(t_data *data, char *tmp);
+					int	ea(t_data *data, char *tmp);
+					int pars_asset(t_data *d, char *tmp);
 
-				int		pars_f_n_c(t_data *data, char *tmp);
+				int 	pars_env(t_data *data, int fd);
 
+					int		pars_f_n_c(t_data *data, char *tmp);
+			/*
+			 * pars_map.c
+			 */
 			int		pars_map(t_data *data, int fd);
 
 				int		line_map_ok(const char *tmp);
-
 				void	len_line(t_data *data, char *tmp);
-
+			/*
+			 * stock_map.c
+			 */
 			int		stock_map(t_data *data, int fd);
 
 				int		malloc_map(t_data *d);
 
 					void	*ft_calloc_nine(size_t count, size_t size);
-
-				int		print_map(t_data *data, int fd);
-
+					/*
+					 * print_map.c
+					*/
+					int		print_map(t_data *data, int fd);
 					void	get_to_line_map_in_fd(t_data *data, int fd);
+					int		print_full_map(t_data *data, int fd);
 
-					int	print_full_map(t_data *data, int fd);
+						int 	init_pos(t_data *data, const char *tmp, int i);
+					/*
+					 * error_map.c
+					 */
+					int 	error_map(t_data *d);
 
-						int init_pos(t_data *data, const char *tmp, int i);
+						int 	check_borders(t_data *d);
 
-					int error_map(t_data *d);
+							int		check_y(t_data *d);
+							int 	check_x(t_data *d);
+						/*
+						* error_map_utils.c
+						*/
+						int 	zero_is_surrended(t_data *d);
 
-						int check_borders(t_data *d);
-
-							int	check_y(t_data *d);
-
-							int check_x(t_data *d);
-
-						int zero_is_surrended(t_data *d);
-
-							int check_around(char **map, int y, int x);
+							int 	check_around(char **map, int y, int x);
 
 
 #endif
