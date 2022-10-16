@@ -3,5 +3,5 @@ This project is inspired by the world-famous eponymous 90's game, which was the 
 
 Projet structure is on miro.
 Invitation link (while repo is private): 
-<\br>
+</br>
 https://miro.com/welcomeonboard/em0wVVFlUEhoVFVCWjlqWVlBZXVUZGM2SG9sRE9PaTNpdUFVVjQ2eFVWYUdaNnBWQmFUT1FZaWJwSVNyS05SOXwzMDc0NDU3MzYxMzI2MDIzMDI5fDI=?share_link_id=22164280791
