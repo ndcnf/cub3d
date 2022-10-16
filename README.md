@@ -5,5 +5,5 @@ Projet structure is on [miro](https://miro.com/welcomeonboard/em0wVVFlUEhoVFVCWj
 (<-invitation link while repo is private): 
 </br>
 
-teammate: [Nadia](https://github.com/ndcnf) </br>
-![myImage](https://media.giphy.com/media/XRB1uf2F9bGOA/giphy.gif)
+teammate: [Nadia Full Powa](https://github.com/ndcnf) </br>
+![myImage](https://giphy.com/gifs/computer-cat-wearing-glasses-VbnUQpnihPSIgIXuZv)
