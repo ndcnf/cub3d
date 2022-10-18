@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_check.c                                      :+:      :+:    :+:   */
+/*   len_tab.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 23:44:46 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/17 23:44:47 by lzima            ###   ########.fr       */
+/*   Created: 2022/10/17 23:43:14 by lzima             #+#    #+#             */
+/*   Updated: 2022/10/17 23:43:16 by lzima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../utils/inc/libft.h"
 
-int	alloc_check(void *ptr)
+int	len_tab(void **tab)
 {
-	if (!ptr)
-	{
-		ft_putstr_fd("An error as occurred during a dynamic allocation\n", 2);
-		return(1);
-	}
-	return (0);
+	int	len;
+
+	len = 0;
+	while (tab != NULL && tab[len] != NULL)
+		len++;
+	return (len);
 }
+

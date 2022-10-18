@@ -12,11 +12,6 @@
 
 #include "../inc/cub3d.h"
 
-int error_colors(t_data *data, char *tmp)
-{
-	return (SUCCESS);
-}
-
 int pars_f_n_c(t_data *data, char *tmp)
 {
 
@@ -51,6 +46,8 @@ int pars_f_n_c(t_data *data, char *tmp)
 
 int get_asset(t_data *d, char *tmp)
 {
+	int	i;
+
 	(void)d;
 	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
 		return (ERROR);
@@ -58,8 +55,18 @@ int get_asset(t_data *d, char *tmp)
 	{
 		if (tmp[0] != '\0')
 			return (SUCCESS);
-		if (tmp[1] == '1')
+		if (tmp[0] == '1')
+		{
+			i = 0;
+			while (tmp[i] != '\0')
+			{
+				if (tmp[i] == '1' || tmp[i] == ' ')
+					i++;
+				else
+					return (ERROR);
+			}
 			return (MAP_START);
+		}
 		else
 			return (ERROR);
 	}

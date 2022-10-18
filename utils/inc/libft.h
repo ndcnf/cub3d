@@ -51,6 +51,7 @@ int			leakfree_strtrim(char **s1, const char *set);
 char		*leaksfree_substr(char **s, unsigned int start, size_t len);
 char		*leaksfree_strjoin(char *dynstr, char const *s2);
 void		free_tab(void **ptr);
+int			len_tab(void **tab);
 
 /*
  * classic libft

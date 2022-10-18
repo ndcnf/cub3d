@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/17 23:44:32 by lzima             #+#    #+#             */
+/*   Updated: 2022/10/17 23:44:34 by lzima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "../../utils/inc/libft.h"
 
-void	free_tab(void **ptr)
+void	free_tab(void **tab)
 {
 	int	i;
 
 	i = 0;
-	if (ptr)
+	if (tab)
 	{
-		while (ptr[i])
+		while (tab[i])
 			i++;
 		while (i >= 0)
-			free(ptr[i--]);
-		free(ptr);
-		ptr = NULL;
+			free(tab[i--]);
+		free(tab);
+		tab = NULL;
 	}
 }

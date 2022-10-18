@@ -80,9 +80,8 @@ void	print_asset(t_data *d);
 int		read_map(t_data *data, int fd, const char *map_cub);
 int		load_map(t_data *data, int fd, char *map_cub);
 /*
-* asset_floor_celling.c FULL
+* asset_floor_celling.c
 */
-int		error_colors(t_data *data, char *tmp);
 int		pars_f_n_c(t_data *data, char *tmp);
 int		get_asset(t_data *data, char *tmp);
 int		asset_all_good(t_data *d);
@@ -92,6 +91,7 @@ int		asset(t_data *data, int fd);
  */
 int		map_start(t_data *d, char *tmp);
 void	init_check_asset(t_data *d);
+int		error_colors(t_data *data, char *tmp);
 /*
 * check_asset.c FULL
 */
