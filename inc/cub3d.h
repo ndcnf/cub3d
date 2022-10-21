@@ -103,7 +103,7 @@ int		asset(t_data *data, int fd);
  */
 int		map_start(t_data *d, char *tmp);
 void	init_check_asset(t_data *d);
-int		error_colors(t_data *data, char *tmp);
+int		error_colors(char *tmp);
 /*
 * check_asset.c FULL
 */

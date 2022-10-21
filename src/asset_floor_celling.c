@@ -14,13 +14,12 @@
 
 int pars_f_n_c(t_data *data, char *tmp)
 {
-
 	if (ft_strncmp(tmp, "F", 1) == SUCCESS)
 	{
 		if (data->check_f == 0)
 		{
 			data->f = ft_strdup(ft_strtrim(tmp, "F "));
-			if (error_colors(data, tmp) != SUCCESS)
+			if (error_colors(tmp) != SUCCESS)
 				return (p_error("PARSING ERROR: colors setting error\n"));
 			data->check_f = 1;
 			return (SUCCESS);
@@ -33,7 +32,7 @@ int pars_f_n_c(t_data *data, char *tmp)
 		if (data->check_c == 0)
 		{
 			data->c = ft_strdup(ft_strtrim(tmp, "C "));
-			if (error_colors(data, tmp) != SUCCESS)
+			if (error_colors(tmp) != SUCCESS)
 				return (p_error("PARSING ERROR: colors setting error\n"));
 			data->check_c = 1;
 			return (SUCCESS);
