@@ -14,6 +14,7 @@
 
 int map_start(t_data *d, char *tmp)
 {
+	(void)d; // ----------------------------------------------------------------- ajoute pour eviter erreur de compilation
 	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
 		return (ERROR);
 	return (0);
@@ -33,13 +34,13 @@ void	init_check_asset(t_data *d)
 int error_colors(t_data *data, char *tmp)
 {
 	char	**colors;
-	int 	c;
-
+	// int 	c;
+	(void)data; // -------------------------------------------------------------- ajoute pour eviter erreur de compilation
 
 	colors = ft_split(tmp, ',');
 	if (colors == NULL)
 		return (ERROR);
-	if ()
+	//if () // ------------------------------------------------------------------ ajoute pour eviter erreur de compilation
 
 	return (SUCCESS);
 }

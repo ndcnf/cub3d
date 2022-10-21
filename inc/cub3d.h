@@ -37,6 +37,18 @@
 # define ERROR 1
 # define MAP_START 10
 
+# define WIN_TITLE "The Untold Legend of Diana"
+# define WIN_H 512
+# define WIN_W 512
+# define IMG_PXL 32
+
+typedef struct s_colors
+{
+	int	red;
+	int	green;
+	int blue;
+}	t_colors;
+
 typedef struct s_data
 {
 	void	*mlx;

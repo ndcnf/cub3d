@@ -19,6 +19,7 @@ SRCS_DIR		= ./src/
 
 SRCS_FILES	= main.c \
 				asset_floor_celling.c \
+				asset_floor_celling_utils.c \
 				check_asset.c \
 				error_map.c \
 				error_map_utils.c \

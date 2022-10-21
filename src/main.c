@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/12 18:32:02 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/20 15:43:01 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int    main(int ac, char **av)
 
 	printf("Init game\n");
 	ft_bzero(&data, sizeof(t_data));
-	if (args_error(ac) != SUCCESS) {
+	if (args_error(ac) != SUCCESS)
+	{
 		return (ERROR);
 	}
 	fd = safe_open_map_name_cub(av[1]);
