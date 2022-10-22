@@ -35,18 +35,19 @@ int	check_y(t_data *d)
 	int y;
 
 	y = 0;
-	while (d->map[y][0] != '\0')
+	while (y < d->nb_line_map)
 	{
-		if (d->map[y][0] == 0)
-			return (ERROR);
+		if (d->map[y][0] == '0')
+			return (p_error("PARSING ERROR: 0 found on first "));
 		y++;
 	}
 
 	y = 0;
-	while (d->map[y][d->len_line_map])
+	while (y < (int)d->len_line_map)
 	{
-		if (d->map[y][d->len_line_map] == 0)
+		if (d->map[y][d->len_line_map] == '0')
 			return (ERROR);
+		y++;
 	}
 	return (SUCCESS);
 }
@@ -56,16 +57,16 @@ int check_x(t_data *d)
 	int	x;
 
 	x = 0;
-	while (d->map[0][x] != '\0')
+	while (x < d->nb_line_map)
 	{
-		if (d->map[0][x] == 0)
+		if (d->map[0][x] == '0')
 			return (ERROR);
 		x++;
 	}
 	x = 0;
-	while (d->map[d->sizeof_tab][x] != '\0')
+	while (x < (int)d->len_line_map)
 	{
-		if (d->map[d->sizeof_tab][x] == 0)
+		if (d->map[d->sizeof_tab][x] == '0')
 			return (ERROR);
 		x++;
 	}

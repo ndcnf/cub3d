@@ -14,6 +14,7 @@
 
 int map_start(t_data *d, char *tmp)
 {
+	(void)d;
 	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
 		return (ERROR);
 	return (0);
@@ -44,25 +45,26 @@ int error_colors(char *tmp)
 {
 	int 	x;
 	int 	i;
-	char	**c;
+	char	**colors;
 
-	c= ft_split(tmp, ',');
-	if (c == NULL)
+	colors = ft_split(tmp, ',');
+	if (colors == NULL)
 		return (ERROR);
 	i = 0;
 	while (i < 3)
 	{
 		x = -1;
-		if (c[i] != NULL)
-			x = ft_atoi(c[i]);
-		if (check_colors(c, x) != SUCCESS)
+		if (colors[i] != NULL)
+			x = ft_atoi(colors[i]);
+		if (check_colors(colors, x) != SUCCESS)
 			return (ERROR);
+		i++;
 	}
-	if (c[3] != NULL)
+	if (colors[3] != NULL)
 	{
-		free_tab((void *)c);
+		free_tab((void *)colors);
 		return (p_error(" PARSING ERROR: colors"));
 	}
-	free_tab((void *)c);
+	free_tab((void *)colors);
 	return (SUCCESS);
 }

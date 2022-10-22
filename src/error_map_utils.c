@@ -30,12 +30,11 @@ int zero_is_surrended(t_data *d)
 	int x;
 	int	y;
 
-	x = 0;
 	y = 0;
-	while (d->map[y] != NULL)
+	while (y <= d->nb_line_map)
 	{
 		x = 0;
-		while (d->map[y][x] != '\0')
+		while (x <= (int)d->len_line_map)
 		{
 			if (check_around(d->map, y, x) != SUCCESS)
 				return (ERROR);

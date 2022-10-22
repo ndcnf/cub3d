@@ -29,23 +29,24 @@ int malloc_map(t_data *d)
 	if (alloc_check(d->map) != SUCCESS)
 		return (ERROR);
 	i = 0;
-	while(d->nb_line_map-- >= 0)
+	while(i <= d->nb_line_map)
 	{
-		d->map[i] = (char *)ft_calloc_nine(1, (d->len_line_map * sizeof(char)));
+		d->map[i] = (char *)ft_calloc_point(1, (d->len_line_map * sizeof(char)));
 		if (alloc_check(d->map[i]) != SUCCESS)
 			return (ERROR);
+		d->malloc_check = i;
 		i++;
 	}
 	return (SUCCESS);
 }
 
-void	*ft_calloc_nine(size_t count, size_t size)
+void	*ft_calloc_point(size_t count, size_t size)
 {
 	char	*memoryallocation;
 
 	memoryallocation = malloc(count * size);
 	if (memoryallocation == NULL)
 		return (memoryallocation);
-	ft_memset(memoryallocation, '9', count * size);
+	ft_memset(memoryallocation, '.', count * size);
 	return (memoryallocation);
 }

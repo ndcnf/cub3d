@@ -19,7 +19,7 @@ int pars_f_n_c(t_data *data, char *tmp)
 		if (data->check_f == 0)
 		{
 			data->f = ft_strdup(ft_strtrim(tmp, "F "));
-			if (error_colors(tmp) != SUCCESS)
+			if (error_colors(data->f) != SUCCESS)
 				return (p_error("PARSING ERROR: colors setting error\n"));
 			data->check_f = 1;
 			return (SUCCESS);
@@ -32,7 +32,7 @@ int pars_f_n_c(t_data *data, char *tmp)
 		if (data->check_c == 0)
 		{
 			data->c = ft_strdup(ft_strtrim(tmp, "C "));
-			if (error_colors(tmp) != SUCCESS)
+			if (error_colors(data->c) != SUCCESS)
 				return (p_error("PARSING ERROR: colors setting error\n"));
 			data->check_c = 1;
 			return (SUCCESS);
@@ -50,24 +50,17 @@ int get_asset(t_data *d, char *tmp)
 	(void)d;
 	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
 		return (ERROR);
-	if (pars_asset(d, tmp) != SUCCESS || pars_f_n_c(d, tmp) != SUCCESS)
+	if (pars_asset(d, tmp) != SUCCESS || pars_f_n_c(d, tmp) != SUCCESS || (tmp[0] == '1'))
 	{
-		if (tmp[0] != '\0')
-			return (SUCCESS);
-		if (tmp[0] == '1')
+		i = 0;
+		while (tmp[i] != '\0')
 		{
-			i = 0;
-			while (tmp[i] != '\0')
-			{
-				if (tmp[i] == '1' || tmp[i] == ' ')
-					i++;
-				else
-					return (ERROR);
-			}
-			return (MAP_START);
+			if (tmp[i] == '1' || tmp[i] == ' ')
+				i++;
+			else
+				return (ERROR);
 		}
-		else
-			return (ERROR);
+		return (MAP_START);
 	}
 	return (SUCCESS);
 }
