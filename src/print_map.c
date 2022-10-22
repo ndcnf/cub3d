@@ -14,49 +14,50 @@
 
 int print_map(t_data *data, int fd)
 {
-	get_to_line_map_in_fd(data, fd);
-	if (print_full_map(data, fd) != SUCCESS)
+	char	*tmp;
+
+	tmp = NULL;
+	tmp = get_to_line_map_in_fd(data, fd);
+	if (print_full_map(data, fd, tmp) != SUCCESS)
 		return (ERROR);
 	if (error_map(data) != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }
 
-void	get_to_line_map_in_fd(t_data *data, int fd)
+char	*get_to_line_map_in_fd(t_data *data, int fd)
 {
-	char *tmp;
+	int 	i;
+	char	*tmp;
 
 	tmp = NULL;
-	data->fd_line = 0;
-	while (data->fd_line < 9)
-	{
+	i = 0;
+	while (++i <= data->fd_line + 1)
 		tmp = get_next_line(fd);
-		free(tmp);
-		data->fd_line++;
-	}
+	return (tmp);
 }
 
-int	print_full_map(t_data *data, int fd)
+int	print_full_map(t_data *data, int fd, char *tmp)
 {
-	char	*tmp;
 	int		i;
 
-	tmp = NULL;
-	tmp = get_next_line(fd);
 	data->sizeof_tab = 0;
 	while (tmp != NULL)
 	{
 		i = 0;
-		while (tmp[i] != '\0' || tmp[i] != '\n')
+		while (tmp[i] != '\0')
 		{
-			if (tmp[i] == ' ')
+			if (tmp[i] == ' ' || tmp[i] == '\n')
 				data->map[data->sizeof_tab][i] = '9';
-			if (init_pos(data, tmp, i) != SUCCESS)
+			else if (init_pos(data, tmp, i) != SUCCESS)
 				return (ERROR);
-			else
+			else if (!(tmp[i] == 'N' || tmp[i] == 'S' ||
+								tmp[i] == 'W' || tmp[i] == 'E'))
 				data->map[data->sizeof_tab][i] = tmp[i];
 			i++;
 		}
+		if (tmp[i] != '\0')
+			data->map[data->sizeof_tab][i] = '\0';
 		data->sizeof_tab++;
 		free(tmp);
 		tmp = get_next_line(fd);

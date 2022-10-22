@@ -68,6 +68,7 @@ typedef struct s_data
 	int 	nb_line_map;
 	size_t 	len_line_map;
 	char	**map;
+	int 	malloc_check;
 	int 	sizeof_tab;
 	float 	pposx;
 	float 	pposy;
@@ -76,7 +77,9 @@ typedef struct s_data
 /*
  * main.c
  */
-int    main(int ac, char **av);
+int		main(int ac, char **av);
+void	print_load_map(t_data *d);
+void	print_load_asset(t_data *d);
 /*
  * main_utils.c FULL
  */
@@ -88,7 +91,6 @@ int		safe_open_map_name_cub(const char *mn);
 /*
 * init_game.c
 */
-void	print_asset(t_data *d);
 int		read_map(t_data *data, int fd, const char *map_cub);
 int		load_map(t_data *data, int fd, char *map_cub);
 /*
@@ -123,13 +125,13 @@ int		pars_map(t_data *data, int fd);
 */
 int		stock_map(t_data *data, int fd);
 int		malloc_map(t_data *d);
-void	*ft_calloc_nine(size_t count, size_t size);
+void	*ft_calloc_point(size_t count, size_t size);
 /*
 * print_map.c
 */
 int		print_map(t_data *data, int fd);
-void	get_to_line_map_in_fd(t_data *data, int fd);
-int		print_full_map(t_data *data, int fd);
+char	*get_to_line_map_in_fd(t_data *data, int fd);
+int		print_full_map(t_data *data, int fd, char *tmp);
 int 	init_pos(t_data *data, const char *tmp, int i);
 /*
 * error_map.c

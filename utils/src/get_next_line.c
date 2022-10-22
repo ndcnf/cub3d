@@ -74,6 +74,5 @@ char	*get_next_line(int fd)
 		statik = NULL;
 		return (NULL);
 	}
-
 	return (neo_line);
 }
