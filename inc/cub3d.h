@@ -101,11 +101,12 @@ int		get_asset(t_data *data, char *tmp);
 int		asset_all_good(t_data *d);
 int		asset(t_data *data, int fd);
 /*
- * asset_floor_celling_utils.c
+ * asset_floor_celling_utils.c FULL
  */
 int		map_start(t_data *d, char *tmp);
-void	init_check_asset(t_data *d);
 int		error_colors(char *tmp);
+int		pars_f(t_data *data, char *tmp);
+int		pars_c(t_data *data, char *tmp);
 /*
 * check_asset.c FULL
 */
@@ -144,6 +145,6 @@ int 	check_x(t_data *d);
 * error_map_utils.c
 */
 int 	check_around(char **map, int y, int x);
-int 	zero_is_surrended(t_data *d);
+int 	zero_is_surrounded(t_data *d);
 
 #endif

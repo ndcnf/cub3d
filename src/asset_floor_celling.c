@@ -15,31 +15,11 @@
 int pars_f_n_c(t_data *data, char *tmp)
 {
 	if (ft_strncmp(tmp, "F", 1) == SUCCESS)
-	{
-		if (data->check_f == 0)
-		{
-			data->f = ft_strdup(ft_strtrim(tmp, "F "));
-			if (error_colors(data->f) != SUCCESS)
-				return (p_error("PARSING ERROR: colors setting error\n"));
-			data->check_f = 1;
-			return (SUCCESS);
-		}
-		if (data->check_f == 1)
+		if (pars_f(data, tmp) != SUCCESS)
 			return (ERROR);
-	}
 	if (ft_strncmp(tmp, "C", 1) == SUCCESS)
-	{
-		if (data->check_c == 0)
-		{
-			data->c = ft_strdup(ft_strtrim(tmp, "C "));
-			if (error_colors(data->c) != SUCCESS)
-				return (p_error("PARSING ERROR: colors setting error\n"));
-			data->check_c = 1;
-			return (SUCCESS);
-		}
-		if (data->check_c == 1)
+		if (pars_c(data, tmp) != SUCCESS)
 			return (ERROR);
-	}
 	return (SUCCESS);
 }
 
@@ -58,7 +38,7 @@ int get_asset(t_data *d, char *tmp)
 			if (tmp[i] == '1' || tmp[i] == ' ')
 				i++;
 			else
-				return (ERROR);
+				return (p_error("❌ at MAP_START\n"));
 		}
 		return (MAP_START);
 	}
@@ -67,9 +47,9 @@ int get_asset(t_data *d, char *tmp)
 
 int asset_all_good(t_data *d)
 {
-	if (d->no == NULL || d->so == NULL || d->we == NULL || !d->ea ||
+	if (d->no == NULL || d->so == NULL || d->we == NULL || d->ea == NULL ||
 			d->f == NULL || d->c == NULL)
-		return (p_error("PARSING ERROR: missing assets or colors (floor || celling)\n"));
+		return (p_error("❌ missing assets or colors (floor || celling)\n"));
 	return (SUCCESS);
 }
 
@@ -78,7 +58,6 @@ int	asset(t_data *d, int fd)
 	char	*tmp;
 	int		start;
 
-	init_check_asset(d);
 	tmp = get_next_line(fd);
 	d->fd_line = 0;
 	while (tmp != NULL)
@@ -89,10 +68,10 @@ int	asset(t_data *d, int fd)
 			if (start == MAP_START)
 			{
 				if (asset_all_good(d) != SUCCESS)
-					return (ERROR);
+					return (p_error("❌ asset_all_good(d)\n"));
 				break ;
 			}
-			return (ERROR);
+			return (p_error("❌ get_asset(d, tmp)\n"));
 		}
 		d->fd_line++;
 		tmp = get_next_line(fd);

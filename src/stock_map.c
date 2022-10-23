@@ -27,13 +27,13 @@ int malloc_map(t_data *d)
 
 	d->map = malloc(d->nb_line_map * sizeof(char *));
 	if (alloc_check(d->map) != SUCCESS)
-		return (ERROR);
+		return (p_error("❌ malloc_map error\n"));
 	i = 0;
 	while(i <= d->nb_line_map)
 	{
 		d->map[i] = (char *)ft_calloc_point(1, (d->len_line_map * sizeof(char)));
 		if (alloc_check(d->map[i]) != SUCCESS)
-			return (ERROR);
+			return (p_error("❌ malloc_map error\n"));
 		d->malloc_check = i;
 		i++;
 	}

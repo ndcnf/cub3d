@@ -12,6 +12,36 @@
 
 #include "../inc/cub3d.h"
 
+int pars_f(t_data *data, char *tmp)
+{
+	if (data->check_f == 0)
+	{
+		data->f = ft_strdup(ft_strtrim(tmp, "F "));
+		if (error_colors(data->f) != SUCCESS)
+			return (p_error("❌ F colors setting error\n"));
+		data->check_f = 1;
+		return (SUCCESS);
+	}
+	if (data->check_f == 1)
+		return (p_error("❌ Duplicate F \n"));
+	return(SUCCESS);
+}
+
+int pars_c(t_data *data, char *tmp)
+{
+	if (data->check_c == 0)
+	{
+		data->c = ft_strdup(ft_strtrim(tmp, "C "));
+		if (error_colors(data->c) != SUCCESS)
+			return (p_error("❌ C colors setting error\n"));
+		data->check_c = 1;
+		return (SUCCESS);
+	}
+	if (data->check_c == 1)
+		return (p_error("❌ Duplicate C \n"));
+	return(SUCCESS);
+}
+
 int map_start(t_data *d, char *tmp)
 {
 	(void)d;
@@ -20,23 +50,12 @@ int map_start(t_data *d, char *tmp)
 	return (0);
 }
 
-void	init_check_asset(t_data *d)
-{
-	d->check_no = 0;
-	d->check_so = 0;
-	d->check_we = 0;
-	d->check_ea = 0;
-	d->check_f = 0;
-	d->check_c = 0;
-	d->fd_line = 0;
-}
-
-int check_colors(char **colors, int c)
+static int check_colors(char **colors, int c)
 {
 	if (c < 0 || c > 256)
 	{
 		free_tab((void *)colors);
-		return (p_error(" PARSING ERROR: colors"));
+		return (p_error("❌ Range's colors"));
 	}
 	return (SUCCESS);
 }
@@ -63,7 +82,7 @@ int error_colors(char *tmp)
 	if (colors[3] != NULL)
 	{
 		free_tab((void *)colors);
-		return (p_error(" PARSING ERROR: colors"));
+		return (p_error("❌ too many colors"));
 	}
 	free_tab((void *)colors);
 	return (SUCCESS);

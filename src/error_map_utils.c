@@ -16,16 +16,19 @@ int check_around(char **map, int y, int x)
 {
 	if (map[y][x] == '0' || map[y][x] == '2')
 	{
-		if ((map[y][x + 1] != '1' && map[y][x + 1] != '0' && map[y][x + 1] != '2') ||
-			(map[y][x - 1] != '1' && map[y][x - 1] != '0' && map[y][x - 1] != '2') ||
-			(map[y + 1][x] != '1' && map[y + 1][x] != '0' && map[y + 1][x] != '2') ||
-			(map[y - 1][x] != '1' && map[y - 1][x] != '0' && map[y - 1][x] != '2'))
-			return (ERROR);
+		if ((map[y][x + 1] != '1' && map[y][x + 1] != '0' && map[y][x + 1] != '2')
+		|| (map[y][x - 1] != '1' && map[y][x - 1] != '0' && map[y][x - 1] != '2')
+		|| (map[y + 1][x] != '1' && map[y + 1][x] != '0' && map[y + 1][x] != '2')
+		|| (map[y - 1][x] != '1' && map[y - 1][x] != '0' && map[y - 1][x] != '2'))
+		{
+			printf("at x:%d y:%d\n", y + 1, x + 1);
+			return (p_error("❌ 0 isn't surrounded\n"));
+		}
 	}
 	return (SUCCESS);
 }
-//todo != NULL condition needs to be set when map is printed in char **d->map
-int zero_is_surrended(t_data *d)
+
+int zero_is_surrounded(t_data *d)
 {
 	int x;
 	int	y;
