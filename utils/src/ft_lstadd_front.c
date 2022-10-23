@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 18:10:12 by lzima             #+#    #+#             */
+/*   Updated: 2022/10/23 18:10:40 by lzima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../utils/inc/libft.h"
 
@@ -25,7 +36,6 @@ Description
 Adds the node ’new’ at the beginning of the list.
 
 */
-
 
 void	ft_lstadd_front(t_list **alst, t_list *new)
 {

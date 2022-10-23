@@ -1,35 +1,14 @@
-
-
-/*
-
-Function name 
-ft_lstmap
-
-Prototype 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
-Turn in files 
--
-
-Parameters 
-lst: The address of a pointer to a node.
-f: The address of the function used to iterate on the list.
-del: The address of the function used to delete the content of a node if needed.
-
-Return value 
-The new list.
-NULL if the allocation fails.
-
-External functs. 
-malloc, free
-
-Description 
-Iterates the list ’lst’ and applies the function ’f’ on the content of each node. 
-Creates a new list resulting of the successive applications of the function ’f’. 
-The ’del’ function is used to delete the content of a node if needed.  
-
-*/
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 18:13:25 by lzima             #+#    #+#             */
+/*   Updated: 2022/10/23 18:15:09 by lzima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../utils/inc/libft.h"
 
@@ -54,3 +33,31 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (new_lst);
 }
+/*
+Function name
+ft_lstmap
+
+Prototype
+t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+Turn in files
+-
+
+Parameters
+lst: The address of a pointer to a node.
+f: The address of the function used to iterate on the list.
+del: The address of the function used to delete the content of a node if needed.
+
+Return value
+The new list.
+NULL if the allocation fails.
+
+External functs.
+malloc, free
+
+Description
+Iterates the list ’lst’ and applies the function ’f’ on the content of each node.
+Creates a new list resulting of the successive applications of the function ’f’.
+The ’del’ function is used to delete the content of a node if needed.
+
+*/
