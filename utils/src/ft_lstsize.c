@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 18:16:13 by lzima             #+#    #+#             */
+/*   Updated: 2022/10/23 18:16:36 by lzima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../utils/inc/libft.h"
 
 /*Function name 
@@ -21,7 +33,6 @@ None
 Description 
 Counts the number of nodes in a list.
 */
-
 
 int	ft_lstsize(t_list *lst)
 {

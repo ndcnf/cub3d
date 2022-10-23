@@ -6,7 +6,7 @@
 /*   By: lzima <lzima@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:27:56 by lzima             #+#    #+#             */
-/*   Updated: 2021/11/17 00:04:08 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/23 18:21:17 by lzima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_list	t_list;
 
 typedef struct s_list
 {
-	void		*content;
-	char		type;
+	void			*content;
+	char			type;
 	struct s_list	*next;
 }	t_list;
 
@@ -108,6 +108,5 @@ t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list		*ft_lstnew(void *content);
 int			ft_lstsize(t_list *lst);
-
 
 #endif

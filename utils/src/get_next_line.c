@@ -6,15 +6,15 @@
 /*   By: lzima <lzima@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 22:56:23 by lzima             #+#    #+#             */
-/*   Updated: 2022/01/11 11:27:27 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/23 18:17:20 by lzima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../utils/inc/libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
 
 static void	see_the_matrix(char **statik, int fd)
 {

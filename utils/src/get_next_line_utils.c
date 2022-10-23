@@ -6,15 +6,15 @@
 /*   By: lzima <lzima@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 16:31:45 by lzima             #+#    #+#             */
-/*   Updated: 2022/01/10 22:35:04 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/23 18:17:40 by lzima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../utils/inc/libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
 
 int	ft_gstrlen(const char	*str)
 {
