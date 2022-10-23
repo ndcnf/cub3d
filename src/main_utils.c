@@ -31,12 +31,12 @@ int	args_error(int ac)
 {
 	if (ac == 1)
 	{
-		printf("Error: Cud3d needs a *.cub in map folder as an argument\n");
+		printf("❌ Cud3d needs a *.cub in map folder as an argument\n");
 		return (ERROR);
 	}
 	if (ac > 2)
 	{
-		printf("Error: Only one argument needed\n");
+		printf("❌ Only one argument needed\n");
 		return(ERROR);
 	}
 	return (SUCCESS);

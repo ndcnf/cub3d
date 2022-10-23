@@ -36,7 +36,7 @@ int    main(int ac, char **av)
 	t_data	data;
 	int		fd;
 
-	printf("Init game\n");
+	printf("⏳ Init game\n");
 	ft_bzero(&data, sizeof(t_data));
 	if (args_error(ac) != SUCCESS)
 		return (ERROR);
@@ -48,7 +48,7 @@ int    main(int ac, char **av)
 	if (load_map(&data, fd, av[1]) != SUCCESS)
 		return (ERROR);
 	close(fd);
-	printf("✅ load_map(&data, fd, av[1])\n");
+	printf("✅ load_map(&data, fd, av[1])\n\n");
 	print_load_asset(&data);
 	print_load_map(&data);
 	return (SUCCESS);

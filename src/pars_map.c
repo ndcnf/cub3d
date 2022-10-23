@@ -32,7 +32,7 @@ int	line_map_ok(const char *tmp)
 			|| tmp[i] == 'W' || tmp[i] == 'E' || tmp[i] == ' ' || tmp[i] == '\n')
 			i++;
 		else
-			return (ERROR);
+			return (p_error("❌ line_map_ok(tmp)\n"));
 	}
 	return (SUCCESS);
 }
@@ -46,9 +46,9 @@ int	pars_map(t_data *d, int fd)
 	while (++i <= d->fd_line + 1)
 		tmp = get_next_line(fd);
 	d->nb_line_map = 0;
+	d->len_line_map = 0;
 	while (tmp != NULL)
 	{
-		d->len_line_map = 0;
 		if (line_map_ok(tmp) != SUCCESS)
 			return (ERROR);
 		len_line(d, tmp);
