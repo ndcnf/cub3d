@@ -27,7 +27,8 @@ SRCS_FILES	= main.c \
 				main_utils.c \
 				pars_map.c \
                	print_map.c \
-               	stock_map.c
+               	stock_map.c \
+				minimap.c
 
 #_______________ OBJS
 
