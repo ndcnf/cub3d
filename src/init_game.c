@@ -12,7 +12,7 @@
 
 #include "../inc/cub3d.h"
 
-int read_map(t_data *data, int fd, const char *map_cub)
+int	read_map(t_data *data, int fd, const char *map_cub)
 {
 	fd = open(map_cub, O_RDONLY);
 	if (asset(data, fd) != SUCCESS)
@@ -51,7 +51,6 @@ int	load_map(t_data *data, int fd, char *map_cub)
 	data->c = NULL;
 	data->pposx = -1;
 	data->pposy = -1;
-
 	if (read_map(data, fd, map_cub) != SUCCESS)
 	{
 		free_map(data);

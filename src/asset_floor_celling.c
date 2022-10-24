@@ -12,7 +12,7 @@
 
 #include "../inc/cub3d.h"
 
-int pars_f_n_c(t_data *data, char *tmp)
+int	pars_f_n_c(t_data *data, char *tmp)
 {
 	if (ft_strncmp(tmp, "F", 1) == SUCCESS)
 		if (pars_f(data, tmp) != SUCCESS)
@@ -23,14 +23,15 @@ int pars_f_n_c(t_data *data, char *tmp)
 	return (SUCCESS);
 }
 
-int get_asset(t_data *d, char *tmp)
+int	get_asset(t_data *d, char *tmp)
 {
 	int	i;
 
 	(void)d;
 	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
 		return (ERROR);
-	if (pars_asset(d, tmp) != SUCCESS || pars_f_n_c(d, tmp) != SUCCESS || (tmp[0] == '1'))
+	if (pars_asset(d, tmp) != SUCCESS || pars_f_n_c(d, tmp) != SUCCESS
+		|| (tmp[0] == '1'))
 	{
 		i = 0;
 		while (tmp[i] != '\0')
@@ -45,10 +46,10 @@ int get_asset(t_data *d, char *tmp)
 	return (SUCCESS);
 }
 
-int asset_all_good(t_data *d)
+int	asset_all_good(t_data *d)
 {
-	if (d->no == NULL || d->so == NULL || d->we == NULL || d->ea == NULL ||
-			d->f == NULL || d->c == NULL)
+	if (d->no == NULL || d->so == NULL || d->we == NULL || d->ea == NULL
+		|| d->f == NULL || d->c == NULL)
 		return (p_error("❌ missing assets or colors (floor || celling)\n"));
 	return (SUCCESS);
 }

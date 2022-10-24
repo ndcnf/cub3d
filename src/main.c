@@ -31,7 +31,7 @@ void	print_load_asset(t_data *d)
 	printf("C \"%s\"\n\n", d->c);
 }
 
-int    main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_data	data;
 	int		fd;

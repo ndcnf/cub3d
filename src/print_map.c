@@ -12,7 +12,7 @@
 
 #include "../inc/cub3d.h"
 
-int print_map(t_data *data, int fd)
+int	print_map(t_data *data, int fd)
 {
 	char	*tmp;
 
@@ -27,7 +27,7 @@ int print_map(t_data *data, int fd)
 
 char	*get_to_line_map_in_fd(t_data *data, int fd)
 {
-	int 	i;
+	int		i;
 	char	*tmp;
 
 	tmp = NULL;
@@ -51,8 +51,8 @@ int	print_full_map(t_data *data, int fd, char *tmp)
 				data->map[data->sizeof_tab][i] = '9';
 			else if (init_pos(data, tmp, i) != SUCCESS)
 				return (ERROR);
-			else if (!(tmp[i] == 'N' || tmp[i] == 'S' ||
-								tmp[i] == 'W' || tmp[i] == 'E'))
+			else if (!(tmp[i] == 'N' || tmp[i] == 'S'
+					|| tmp[i] == 'W' || tmp[i] == 'E'))
 				data->map[data->sizeof_tab][i] = tmp[i];
 			i++;
 		}
@@ -65,7 +65,7 @@ int	print_full_map(t_data *data, int fd, char *tmp)
 	return (SUCCESS);
 }
 
-int init_pos(t_data *data, const char *tmp, int i)
+int	init_pos(t_data *data, const char *tmp, int i)
 {
 	if (tmp[i] == 'N' || tmp[i] == 'S' || tmp[i] == 'W' || tmp[i] == 'E')
 	{

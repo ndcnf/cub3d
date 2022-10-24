@@ -20,7 +20,7 @@ int	no(t_data *data, char *tmp)
 	{
 		if (data->check_no == 0)
 		{
-			data->no = ft_strdup(ft_strchr(tmp, (char)'.'));
+			data->no = ft_strdup(ft_strchr(tmp, (char) '.'));
 			fd = open(data->no, O_RDONLY);
 			if (fd == -1)
 				return (p_error("❌ NO asset won't open\n"));
@@ -33,15 +33,15 @@ int	no(t_data *data, char *tmp)
 	return (SUCCESS);
 }
 
-int so(t_data *data, char *tmp)
+int	so(t_data *data, char *tmp)
 {
-	int fd;
+	int	fd;
 
 	if (ft_strncmp(tmp, "SO", 2) == SUCCESS)
 	{
 		if (data->check_so == 0)
 		{
-			data->so = ft_strdup(ft_strchr(tmp, (char)'.'));
+			data->so = ft_strdup(ft_strchr(tmp, (char) '.'));
 			fd = open(data->so, O_RDONLY);
 			if (fd == -1)
 				return (p_error("❌ SO asset won't open\n"));
@@ -56,13 +56,13 @@ int so(t_data *data, char *tmp)
 
 int	we(t_data *data, char *tmp)
 {
-	int fd;
+	int	fd;
 
 	if (ft_strncmp(tmp, "WE", 2) == SUCCESS)
 	{
 		if (data->check_we == 0)
 		{
-			data->we = ft_strdup(ft_strchr(tmp, (char)'.'));
+			data->we = ft_strdup(ft_strchr(tmp, (char) '.'));
 			fd = open(data->we, O_RDONLY);
 			if (fd == -1)
 				return (p_error("❌ WE asset won't open\n"));
@@ -77,13 +77,13 @@ int	we(t_data *data, char *tmp)
 
 int	ea(t_data *data, char *tmp)
 {
-	int fd;
+	int	fd;
 
 	if (ft_strncmp(tmp, "EA", 2) == SUCCESS)
 	{
 		if (data->check_ea == 0)
 		{
-			data->ea = ft_strdup(ft_strchr(tmp, (char)'.'));
+			data->ea = ft_strdup(ft_strchr(tmp, (char) '.'));
 			fd = open(data->ea, O_RDONLY);
 			if (fd == -1)
 				return (p_error("❌ EA asset won't open\n"));
@@ -96,7 +96,7 @@ int	ea(t_data *data, char *tmp)
 	return (SUCCESS);
 }
 
-int   pars_asset(t_data *d, char *tmp)
+int	pars_asset(t_data *d, char *tmp)
 {
 	if (no(d, tmp) != SUCCESS)
 		return (ERROR);
