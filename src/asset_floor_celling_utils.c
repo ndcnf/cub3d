@@ -12,7 +12,7 @@
 
 #include "../inc/cub3d.h"
 
-int pars_f(t_data *data, char *tmp)
+int	pars_f(t_data *data, char *tmp)
 {
 	if (data->check_f == 0)
 	{
@@ -24,10 +24,10 @@ int pars_f(t_data *data, char *tmp)
 	}
 	if (data->check_f == 1)
 		return (p_error("❌ Duplicate F \n"));
-	return(SUCCESS);
+	return (SUCCESS);
 }
 
-int pars_c(t_data *data, char *tmp)
+int	pars_c(t_data *data, char *tmp)
 {
 	if (data->check_c == 0)
 	{
@@ -39,10 +39,10 @@ int pars_c(t_data *data, char *tmp)
 	}
 	if (data->check_c == 1)
 		return (p_error("❌ Duplicate C \n"));
-	return(SUCCESS);
+	return (SUCCESS);
 }
 
-int map_start(t_data *d, char *tmp)
+int	map_start(t_data *d, char *tmp)
 {
 	(void)d;
 	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
@@ -50,7 +50,7 @@ int map_start(t_data *d, char *tmp)
 	return (0);
 }
 
-static int check_colors(char **colors, int c)
+static int	check_colors(char **colors, int c)
 {
 	if (c < 0 || c > 256)
 	{
@@ -60,10 +60,10 @@ static int check_colors(char **colors, int c)
 	return (SUCCESS);
 }
 
-int error_colors(char *tmp)
+int	error_colors(char *tmp)
 {
-	int 	x;
-	int 	i;
+	int		x;
+	int		i;
 	char	**colors;
 
 	colors = ft_split(tmp, ',');

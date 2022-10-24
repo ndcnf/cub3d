@@ -12,14 +12,18 @@
 
 #include "../inc/cub3d.h"
 
-int check_around(char **map, int y, int x)
+int	check_around(char **map, int y, int x)
 {
 	if (map[y][x] == '0' || map[y][x] == '2')
 	{
-		if ((map[y][x + 1] != '1' && map[y][x + 1] != '0' && map[y][x + 1] != '2')
-		|| (map[y][x - 1] != '1' && map[y][x - 1] != '0' && map[y][x - 1] != '2')
-		|| (map[y + 1][x] != '1' && map[y + 1][x] != '0' && map[y + 1][x] != '2')
-		|| (map[y - 1][x] != '1' && map[y - 1][x] != '0' && map[y - 1][x] != '2'))
+		if ((map[y][x + 1] != '1' && map[y][x + 1] != '0'
+			&& map[y][x + 1] != '2')
+		|| (map[y][x - 1] != '1' && map[y][x - 1] != '0'
+		&& map[y][x - 1] != '2')
+		|| (map[y + 1][x] != '1' && map[y + 1][x] != '0'
+		&& map[y + 1][x] != '2')
+		|| (map[y - 1][x] != '1' && map[y - 1][x] != '0'
+		&& map[y - 1][x] != '2'))
 		{
 			printf("at x:%d y:%d\n", y + 1, x + 1);
 			return (p_error("❌ 0 isn't surrounded\n"));
@@ -28,9 +32,9 @@ int check_around(char **map, int y, int x)
 	return (SUCCESS);
 }
 
-int zero_is_surrounded(t_data *d)
+int	zero_is_surrounded(t_data *d)
 {
-	int x;
+	int	x;
 	int	y;
 
 	y = 0;

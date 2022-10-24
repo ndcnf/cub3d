@@ -12,7 +12,7 @@
 
 #include "../inc/cub3d.h"
 
-int error_map(t_data *d)
+int	error_map(t_data *d)
 {
 	if (check_borders(d) != SUCCESS)
 		return (p_error("❌ check border(d)\n"));
@@ -21,7 +21,7 @@ int error_map(t_data *d)
 	return (SUCCESS);
 }
 
-int check_borders(t_data *d)
+int	check_borders(t_data *d)
 {
 	if (check_x(d) != SUCCESS)
 		return (p_error("❌ check_x(d)\n"));
@@ -32,7 +32,7 @@ int check_borders(t_data *d)
 
 int	check_y(t_data *d)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	while (y < d->nb_line_map)
@@ -41,13 +41,13 @@ int	check_y(t_data *d)
 			return (p_error("❌ 0 isn't surrounded\n"));
 		y++;
 	}
-
 	y = 0;
 	while (y < (int)d->nb_line_map)
 	{
 		if (d->map[y][d->len_line_map] == '0')
 		{
-			printf("map[%d][%d] = %c\n", y, (int)d->len_line_map, d->map[y][d->len_line_map]);
+			printf("map[%d][%d] = %c\n", y, (int) d->len_line_map,
+				d->map[y][d->len_line_map]);
 			return (p_error("❌ 0 isn't surrounded\n"));
 		}
 		y++;
@@ -55,7 +55,7 @@ int	check_y(t_data *d)
 	return (SUCCESS);
 }
 
-int check_x(t_data *d)
+int	check_x(t_data *d)
 {
 	int	x;
 

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lzima <lzima@student.42lausanne.ch>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: ******************* by lzima             #+#    #+#             */
-/*   Updated: ******************* by lzima            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -46,32 +35,32 @@ typedef struct s_colors
 {
 	int	red;
 	int	green;
-	int blue;
+	int	blue;
 }	t_colors;
 
 typedef struct s_data
 {
 	void	*mlx;
 	char	*no;
-	int 	check_no;
+	int		check_no;
 	char	*so;
-	int 	check_so;
+	int		check_so;
 	char	*we;
-	int 	check_we;
+	int		check_we;
 	char	*ea;
-	int 	check_ea;
+	int		check_ea;
 	char	*f;
-	int 	check_f;
+	int		check_f;
 	char	*c;
-	int 	check_c;
-	int 	fd_line;
-	int 	nb_line_map;
-	size_t 	len_line_map;
+	int		check_c;
+	int		fd_line;
+	int		nb_line_map;
+	size_t	len_line_map;
 	char	**map;
-	int 	malloc_check;
-	int 	sizeof_tab;
-	float 	pposx;
-	float 	pposy;
+	int		malloc_check;
+	int		sizeof_tab;
+	float	pposx;
+	float	pposy;
 }			t_data;
 
 /*
@@ -85,7 +74,7 @@ void	print_load_asset(t_data *d);
  */
 void	safe_free(void **x);
 int		p_error(char *error);
-void 	free_map(t_data *data);
+void	free_map(t_data *data);
 int		args_error(int ac);
 int		safe_open_map_name_cub(const char *mn);
 /*
@@ -126,25 +115,25 @@ int		pars_map(t_data *data, int fd);
 */
 int		stock_map(t_data *data, int fd);
 int		malloc_map(t_data *d);
-void	*ft_calloc_point(size_t count, size_t size);
+void	*ft_calloc_p(size_t count, size_t size);
 /*
 * print_map.c
 */
 int		print_map(t_data *data, int fd);
 char	*get_to_line_map_in_fd(t_data *data, int fd);
 int		print_full_map(t_data *data, int fd, char *tmp);
-int 	init_pos(t_data *data, const char *tmp, int i);
+int		init_pos(t_data *data, const char *tmp, int i);
 /*
 * error_map.c
 */
-int 	error_map(t_data *d);
-int 	check_borders(t_data *d);
+int		error_map(t_data *d);
+int		check_borders(t_data *d);
 int		check_y(t_data *d);
-int 	check_x(t_data *d);
+int		check_x(t_data *d);
 /*
 * error_map_utils.c
 */
-int 	check_around(char **map, int y, int x);
-int 	zero_is_surrounded(t_data *d);
+int		check_around(char **map, int y, int x);
+int		zero_is_surrounded(t_data *d);
 
 #endif
