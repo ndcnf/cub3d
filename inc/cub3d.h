@@ -191,7 +191,7 @@ int		zero_is_surrounded(t_data *d);
 * minimap.c
 */
 void	init_map(t_board *bd);
-// void	minimap_area(t_board *bd);
 int		minimap_area(t_board *bd);
+void	get_file_tmp(t_board *bd, char *argv[]); // SUPPRIMER APRES PARSING OK, TEMPORAIRE
 
 #endif

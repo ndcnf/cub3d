@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/24 17:22:19 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:45:37 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 	t_board	bd;
 	int		fd;
 
+	/* PARTIE LOWELL
 	printf("⏳ Init game\n");
 	ft_bzero(&data, sizeof(t_data));
 	if (args_error(ac) != SUCCESS)
@@ -52,7 +53,18 @@ int	main(int ac, char **av)
 	printf("✅ load_map(&data, fd, av[1])\n\n");
 	print_load_asset(&data);
 	print_load_map(&data);
+	FIN PARTIE LOWELL */
+
+	/* PARTIE NADIA */
+	(void)ac;
+	(void)fd;
+	(void)data;
 	init_map(&bd);
+	get_file_tmp(&bd, av);
+	printf("hello?\n");
 	minimap_area(&bd);
+
+	/* FIN PARTIE NADIA */
+
 	return (SUCCESS);
 }
