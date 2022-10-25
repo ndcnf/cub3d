@@ -187,5 +187,11 @@ int		check_x(t_data *d);
 */
 int		check_around(char **map, int y, int x);
 int		zero_is_surrounded(t_data *d);
+/*
+* minimap.c
+*/
+void	init_map(t_board *bd);
+// void	minimap_area(t_board *bd);
+int		minimap_area(t_board *bd);
 
 #endif

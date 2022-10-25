@@ -32,19 +32,26 @@ SRCS_FILES	= main.c \
 
 #_______________ OBJS
 
-OBJS_FILES		:= ${SRCS_FILES:.c=.o}
-OBJS			:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
+MAKELIB			= ${MAKE} -C
 
 HEADS_DIR		= ./inc/
 
 NAME			= cub3d
 
 LIBUTILS		= ./utils
+MAKELIBUTILS	= ${MAKELIB} ${LIBUTILS}
+LIBMLX			= ./mlx
+MAKEMLX			= ${MAKELIB} ${LIBMLX}
+HEADS			= -I./inc/ -I${LIBUTILS} -I${LIBMLX}
 
+OBJS_FILES		:= ${SRCS_FILES:.c=.o}
+OBJS			:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}} \
+					${LIBUTILS}/libutils.a \
+					${LIBMLX}/libmlx.a
 
 #_______________ RULES
 
-MAKELIB			= ${MAKE} -C
+LIBS			= -framework OpenGL -framework AppKit
 CC				= gcc
 AR              = ar rcs
 MKDIR           = mkdir -p
@@ -58,13 +65,15 @@ TSEP            = ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 all:			${NAME}
 
 ${NAME}:		${O_DIR} ${OBJS}
+				${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS}
 				@printf "\n"
-				@${MAKELIB} ${LIBUTILS}
+				#@${MAKELIB} ${LIBUTILS}
 				@printf "${TSEP}\n"
 				@printf "${GREEN} 💻 Successfully compiled ${NAME} .o's${RESET} ✅\n"
-				@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a
+				#@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a
 				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
 				@printf "${TSEP}\n"
+
 
 ${O_DIR}:
 				@${MKDIR} ${O_DIR}

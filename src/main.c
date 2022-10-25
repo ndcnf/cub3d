@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/20 15:43:01 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:22:19 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	print_load_asset(t_data *d)
 int	main(int ac, char **av)
 {
 	t_data	data;
+	t_board	bd;
 	int		fd;
 
 	printf("⏳ Init game\n");
@@ -51,5 +52,7 @@ int	main(int ac, char **av)
 	printf("✅ load_map(&data, fd, av[1])\n\n");
 	print_load_asset(&data);
 	print_load_map(&data);
+	init_map(&bd);
+	minimap_area(&bd);
 	return (SUCCESS);
 }
