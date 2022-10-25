@@ -40,8 +40,8 @@ NAME			= cub3d
 
 LIBUTILS		= ./utils
 MAKELIBUTILS	= ${MAKELIB} ${LIBUTILS}
-LIBMLX			= ./mlx
-MAKEMLX			= ${MAKELIB} ${LIBMLX}
+MLX				= ./mlx
+MAKEMLX			= ${MAKELIB} ${MLX}
 HEADS			= -I./inc/ -I${LIBUTILS} -I${LIBMLX}
 
 OBJS_FILES		:= ${SRCS_FILES:.c=.o}
@@ -64,6 +64,15 @@ TSEP            = ${SEP}=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 all:			${NAME}
 
+${O_DIR}:
+				@${MKDIR} ${O_DIR}
+				@printf "\n${BUILD}${O_DIR} Directory Created 📎${RESET}\n\n"
+
+${O_DIR}%.o:${SRCS_DIR}%.c
+				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
+				${CC} ${CFLAGS} -Imlx -c $< -o $@
+				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
+
 ${NAME}:		${O_DIR} ${OBJS}
 				${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS}
 				@printf "\n"
@@ -73,15 +82,11 @@ ${NAME}:		${O_DIR} ${OBJS}
 				#@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a
 				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
 				@printf "${TSEP}\n"
+				-Lmlx -lmlx \
+				-framework OpenGL -framework AppKit -o ${NAME}
 
 
-${O_DIR}:
-				@${MKDIR} ${O_DIR}
-				@printf "\n${BUILD}${O_DIR} Directory Created 📎${RESET}\n\n"
 
-${O_DIR}%.o:${SRCS_DIR}%.c
-				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
-				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
 
 clean :
 				@${RM} ${O_DIR}
