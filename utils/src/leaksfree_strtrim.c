@@ -52,6 +52,7 @@ int	leakfree_strtrim(char **s1, const char *set)
 
 	trim = selftrim(*s1, set);
 	free(*s1);
+	*s1 = NULL;
 	if (trim == NULL)
 		return (1);
 	*s1 = trim;

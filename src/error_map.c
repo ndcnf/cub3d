@@ -71,7 +71,7 @@ int	check_x(t_data *d)
 	x = 0;
 	while (x < (int)d->len_line_map)
 	{
-		if (d->map[d->sizeof_tab][x] == '0')
+		if (d->map[d->nb_line_map - 1][x] == '0')
 			return (p_error("❌ 0 isn't surrounded\n"));
 		x++;
 	}

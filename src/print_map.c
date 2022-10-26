@@ -33,7 +33,11 @@ char	*get_to_line_map_in_fd(t_data *data, int fd)
 	tmp = NULL;
 	i = 0;
 	while (++i <= data->fd_line + 1)
+	{
+		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
+	}
 	return (tmp);
 }
 
@@ -60,6 +64,7 @@ int	print_full_map(t_data *data, int fd, char *tmp)
 			data->map[data->sizeof_tab][i] = '\0';
 		data->sizeof_tab++;
 		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
 	}
 	return (SUCCESS);

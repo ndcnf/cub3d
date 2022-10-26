@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_tab.c                                         :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: lzima <lzima@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 23:44:32 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/23 18:22:40 by lzima            ###   ########.fr       */
+/*   Created: 2021/10/25 14:14:48 by lzima             #+#    #+#             */
+/*   Updated: 2021/11/03 02:29:02 by lzima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/inc/libft.h"
+/* RTFM */
 
-void	free_tab(void **tab)
+int	ft_str_isdigit(char *s, char c)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	if (tab)
+	while (s[i])
 	{
-		while (tab[i])
+		if ((s[i] >= '0' && s[i] <= '9') || s[i] == c)
 			i++;
-		while (i >= 0)
-			free(tab[i--]);
-		free(tab);
-		tab = NULL;
+		else
+			return (0);
 	}
+	return (1);
 }

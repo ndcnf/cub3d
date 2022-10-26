@@ -48,10 +48,13 @@ int	main(int ac, char **av)
 		return (ERROR);
 	close(fd);
 	if (load_map(&data, fd, av[1]) != SUCCESS)
+	{
 		return (ERROR);
+	}
 	close(fd);
 	printf("✅ load_map(&data, fd, av[1])\n\n");
 	print_load_asset(&data);
 	print_load_map(&data);
+	free_map(&data);
 	return (SUCCESS);
 }

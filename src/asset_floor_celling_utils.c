@@ -14,9 +14,13 @@
 
 int	pars_f(t_data *data, char *tmp)
 {
+	char	*s;
+
 	if (data->check_f == 0)
 	{
-		data->f = ft_strdup(ft_strtrim(tmp, "F "));
+		s = ft_strtrim(tmp, "F ");
+		data->f = ft_strdup(s);
+		free(s);
 		if (error_colors(data->f) != SUCCESS)
 			return (p_error("❌ F colors setting error\n"));
 		data->check_f = 1;
@@ -29,9 +33,13 @@ int	pars_f(t_data *data, char *tmp)
 
 int	pars_c(t_data *data, char *tmp)
 {
+	char	*s;
+
 	if (data->check_c == 0)
 	{
-		data->c = ft_strdup(ft_strtrim(tmp, "C "));
+		s = ft_strtrim(tmp, "C ");
+		data->c = ft_strdup(s);
+		free(s);
 		if (error_colors(data->c) != SUCCESS)
 			return (p_error("❌ C colors setting error\n"));
 		data->check_c = 1;
@@ -44,9 +52,13 @@ int	pars_c(t_data *data, char *tmp)
 
 int	map_start(t_data *d, char *tmp)
 {
+	char	*s;
+
 	(void)d;
-	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
+	s = ft_strtrim(tmp, " \t\n\r\f\v");
+	if (!s)
 		return (ERROR);
+	free(s);
 	return (0);
 }
 
@@ -73,6 +85,11 @@ int	error_colors(char *tmp)
 	while (i < 3)
 	{
 		x = -1;
+		if (ft_str_isdigit(tmp, ',') != 1)
+		{
+			free_tab((void *)colors);
+			return (p_error("❌ F colors setting isn't digit\n"));
+		}
 		if (colors[i] != NULL)
 			x = ft_atoi(colors[i]);
 		if (check_colors(colors, x) != SUCCESS)

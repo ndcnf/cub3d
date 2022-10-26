@@ -35,7 +35,7 @@ int	no(t_data *data, char *tmp)
 
 int	so(t_data *data, char *tmp)
 {
-	int	fd;
+	int		fd;
 
 	if (ft_strncmp(tmp, "SO", 2) == SUCCESS)
 	{

@@ -38,7 +38,7 @@ int	zero_is_surrounded(t_data *d)
 	int	y;
 
 	y = 0;
-	while (y <= d->nb_line_map)
+	while (y < d->nb_line_map)
 	{
 		x = 0;
 		while (x <= (int)d->len_line_map)

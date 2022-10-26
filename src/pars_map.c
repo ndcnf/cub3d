@@ -41,17 +41,25 @@ int	pars_map(t_data *d, int fd)
 	char	*tmp;
 	int		i;
 
+	tmp = get_next_line(fd);
 	i = 0;
-	while (++i <= d->fd_line + 1)
+	while (++i <= d->fd_line)
+	{
+		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
-	d->nb_line_map = 0;
-	d->len_line_map = 0;
+	}
 	while (tmp != NULL)
 	{
 		if (line_map_ok(tmp) != SUCCESS)
+		{
+			free(tmp);
 			return (ERROR);
+		}
 		len_line(d, tmp);
 		d->nb_line_map++;
+		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
 	}
 	return (SUCCESS);

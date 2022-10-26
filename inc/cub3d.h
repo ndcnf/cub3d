@@ -68,6 +68,8 @@ typedef struct s_data
 	int		nb_line_map;
 	size_t	len_line_map;
 	char	**map;
+	char	*tmp;
+	int		start;
 	int		malloc_check;
 	int		sizeof_tab;
 	float	pposx;
@@ -84,7 +86,7 @@ void	print_load_asset(t_data *d);
 /*
  * main_utils.c FULL
  */
-void	safe_free(void **x);
+void	safe_free(void *x);
 int		p_error(char *error);
 void	free_map(t_data *data);
 int		args_error(int ac);
