@@ -18,6 +18,8 @@ int	error_map(t_data *d)
 		return (p_error("❌ check border(d)\n"));
 	if (zero_is_surrounded(d) != SUCCESS)
 		return (p_error("❌ zero_is_surrended(d)\n"));
+	if (d->pposx == -1 || d->pposy == -1)
+		return (p_error("❌ init_pos isn't set\n"));
 	return (SUCCESS);
 }
 
@@ -46,7 +48,7 @@ int	check_y(t_data *d)
 	{
 		if (d->map[y][d->len_line_map] == '0')
 		{
-			printf("map[%d][%d] = %c\n", y, (int) d->len_line_map,
+			printf("map[%d][%d] = %c\n", (int) d->len_line_map, y,
 				d->map[y][d->len_line_map]);
 			return (p_error("❌ 0 isn't surrounded\n"));
 		}

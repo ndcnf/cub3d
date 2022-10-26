@@ -28,9 +28,7 @@ int	line_map_ok(const char *tmp)
 	i = 0;
 	while (tmp[i] != '\0')
 	{
-		if (tmp[i] == '1' || tmp[i] == '0' || tmp[i] == 'N' || tmp[i] == 'S' \
-			|| tmp[i] == 'W' || tmp[i] == 'E' || tmp[i] == ' '
-			|| tmp[i] == '\n')
+		if (ft_strchr("10NSWE \n", tmp[i]) != NULL)
 			i++;
 		else
 			return (p_error("❌ line_map_ok(tmp)\n"));
@@ -56,5 +54,6 @@ int	pars_map(t_data *d, int fd)
 		d->nb_line_map++;
 		tmp = get_next_line(fd);
 	}
+
 	return (SUCCESS);
 }

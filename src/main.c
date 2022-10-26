@@ -29,6 +29,8 @@ void	print_load_asset(t_data *d)
 	printf("EA \"%s\"\n\n", d->ea);
 	printf("F \"%s\"\n", d->f);
 	printf("C \"%s\"\n\n", d->c);
+	printf("Player orientation(%c) at x: \"%f\"\n", d->pos, d->pposx);
+	printf("Player orientation(%c) at y: \"%f\"\n\n", d->pos, d->pposy);
 }
 
 int	main(int ac, char **av)

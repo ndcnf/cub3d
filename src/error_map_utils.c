@@ -25,7 +25,7 @@ int	check_around(char **map, int y, int x)
 		|| (map[y - 1][x] != '1' && map[y - 1][x] != '0'
 		&& map[y - 1][x] != '2'))
 		{
-			printf("at x:%d y:%d\n", y + 1, x + 1);
+			printf("at y:%d | x:%d \n", y + 1, x + 1);
 			return (p_error("❌ 0 isn't surrounded\n"));
 		}
 	}

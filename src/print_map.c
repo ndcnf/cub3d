@@ -71,6 +71,7 @@ int	init_pos(t_data *data, const char *tmp, int i)
 	{
 		if (data->pposx == -1 && data->pposy == -1)
 		{
+			data->pos = tmp[i];
 			data->pposx = (float)data->sizeof_tab;
 			data->pposy = (float)i;
 			data->map[data->sizeof_tab][i] = '0';

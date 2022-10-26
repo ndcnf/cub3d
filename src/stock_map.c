@@ -31,9 +31,10 @@ int	malloc_map(t_data *d)
 	i = 0;
 	while (i <= d->nb_line_map)
 	{
-		d->map[i] = (char *)ft_calloc_p(1, (d->len_line_map * sizeof(char)));
+		d->map[i] = (char *)ft_calloc_p(d->len_line_map + 1, sizeof(char));
 		if (alloc_check(d->map[i]) != SUCCESS)
 			return (p_error("❌ malloc_map error\n"));
+		d->map[i][d->len_line_map] = '\0';
 		d->malloc_check = i;
 		i++;
 	}
