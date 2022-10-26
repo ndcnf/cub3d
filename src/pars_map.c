@@ -54,6 +54,5 @@ int	pars_map(t_data *d, int fd)
 		d->nb_line_map++;
 		tmp = get_next_line(fd);
 	}
-
 	return (SUCCESS);
 }
