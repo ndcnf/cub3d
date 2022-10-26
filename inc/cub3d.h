@@ -54,8 +54,8 @@ typedef struct s_data
 	char	*c;
 	int		check_c;
 	int		fd_line;
-	int		nb_line_map; // == y_len ?
-	size_t	len_line_map; // == x_len ?
+	int		nb_line_map; // == y_len
+	size_t	len_line_map; // == x_len
 	char	**map;
 	int		malloc_check;
 	int		sizeof_tab;
@@ -67,8 +67,8 @@ typedef struct s_map
 {
 	int		x;
 	int		y;
-	int		x_len; // == len_line_map ?
-	int		y_len; // == nb_line_map ?
+	int		x_len; // == len_line_map
+	int		y_len; // == nb_line_map
 	int		cd_x;
 	int		cd_y;
 	char	*content;
@@ -114,6 +114,15 @@ typedef struct s_board
 	int			w;
 	int			h;
 }	t_board;
+
+// TEST MLX UNIQUEMENT
+typedef struct	s_minimap {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_minimap;
 
 /*
  * main.c
@@ -191,7 +200,8 @@ int		zero_is_surrounded(t_data *d);
 * minimap.c
 */
 void	init_map(t_board *bd);
-int		minimap_area(t_board *bd);
+int		minimap_area(t_board *bd, t_minimap *m);
 void	get_file_tmp(t_board *bd, char *argv[]); // SUPPRIMER APRES PARSING OK, TEMPORAIRE
+void	my_mlx_pixel_put(t_minimap *m, int x, int y, int color);
 
 #endif

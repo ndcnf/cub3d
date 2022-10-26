@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/25 15:45:37 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:52:30 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,30 @@ int	main(int ac, char **av)
 	(void)ac;
 	(void)fd;
 	(void)data;
+	(void)av;
 	init_map(&bd);
-	get_file_tmp(&bd, av);
+	// get_file_tmp(&bd, av);
 	printf("hello?\n");
-	minimap_area(&bd);
+
+	// void	*mlx;
+	// void	*mlx_win;
+	t_minimap	img;
+
+	bd.mlx = mlx_init();
+	bd.win = mlx_new_window(bd.mlx, 500, 500, "Hello world!");
+	img.img = mlx_new_image(bd.mlx, 500, 500);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	//my_mlx_pixel_put(&img, 5, 5, 0X00FF0000);
+	minimap_area(&bd, &img);
+	mlx_put_image_to_window(bd.mlx, bd.win, img.img, 0, 0);
+	mlx_loop(bd.mlx);
+
+
+
+	// minimap_area(&bd);
+	// mlx_key_hook(bd.win, key_on, &bd);
+	// mlx_hook(bd.win, X_BTN, 0, close_win, &bd);
+	// mlx_loop(bd.mlx);
 
 	/* FIN PARTIE NADIA */
 
