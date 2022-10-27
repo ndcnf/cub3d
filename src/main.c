@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/26 16:52:30 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:42:09 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	print_load_asset(t_data *d)
 
 int	main(int ac, char **av)
 {
-	t_data	data;
-	t_board	bd;
+	t_data		d;
+	// t_board		bd;
+	// t_minimap	map;
 	int		fd;
 
 	/* PARTIE LOWELL
@@ -58,24 +59,21 @@ int	main(int ac, char **av)
 	/* PARTIE NADIA */
 	(void)ac;
 	(void)fd;
-	(void)data;
 	(void)av;
-	init_map(&bd);
+	init_map(&d);
+
 	// get_file_tmp(&bd, av);
 	printf("hello?\n");
 
-	// void	*mlx;
-	// void	*mlx_win;
-	t_minimap	img;
+	// d.m2d->img = mlx_new_image(d.mlx, 50, 50);
+	// d.m2d->addr = mlx_get_data_addr(d.m2d->img, d.m2d->bits_per_pixel, d.m2d->line_length, d.m2d->endian);
+	//my_mlx_pixel_put(&d, 5, 5, 0X00FF0000);
+	map2d(&d);
 
-	bd.mlx = mlx_init();
-	bd.win = mlx_new_window(bd.mlx, 500, 500, "Hello world!");
-	img.img = mlx_new_image(bd.mlx, 500, 500);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	//my_mlx_pixel_put(&img, 5, 5, 0X00FF0000);
-	minimap_area(&bd, &img);
-	mlx_put_image_to_window(bd.mlx, bd.win, img.img, 0, 0);
-	mlx_loop(bd.mlx);
+	// minimap_area(&d);
+	mlx_put_image_to_window(d.mlx, d.win, d.m2d->img, 0, 0);
+	// minimap_area(&bd, map.img);
+	mlx_loop(d.mlx);
 
 
 

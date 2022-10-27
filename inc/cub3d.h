@@ -29,7 +29,11 @@
 # define WIN_TITLE "Cub3D : Title TBD"
 # define WIN_H 512
 # define WIN_W 512
-# define IMG_PXL 64
+# define IMG_PXL 16
+
+# define RED 0x00FF0000
+# define WHI 0x00FFFFFF
+# define BLU 0x000000FF
 
 typedef struct s_colors
 {
@@ -38,9 +42,23 @@ typedef struct s_colors
 	int	blue;
 }	t_colors;
 
+typedef struct	s_minimap
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_minimap;
+
 typedef struct s_data
 {
-	//void	*mlx;
+	void	*mlx;
+	void	*win;
+	int		w;
+	int		h;
+	t_minimap	*m2d;
+
 	char	*no;
 	int		check_no;
 	char	*so;
@@ -55,7 +73,9 @@ typedef struct s_data
 	int		check_c;
 	int		fd_line;
 	int		nb_line_map; // == y_len
-	size_t	len_line_map; // == x_len
+	size_t	len_line_map; // == x_len ET INT ?
+	int		x_len; //copie de len_line_map
+	int		y_len; //copie de nb_line_map
 	char	**map;
 	int		malloc_check;
 	int		sizeof_tab;
@@ -88,7 +108,6 @@ typedef struct s_items
 
 typedef struct s_player
 {
-	//int	steps;
 	int	x;
 	int	y;
 	int	cd_x;
@@ -108,21 +127,12 @@ typedef struct s_board
 	t_sprite	*spr;
 	t_items		*itm;
 	t_player	*p1;
-	void		*mlx;
-	void		*img;
-	void		*win;
+	// void		*mlx;
+	// void		*img;
+	// void		*win;
 	int			w;
 	int			h;
 }	t_board;
-
-// TEST MLX UNIQUEMENT
-typedef struct	s_minimap {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_minimap;
 
 /*
  * main.c
@@ -199,9 +209,10 @@ int		zero_is_surrounded(t_data *d);
 /*
 * minimap.c
 */
-void	init_map(t_board *bd);
-int		minimap_area(t_board *bd, t_minimap *m);
-void	get_file_tmp(t_board *bd, char *argv[]); // SUPPRIMER APRES PARSING OK, TEMPORAIRE
-void	my_mlx_pixel_put(t_minimap *m, int x, int y, int color);
+void	init_map(t_data *d);
+int		minimap_area(t_data *d, int i, int j, int color);
+void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
+void	on_minimap(t_data *d, int i, int j, char type);
+void	map2d(t_data *d);
 
 #endif
