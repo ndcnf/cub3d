@@ -33,7 +33,6 @@
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
-# define BLU 0x000000FF
 # define GRN 0x00336600
 # define DGR 0x004C9900
 
@@ -213,7 +212,7 @@ int		zero_is_surrounded(t_data *d);
 * minimap.c
 */
 void	init_map(t_data *d);
-int		minimap_area(t_data *d, int i, int j, int color);
+void	minimap_area(t_data *d, int i, int j, int color);
 void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
 void	player_is_here(t_data *d);

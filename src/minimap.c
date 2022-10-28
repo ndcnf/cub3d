@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/28 15:49:18 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:08:39 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
 }
 
 // uniquement pour test de fonctionnement, adapter ensuite car idem Eduardo & Jerome
-int		minimap_area(t_data *d, int i, int j, int color)
+void	minimap_area(t_data *d, int i, int j, int color)
 {
 	int	x;
 	int	y;
@@ -85,7 +85,6 @@ int		minimap_area(t_data *d, int i, int j, int color)
 		}
 		x++;
 	}
-	return (0);
 }
 
 void	on_minimap(t_data *d, int x, int y, char type)
@@ -111,22 +110,15 @@ void	player_is_here(t_data *d)
 
 	x = d->pposx * IMG_PXL + (IMG_PXL/2);
 	y = d->pposy * IMG_PXL + (IMG_PXL/2);
-
 	my_mlx_pixel_put(d, x + 1, y + 1, RED);
 	my_mlx_pixel_put(d, x, y + 1, RED);
 	my_mlx_pixel_put(d, x - 1, y + 1, RED);
-
 	my_mlx_pixel_put(d, x + 1, y - 1, RED);
 	my_mlx_pixel_put(d, x, y - 1, RED);
 	my_mlx_pixel_put(d, x - 1, y - 1, RED);
-
 	my_mlx_pixel_put(d, x + 1, y, RED);
 	my_mlx_pixel_put(d, x, y, RED);
 	my_mlx_pixel_put(d, x - 1, y, RED);
-
-
-
-
 }
 
 void	map2d(t_data *d)
