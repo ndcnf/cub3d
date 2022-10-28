@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/28 15:13:27 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/28 15:49:18 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,12 @@ int		minimap_area(t_data *d, int i, int j, int color)
 		y = j * IMG_PXL;
 		while (y < ((j + 1) * IMG_PXL))
 		{
-			my_mlx_pixel_put(d, x, y, color);
+			if (x % 2 && y % 2 && color == DGR)
+				my_mlx_pixel_put(d, x, y, color);
+			else if (color == DGR)
+				my_mlx_pixel_put(d, x, y, GRN);
+			else
+				my_mlx_pixel_put(d, x, y, color);
 			y++;
 		}
 		x++;
@@ -88,7 +93,7 @@ void	on_minimap(t_data *d, int x, int y, char type)
 	if (type == '0')
 		minimap_area(d, x, y, WHI);
 	if (type == '1')
-		minimap_area(d, x, y, BLU);
+		minimap_area(d, x, y, DGR);
 
 	// devront etre converties en '1' a terme
 	///////////////////////////////////////////
@@ -107,10 +112,17 @@ void	player_is_here(t_data *d)
 	x = d->pposx * IMG_PXL + (IMG_PXL/2);
 	y = d->pposy * IMG_PXL + (IMG_PXL/2);
 
+	my_mlx_pixel_put(d, x + 1, y + 1, RED);
+	my_mlx_pixel_put(d, x, y + 1, RED);
+	my_mlx_pixel_put(d, x - 1, y + 1, RED);
+
+	my_mlx_pixel_put(d, x + 1, y - 1, RED);
+	my_mlx_pixel_put(d, x, y - 1, RED);
+	my_mlx_pixel_put(d, x - 1, y - 1, RED);
+
+	my_mlx_pixel_put(d, x + 1, y, RED);
 	my_mlx_pixel_put(d, x, y, RED);
-	my_mlx_pixel_put(d, x + 1, y + 1, GRE);
-	my_mlx_pixel_put(d, x + 1, y, GRE);
-	my_mlx_pixel_put(d, x, y + 1, GRE);
+	my_mlx_pixel_put(d, x - 1, y, RED);
 
 
 

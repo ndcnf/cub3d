@@ -29,12 +29,13 @@
 # define WIN_TITLE "Cub3D : Title TBD"
 # define WIN_H 512
 # define WIN_W 512
-# define IMG_PXL 64
+# define IMG_PXL 64 //16 sera mieux a terme
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
 # define BLU 0x000000FF
-# define GRE 0x0000FF00
+# define GRN 0x00336600
+# define DGR 0x004C9900
 
 typedef struct s_colors
 {
