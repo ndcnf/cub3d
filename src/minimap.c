@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/27 15:45:12 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:15:38 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**map_test(void)
 	tm[1] = "10001";
 	tm[2] = "11N01";
 	tm[3] = "10011";
-	tm[4] = "11119";
+	tm[4] = "11111";
 	tm[5] = NULL;
 	return(tm);
 }
@@ -69,23 +69,17 @@ int		minimap_area(t_data *d, int i, int j, int color)
 	int	x;
 	int	y;
 
-	// d->map.x = 1;
-	// bd->map.y = 1;
-
 	x = i * IMG_PXL;
 	while (x < ((i + 1) * IMG_PXL))
 	{
 		y = j * IMG_PXL;
-		// printf("PREMIER x[%d] et y[%d]\n", x, y);
 		while (y < ((j + 1) * IMG_PXL))
 		{
 			my_mlx_pixel_put(d, x, y, color);
-			// printf("x[%d] et y[%d]\n", x, y);
 			y++;
 		}
 		x++;
 	}
-	printf("apres boucle map\n");
 	return (0);
 }
 
@@ -95,19 +89,28 @@ void	on_minimap(t_data *d, int i, int j, char type)
 		minimap_area(d, i, j, WHI);
 	if (type == '1')
 		minimap_area(d, i, j, BLU);
+
+	// devront etre converties en '1' a terme
+	///////////////////////////////////////////
 	if (type == '9')
 		minimap_area(d, i, j, RED);
+	///////////////////////////////////////////
 }
 
 void	map2d(t_data *d)
 {
-	char	**tm;
 	int		i;
 	int		j;
+
+	// A remplacer apres parsing par **map
+	///////////////////////////////////////////
+	char	**tm;
 
 	tm = map_test();
 	d->h = 5;
 	d->w = 5;
+	///////////////////////////////////////////
+
 	i = 0;
 	while (i < d->h)
 	{
