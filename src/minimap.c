@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/28 12:15:38 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/28 15:09:16 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,30 @@ void	on_minimap(t_data *d, int i, int j, char type)
 	///////////////////////////////////////////
 }
 
+void	player_is_here(t_data *d)
+{
+	int	x;
+	int	y;
+
+	printf("posx[%f] / posy[%f] / orient[%c]\n", d->pposx, d->pposy, d->p_orient);
+
+	x = d->pposx * IMG_PXL + (IMG_PXL/2);
+	y = d->pposy * IMG_PXL + (IMG_PXL/2);
+
+	my_mlx_pixel_put(d, x, y, RED);
+	my_mlx_pixel_put(d, x + 1, y + 1, GRE);
+	my_mlx_pixel_put(d, x + 1, y, GRE);
+	my_mlx_pixel_put(d, x, y + 1, GRE);
+
+
+
+
+}
+
 void	map2d(t_data *d)
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 
 	// A remplacer apres parsing par **map
 	///////////////////////////////////////////
@@ -111,15 +131,27 @@ void	map2d(t_data *d)
 	d->w = 5;
 	///////////////////////////////////////////
 
-	i = 0;
-	while (i < d->h)
+	x = 0;
+	while (x < d->h)
 	{
-		j = 0;
-		while (j < d->w)
+		y = 0;
+		while (y < d->w)
 		{
-			on_minimap(d, i, j, tm[i][j]);
-			j++;
+			// definir ailleurs la position du joueur et son orientation
+			///////////////////////////////////////////////////////////////////////////////
+			if (tm[y][x] == 'N' || tm[y][x] == 'W' ||tm[y][x] == 'E' ||tm[y][x] == 'S')
+			{
+				d->pposx = x;
+				d->pposy = y;
+				d->p_orient = tm[y][x];
+				on_minimap(d, x, y, '0');
+			}
+			else
+			///////////////////////////////////////////////////////////////////////////////
+				on_minimap(d, x, y, tm[y][x]);
+			y++;
 		}
-		i++;
+		x++;
 	}
+	player_is_here(d);
 }

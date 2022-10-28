@@ -29,11 +29,12 @@
 # define WIN_TITLE "Cub3D : Title TBD"
 # define WIN_H 512
 # define WIN_W 512
-# define IMG_PXL 16
+# define IMG_PXL 64
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
 # define BLU 0x000000FF
+# define GRE 0x0000FF00
 
 typedef struct s_colors
 {
@@ -81,6 +82,7 @@ typedef struct s_data
 	int		sizeof_tab;
 	float	pposx;
 	float	pposy;
+	char	p_orient;
 }			t_data;
 
 typedef struct s_map
@@ -213,6 +215,7 @@ void	init_map(t_data *d);
 int		minimap_area(t_data *d, int i, int j, int color);
 void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
+void	player_is_here(t_data *d);
 void	map2d(t_data *d);
 
 #endif
