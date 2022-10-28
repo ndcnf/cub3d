@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/28 15:09:16 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/28 15:13:27 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**map_test(void)
 	}
 	tm[0] = "11111";
 	tm[1] = "10001";
-	tm[2] = "11N01";
+	tm[2] = "110N1";
 	tm[3] = "10011";
 	tm[4] = "11111";
 	tm[5] = NULL;
@@ -83,17 +83,17 @@ int		minimap_area(t_data *d, int i, int j, int color)
 	return (0);
 }
 
-void	on_minimap(t_data *d, int i, int j, char type)
+void	on_minimap(t_data *d, int x, int y, char type)
 {
 	if (type == '0')
-		minimap_area(d, i, j, WHI);
+		minimap_area(d, x, y, WHI);
 	if (type == '1')
-		minimap_area(d, i, j, BLU);
+		minimap_area(d, x, y, BLU);
 
 	// devront etre converties en '1' a terme
 	///////////////////////////////////////////
 	if (type == '9')
-		minimap_area(d, i, j, RED);
+		minimap_area(d, x, y, RED);
 	///////////////////////////////////////////
 }
 
