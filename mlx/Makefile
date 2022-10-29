@@ -1,5 +1,7 @@
 #
 #
+BUILD	= \e[38;5;225m
+RESET	= \033[0m
 
 NOM=libmlx.a
 SRC= mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
@@ -9,16 +11,20 @@ OBJ=$(OBJ1:.m=.o)
 CFLAGS+=-O2
 
 # add to match string put with X11 in size and position
-CFLAGS+= -DSTRINGPUTX11
+CFLAGS+= -DSTRINGPUTX11 -w
 
 all: $(NOM)
 
-$(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+$(NOM): $(OBJ)
+	@ar -r $(NOM) $(OBJ)
+	@printf "\e[1K\r${BUILD} 🚧 $@ from $<\n${RESET}"
+	@ranlib $(NOM)
+	@printf "${TSEP}\n"
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+	@rm -f $(NOM) $(OBJ) *~
+	@rm -f mlx_app
+
+fclean: clean
 
 re: clean all

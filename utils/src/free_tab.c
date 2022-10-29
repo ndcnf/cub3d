@@ -14,8 +14,8 @@
 
 void	free_tab(void **tab)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (tab)
 	{
