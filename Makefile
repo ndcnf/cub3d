@@ -52,7 +52,7 @@ CC				= gcc
 AR              = ar rcs
 MKDIR           = mkdir -p
 RM              = rm -rf
-CFLAGS          = -Wall -Wextra -Werror -g3 -fsanitize=address -Imlx
+CFLAGS          = -Wall -Wextra -Werror -g3 #-fsanitize=address -Imlx
 MLXFLAGS        = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 TSEP            = ${SEP}...${RESET}

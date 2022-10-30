@@ -48,8 +48,6 @@ void	free_map(t_data *data)
 	safe_free(data->ea);
 	safe_free(data->we);
 	safe_free(data->so);
-	safe_free(data->f);
-	safe_free(data->c);
 	safe_free(data->mlx);
 	free_tab((void *)data->map);
 }

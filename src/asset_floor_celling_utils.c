@@ -19,10 +19,13 @@ int	pars_f(t_data *data, char *tmp)
 	if (data->check_f == 0)
 	{
 		s = ft_strtrim(tmp, "F ");
-		data->f = ft_strdup(s);
-		free(s);
-		if (error_colors(data->f) != SUCCESS)
+		data->f = 0;
+		if (error_colors(s, &data->f) != SUCCESS)
+		{
+			free(s);
 			return (p_error("❌ F colors setting error\n"));
+		}
+		free(s);
 		data->check_f = 1;
 		return (SUCCESS);
 	}
@@ -38,10 +41,13 @@ int	pars_c(t_data *data, char *tmp)
 	if (data->check_c == 0)
 	{
 		s = ft_strtrim(tmp, "C ");
-		data->c = ft_strdup(s);
-		free(s);
-		if (error_colors(data->c) != SUCCESS)
+		data->c = 0;
+		if (error_colors(s, &data->c) != SUCCESS)
+		{
+			free(s);
 			return (p_error("❌ C colors setting error\n"));
+		}
+		free(s);
 		data->check_c = 1;
 		return (SUCCESS);
 	}
@@ -62,44 +68,44 @@ int	map_start(t_data *d, char *tmp)
 	return (0);
 }
 
-static int	check_colors(char **colors, int c)
+static int	check_colors(char **colors, int *out)
 {
-	if (c < 0 || c > 256)
+	int	c;
+	int	i;
+
+	i = 0;
+	while (i < 3)
 	{
-		free_tab((void *)colors);
-		return (p_error("❌ Range's colors"));
+		c = ft_atoi(colors[i]);
+		if (c < 0 || c >= 256)
+			return (p_error("❌ Range's colors\n"));
+		*out = (*out << 8) | c;
+		i++;
 	}
 	return (SUCCESS);
 }
 
-int	error_colors(char *tmp)
+int	error_colors(char *tmp, int *out)
 {
-	int		x;
-	int		i;
 	char	**colors;
 
 	colors = ft_split(tmp, ',');
 	if (colors == NULL)
 		return (ERROR);
-	i = 0;
-	while (i < 3)
-	{
-		x = -1;
-		if (ft_str_isdigit(tmp, ',') != 1)
-		{
-			free_tab((void *)colors);
-			return (p_error("❌ F colors setting isn't digit\n"));
-		}
-		if (colors[i] != NULL)
-			x = ft_atoi(colors[i]);
-		if (check_colors(colors, x) != SUCCESS)
-			return (ERROR);
-		i++;
-	}
-	if (colors[3] != NULL)
+	if (len_tab((void *)colors) != 3)
 	{
 		free_tab((void *)colors);
-		return (p_error("❌ too many colors"));
+		return (p_error("❌ too many colors\n"));
+	}
+	if (ft_str_isdigit(tmp, ',') != 1)
+	{
+		free_tab((void *)colors);
+		return (p_error("❌ F colors setting isn't digit\n"));
+	}
+	if (check_colors(colors, out) != SUCCESS)
+	{
+		free_tab((void *)colors);
+		return (p_error("↪️ check_colors(colors, out)\n"));
 	}
 	free_tab((void *)colors);
 	return (SUCCESS);

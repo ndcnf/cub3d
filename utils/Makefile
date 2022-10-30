@@ -84,6 +84,7 @@ SRCS_FILES	= ft_atoi.c \
 			leaksfree_strjoin.c \
 			leaksfree_substr.c \
 			ft_str_isdigit.c \
+			len_tab.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 

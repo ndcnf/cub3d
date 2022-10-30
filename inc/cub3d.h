@@ -60,9 +60,9 @@ typedef struct s_data
 	int		check_we;
 	char	*ea;
 	int		check_ea;
-	char	*f;
+	int 	f;
 	int		check_f;
-	char	*c;
+	int 	c;
 	int		check_c;
 	int		fd_line;
 	int		nb_line_map;
@@ -102,14 +102,15 @@ int		load_map(t_data *data, int fd, char *map_cub);
 int		pars_f_n_c(t_data *data, char *tmp);
 int		get_asset(t_data *data, char *tmp);
 int		asset_all_good(t_data *d);
-int		asset(t_data *data, int fd);
+int		asset(t_data *data, int fd, char *tmp);
 /*
  * asset_floor_celling_utils.c FULL
  */
 int		map_start(t_data *d, char *tmp);
-int		error_colors(char *tmp);
+int		error_colors(char *tmp, int *out);
 int		pars_f(t_data *data, char *tmp);
 int		pars_c(t_data *data, char *tmp);
+int		translated_colors(int *out, char *s);
 /*
 * check_asset.c FULL
 */

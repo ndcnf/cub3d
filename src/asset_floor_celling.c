@@ -55,22 +55,15 @@ int	get_asset(t_data *d, char *tmp)
 int	asset_all_good(t_data *d)
 {
 	if (d->no == NULL || d->so == NULL || d->we == NULL || d->ea == NULL
-		|| d->f == NULL || d->c == NULL)
+		|| d->f < 0 || d->c < 0)
 		return (p_error("❌ missing assets or colors (floor || celling)\n"));
 	return (SUCCESS);
 }
 
-//void	start_map(t_data *d, int start, char *tmp)
-//{
-//
-//}
-
-int	asset(t_data *d, int fd)
+int	asset(t_data *d, int fd, char *tmp)
 {
-	char	*tmp;
 	int		start;
 
-	tmp = get_next_line(fd);
 	while (tmp != NULL)
 	{
 		start = get_asset(d, tmp);
@@ -81,19 +74,14 @@ int	asset(t_data *d, int fd)
 				if (asset_all_good(d) != SUCCESS)
 				{
 					safe_free(tmp);
-					return (p_error("❌ asset_all_good(d)\n"));
+					return (p_error(" ↪ asset_all_good(d)\n"));
 				}
 				break ;
 			}
 			safe_free(tmp);
-			return (p_error("❌ get_asset(d, tmp)\n"));
+			return (p_error(" ↪ get_asset(d, tmp)\n"));
 		}
 		d->fd_line++;
-		safe_free(tmp);
-		tmp = get_next_line(fd);
-	}
-	while (tmp != NULL)
-	{
 		safe_free(tmp);
 		tmp = get_next_line(fd);
 	}

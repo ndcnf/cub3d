@@ -39,7 +39,6 @@ int	malloc_map(t_data *d)
 		i++;
 	}
 	d->map[i] = NULL;
-	print_load_map(d);
 	return (SUCCESS);
 }
 

@@ -19,9 +19,9 @@ int	print_map(t_data *data, int fd)
 	tmp = NULL;
 	tmp = get_to_line_map_in_fd(data, fd);
 	if (print_full_map(data, fd, tmp) != SUCCESS)
-		return (p_error("❌ print_full_map(data, fd, tmp)\n"));
+		return (p_error("↪ print_full_map(data, fd, tmp)\n"));
 	if (error_map(data) != SUCCESS)
-		return (p_error("❌ error_map(data)\n"));
+		return (p_error("↪ error_map(data)\n"));
 	return (SUCCESS);
 }
 
@@ -82,7 +82,7 @@ int	init_pos(t_data *data, const char *tmp, int i)
 			data->map[data->sizeof_tab][i] = '0';
 		}
 		else
-			return (p_error("❌ init_pos(data, tmp, i)\n"));
+			return (p_error("↪ init_pos(data, tmp, i)\n"));
 	}
 	return (SUCCESS);
 }

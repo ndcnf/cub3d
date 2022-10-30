@@ -15,9 +15,9 @@
 int	error_map(t_data *d)
 {
 	if (check_borders(d) != SUCCESS)
-		return (p_error("❌ check border(d)\n"));
+		return (p_error("↪ check border(d)\n"));
 	if (zero_is_surrounded(d) != SUCCESS)
-		return (p_error("❌ zero_is_surrended(d)\n"));
+		return (p_error("↪ zero_is_surrended(d)\n"));
 	if (d->pposx == -1 || d->pposy == -1)
 		return (p_error("❌ init_pos isn't set\n"));
 	return (SUCCESS);
@@ -26,9 +26,9 @@ int	error_map(t_data *d)
 int	check_borders(t_data *d)
 {
 	if (check_x(d) != SUCCESS)
-		return (p_error("❌ check_x(d)\n"));
+		return (p_error("↪ check_x(d)\n"));
 	if (check_y(d) != SUCCESS)
-		return (p_error("❌ check_y(d)\n"));
+		return (p_error("↪ check_y(d)\n"));
 	return (SUCCESS);
 }
 

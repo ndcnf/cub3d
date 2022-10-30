@@ -31,7 +31,7 @@ int	line_map_ok(const char *tmp)
 		if (ft_strchr("10NSWE \n", tmp[i]) != NULL)
 			i++;
 		else
-			return (p_error("❌ line_map_ok(tmp)\n"));
+			return (p_error("❌  map have an wrong char\n"));
 	}
 	return (SUCCESS);
 }
@@ -54,7 +54,7 @@ int	pars_map(t_data *d, int fd)
 		if (line_map_ok(tmp) != SUCCESS)
 		{
 			free(tmp);
-			return (ERROR);
+			return (p_error(" ↪️ line_map_ok(tmp)\n"));
 		}
 		len_line(d, tmp);
 		d->nb_line_map++;
