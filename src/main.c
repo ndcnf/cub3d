@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/31 09:42:55 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:01:52 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	print_load_asset(t_data *d)
 int	main(int ac, char **av)
 {
 	t_data		d;
-	// t_board		bd;
-	// t_minimap	map;
 	int		fd;
 
 	/* PARTIE LOWELL

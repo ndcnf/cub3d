@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/31 09:57:32 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:16:17 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,32 @@ int	key_on(int key, t_data *d)
 		printf("ESCAPE\n");
 		close_win();
 	}
-	else if (key == K_W || key == K_AR_U)
+	else if (key == K_W)
 	{
 		printf("UP\n");
 		// move(d, KEY_UP);
 	}
-	else if (key == K_A || key == K_AR_L)
+	else if (key == K_A)
 	{
 		printf("LEFT\n");
 		// move(d, KEY_LFT);
 	}
-	else if (key == K_S || key == K_AR_D)
+	else if (key == K_AR_L)
+	{
+		printf("CAMERA GAUCHE\n");
+		// move(d, KEY_LFT);
+	}
+	else if (key == K_S)
 	{
 		printf("DOWN\n");
 		// move(d, KEY_DWN);
 	}
-	else if (key == K_D || key == K_AR_R)
+	else if (key == K_AR_R)
+	{
+		printf("CAMERA DROITE\n");
+		// move(d, KEY_LFT);
+	}
+	else if (key == K_D)
 	{
 		printf("RIGHT\n");
 		// move(d, KEY_RGT);

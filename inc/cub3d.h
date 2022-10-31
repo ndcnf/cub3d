@@ -37,13 +37,6 @@
 # define GRN 0x00336600
 # define DGR 0x004C9900
 
-typedef struct s_colors
-{
-	int	red;
-	int	green;
-	int	blue;
-}	t_colors;
-
 typedef struct	s_minimap
 {
 	void	*img;
@@ -85,57 +78,6 @@ typedef struct s_data
 	float	pposy;
 	char	p_orient;
 }			t_data;
-
-typedef struct s_map
-{
-	int		x;
-	int		y;
-	int		x_len; // == len_line_map
-	int		y_len; // == nb_line_map
-	int		cd_x;
-	int		cd_y;
-	char	*content;
-	char	**map2d;
-}	t_map;
-
-typedef struct s_items
-{
-	int	p;
-	int	e;
-	int	one;
-	int	zero;
-	int	c;
-	int	x_e;
-	int	y_e;
-}	t_items;
-
-typedef struct s_player
-{
-	int	x;
-	int	y;
-	int	cd_x;
-	int	cd_y;
-}	t_player;
-
-typedef struct s_sprite
-{
-	int		w;
-	int		h;
-	void	*img;
-}	t_sprite;
-
-typedef struct s_board
-{
-	t_map		map;
-	t_sprite	*spr;
-	t_items		*itm;
-	t_player	*p1;
-	// void		*mlx;
-	// void		*img;
-	// void		*win;
-	int			w;
-	int			h;
-}	t_board;
 
 /*
  * main.c
