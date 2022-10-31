@@ -6,12 +6,43 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/28 16:08:39 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:49:49 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 #include "../inc/key_macos.h"
+
+int	key_on(int key, t_data *d)
+{
+	(void)d;
+	if (key == K_ESCAPE)
+	{
+		printf("ESCAPE\n");
+		//close_win();
+	}
+	else if (key == K_W || key == K_AR_U)
+	{
+		printf("UP\n");
+		// move(d, KEY_UP);
+	}
+	else if (key == K_A || key == K_AR_L)
+	{
+		printf("LEFT\n");
+		// move(d, KEY_LFT);
+	}
+	else if (key == K_S || key == K_AR_D)
+	{
+		printf("DOWN\n");
+		// move(d, KEY_DWN);
+	}
+	else if (key == K_D || key == K_AR_R)
+	{
+		printf("RIGHT\n");
+		// move(d, KEY_RGT);
+	}
+	return (EXIT_SUCCESS);
+}
 
 void	init_map(t_data *d)
 {

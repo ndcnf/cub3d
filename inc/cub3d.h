@@ -217,5 +217,6 @@ void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
 void	player_is_here(t_data *d);
 void	map2d(t_data *d);
+int		key_on(int key, t_data *d);
 
 #endif

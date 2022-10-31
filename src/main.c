@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/28 12:12:07 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:42:55 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ int	main(int ac, char **av)
 	map2d(&d);
 
 	mlx_put_image_to_window(d.mlx, d.win, d.m2d->img, 0, 0);
-
-
-
-	// mlx_key_hook(bd.win, key_on, &bd);
+	mlx_key_hook(d.win, key_on, &d);
 	// mlx_hook(bd.win, X_BTN, 0, close_win, &bd);
 	mlx_loop(d.mlx);
 
