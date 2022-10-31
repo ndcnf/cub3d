@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asset_floor_celling.c                              :+:      :+:    :+:   */
+/*   check_asset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:27:37 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/12 18:27:46 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/31 11:49:26 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	no(t_data *data, char *tmp)
 
 int	so(t_data *data, char *tmp)
 {
-	int	fd;
+	int		fd;
 
 	if (ft_strncmp(tmp, "SO", 2) == SUCCESS)
 	{

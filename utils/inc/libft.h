@@ -52,6 +52,7 @@ char		*leaksfree_substr(char **s, unsigned int start, size_t len);
 char		*leaksfree_strjoin(char *dynstr, char const *s2);
 void		free_tab(void **ptr);
 int			len_tab(void **tab);
+int			ft_str_isdigit(char *s, char c);
 
 /*
  * classic libft

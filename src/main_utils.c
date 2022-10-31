@@ -12,12 +12,12 @@
 
 #include "../inc/cub3d.h"
 
-void	safe_free(void **x)
+void	safe_free(void *x)
 {
-	if ((*x) != NULL)
+	if (x)
 	{
-		free(*x);
-		(*x) = NULL;
+		free(x);
+		x = NULL;
 	}
 }
 
@@ -44,10 +44,12 @@ int	args_error(int ac)
 
 void	free_map(t_data *data)
 {
-	safe_free((void *)&data->no);
-	safe_free((void *)&data->so);
-	safe_free((void *)&data->we);
-	safe_free((void *)&data->ea);
+	safe_free(data->no);
+	safe_free(data->ea);
+	safe_free(data->we);
+	safe_free(data->so);
+	safe_free(data->mlx);
+	free_tab((void *)data->map);
 }
 
 int	safe_open_map_name_cub(const char *mn)

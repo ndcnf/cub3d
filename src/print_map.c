@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:30:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/12 18:30:47 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/31 11:46:21 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	print_map(t_data *data, int fd)
 	tmp = NULL;
 	tmp = get_to_line_map_in_fd(data, fd);
 	if (print_full_map(data, fd, tmp) != SUCCESS)
-		return (p_error("❌ print_full_map(data, fd, tmp)\n"));
+		return (p_error("↪ print_full_map(data, fd, tmp)\n"));
 	if (error_map(data) != SUCCESS)
-		return (p_error("❌ error_map(data)\n"));
+		return (p_error("↪ error_map(data)\n"));
 	return (SUCCESS);
 }
 
@@ -33,7 +33,11 @@ char	*get_to_line_map_in_fd(t_data *data, int fd)
 	tmp = NULL;
 	i = 0;
 	while (++i <= data->fd_line + 1)
+	{
+		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
+	}
 	return (tmp);
 }
 
@@ -48,7 +52,7 @@ int	print_full_map(t_data *data, int fd, char *tmp)
 		while (tmp[i] != '\0')
 		{
 			if (tmp[i] == ' ' || tmp[i] == '\n')
-				data->map[data->sizeof_tab][i] = '9';
+				data->map[data->sizeof_tab][i] = '1';
 			else if (init_pos(data, tmp, i) != SUCCESS)
 				return (ERROR);
 			else if (!(tmp[i] == 'N' || tmp[i] == 'S'
@@ -60,6 +64,7 @@ int	print_full_map(t_data *data, int fd, char *tmp)
 			data->map[data->sizeof_tab][i] = '\0';
 		data->sizeof_tab++;
 		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
 	}
 	return (SUCCESS);
@@ -71,12 +76,13 @@ int	init_pos(t_data *data, const char *tmp, int i)
 	{
 		if (data->pposx == -1 && data->pposy == -1)
 		{
+			data->pos = tmp[i];
 			data->pposx = (float)data->sizeof_tab;
 			data->pposy = (float)i;
 			data->map[data->sizeof_tab][i] = '0';
 		}
 		else
-			return (p_error("❌ init_pos(data, tmp, i)\n"));
+			return (p_error("↪ init_pos(data, tmp, i)\n"));
 	}
 	return (SUCCESS);
 }

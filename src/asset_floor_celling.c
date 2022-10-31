@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asset_floor_celling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:27:37 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/12 18:27:46 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/31 11:49:22 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,42 +25,45 @@ int	pars_f_n_c(t_data *data, char *tmp)
 
 int	get_asset(t_data *d, char *tmp)
 {
-	int	i;
+	int		i;
+	char	*s;
 
-	(void)d;
-	if (leakfree_strtrim(&tmp, " \t\n\r\f\v") != SUCCESS)
+	s = ft_strtrim(tmp, " \t\n\r\f\v");
+	if (!s)
 		return (ERROR);
-	if (pars_asset(d, tmp) != SUCCESS || pars_f_n_c(d, tmp) != SUCCESS
-		|| (tmp[0] == '1'))
+	if (pars_asset(d, s) != SUCCESS || pars_f_n_c(d, s) != SUCCESS
+		|| (s[0] == '1'))
 	{
 		i = 0;
-		while (tmp[i] != '\0')
+		while (s[i] != '\0')
 		{
-			if (tmp[i] == '1' || tmp[i] == ' ')
+			if (s[i] == '1' || s[i] == ' ' || s[i] == '0')
 				i++;
 			else
+			{
+				free(s);
 				return (p_error("❌ at MAP_START\n"));
+			}
 		}
+		free(s);
 		return (MAP_START);
 	}
+	free(s);
 	return (SUCCESS);
 }
 
 int	asset_all_good(t_data *d)
 {
 	if (d->no == NULL || d->so == NULL || d->we == NULL || d->ea == NULL
-		|| d->f == NULL || d->c == NULL)
+		|| d->f < 0 || d->c < 0)
 		return (p_error("❌ missing assets or colors (floor || celling)\n"));
 	return (SUCCESS);
 }
 
-int	asset(t_data *d, int fd)
+int	asset(t_data *d, int fd, char *tmp)
 {
-	char	*tmp;
 	int		start;
 
-	tmp = get_next_line(fd);
-	d->fd_line = 0;
 	while (tmp != NULL)
 	{
 		start = get_asset(d, tmp);
@@ -69,15 +72,19 @@ int	asset(t_data *d, int fd)
 			if (start == MAP_START)
 			{
 				if (asset_all_good(d) != SUCCESS)
-					return (p_error("❌ asset_all_good(d)\n"));
+				{
+					safe_free(tmp);
+					return (p_error(" ↪ asset_all_good(d)\n"));
+				}
 				break ;
 			}
-			return (p_error("❌ get_asset(d, tmp)\n"));
+			safe_free(tmp);
+			return (p_error(" ↪ get_asset(d, tmp)\n"));
 		}
 		d->fd_line++;
+		safe_free(tmp);
 		tmp = get_next_line(fd);
 	}
-	while (tmp != NULL)
-		tmp = get_next_line(fd);
+	free(tmp);
 	return (SUCCESS);
 }

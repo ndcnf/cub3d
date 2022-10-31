@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:29:07 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/12 18:29:07 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/31 11:46:04 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ int	line_map_ok(const char *tmp)
 	i = 0;
 	while (tmp[i] != '\0')
 	{
-		if (tmp[i] == '1' || tmp[i] == '0' || tmp[i] == 'N' || tmp[i] == 'S' \
-			|| tmp[i] == 'W' || tmp[i] == 'E' || tmp[i] == ' '
-			|| tmp[i] == '\n')
+		if (ft_strchr("10NSWE \n", tmp[i]) != NULL)
 			i++;
 		else
-			return (p_error("❌ line_map_ok(tmp)\n"));
+			return (p_error("❌  map have an wrong char\n"));
 	}
 	return (SUCCESS);
 }
@@ -43,17 +41,25 @@ int	pars_map(t_data *d, int fd)
 	char	*tmp;
 	int		i;
 
+	tmp = get_next_line(fd);
 	i = 0;
-	while (++i <= d->fd_line + 1)
+	while (++i <= d->fd_line)
+	{
+		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
-	d->nb_line_map = 0;
-	d->len_line_map = 0;
+	}
 	while (tmp != NULL)
 	{
 		if (line_map_ok(tmp) != SUCCESS)
-			return (ERROR);
+		{
+			free(tmp);
+			return (p_error(" ↪️ line_map_ok(tmp)\n"));
+		}
 		len_line(d, tmp);
 		d->nb_line_map++;
+		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(fd);
 	}
 	return (SUCCESS);

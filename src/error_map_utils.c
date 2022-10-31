@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzima <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:31:12 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/12 18:31:12 by lzima            ###   ########.fr       */
+/*   Updated: 2022/10/31 11:49:30 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_around(char **map, int y, int x)
 		|| (map[y - 1][x] != '1' && map[y - 1][x] != '0'
 		&& map[y - 1][x] != '2'))
 		{
-			printf("at x:%d y:%d\n", y + 1, x + 1);
+			printf("0 at y:%d | x:%d \n", y + 1, x + 1);
 			return (p_error("❌ 0 isn't surrounded\n"));
 		}
 	}
@@ -38,7 +38,7 @@ int	zero_is_surrounded(t_data *d)
 	int	y;
 
 	y = 0;
-	while (y <= d->nb_line_map)
+	while (y < d->nb_line_map)
 	{
 		x = 0;
 		while (x <= (int)d->len_line_map)

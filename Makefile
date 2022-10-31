@@ -17,23 +17,34 @@ SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 LIBFT		= ./utils
 MAKELIB		= ${MAKE} -C ${LIBFT}
 
-LIBX		= ./mlx
+INC_FILES	= cub3d.h
 
-MAKELIBX	= @${MAKE} -C ${LIBX}
+#_______________ OBJS
+
+OBJS_FILES		:= ${SRCS_FILES:.c=.o}
+OBJS			:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
+PATH_SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
 
 O_DIR		= ./objs/
 HEADS		= -I./inc/ -I${LIBFT} -I${LIBX}
 
-OBJS_FILES	:= ${SRCS_FILES:.c=.o}
-OBJS		:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
+LIBUTILS		= ./utils
+MLXLIB			= ./mlx
 
 OBJS		+= ${LIBFT}/libutils.a
 
 OBJS		+= ${LIBX}/libmlx.a
 
-LIBS		= -framework OpenGL -framework AppKit
+MAKELIB			= ${MAKE} -C
+CC				= gcc
+AR              = ar rcs
+MKDIR           = mkdir -p
+RM              = rm -rf
+CFLAGS          = -Wall -Wextra -Werror -g3 #-fsanitize=address -Imlx
+MLXFLAGS        = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
+TSEP            = ${SEP}...${RESET}
 
 NAME		= cub3D
 
@@ -43,36 +54,48 @@ MKDIR		= mkdir
 CP			= cp -f
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror
-
-all:		${NAME}
-
-${NAME}:	${O_DIR} ${OBJS}
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS} -fsanitize=address
+${NAME}:		${O_DIR} ${OBJS}
+				@printf "\n"
+				@${MAKELIB} ${LIBUTILS}
+				@${MAKELIB} ${MLXLIB}
+				@printf "${TSEP}\n"
+				@printf "${GREEN} ✅ Successfully compiled ${NAME} .o's${RESET}\n"
+				@${CC} ${CFLAGS} ${MLXFLAGS} -o ${NAME} ${OBJS} ${LIBUTILS}/libutils.a ${MLXLIB}/libmlx.a
+				@printf "${GREEN} ✅ Successfully created ${NAME} executable${RESET}\n"
+				@printf "${TSEP}\n"
 
 ${O_DIR}:
-			${MKDIR} ${O_DIR}
+				@${MKDIR} ${O_DIR}
+				@printf "\n${BUILD}${O_DIR} Directory Created ${RESET}\n\n"
 
-${O_DIR}%.o:${SRCS_DIR}%.c | inc/cub3d.h
-			${CC} ${CFLAGS} ${HEADS} -o $@ -c $<
+${O_DIR}%.o:${SRCS_DIR}%.c
+				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
+				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
 
-${LIBFT}/libutils.a:
-			${MAKELIB} all
 
-${LIBX}/libmlx.a:
-			@${MAKELIBX} all
+clean :
+				@${RM} ${O_DIR}
 
-clean:
-			${RM} ${OBJS} ${OBJSB}
-			@${RM} -r ${O_DIR}
-			@${MAKELIB} clean
-			@${MAKELIBX} clean
+				@${MAKELIB} ${LIBUTILS} clean
+				@${MAKELIB} ${MLXLIB} clean
+				@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} \n"
+				@printf "${RED} 🧹 Deleted mlx .o's${RESET} \n"
 
-fclean:		clean
-			${RM} ${NAME}
-			@${RM} -r ${NAME}.dSYM
-			@${MAKELIB} fclean
+fclean :
+				@${RM} ${O_DIR}
+				@printf "${RED} 🧹 Deleted ${NAME} .o's${RESET} \n"
+				@printf "${RED} 🧹 Deleted mlx .o's${RESET} \n"
+				@${RM} ${NAME} ${NAME}.dSYM
+				@${MAKELIB} ${LIBUTILS} fclean
+				@${MAKELIB} ${MLXLIB} fclean
+				@printf "${RED} 💥 Deleted ${NAME} files${RESET} \n"
+				@printf "${RED} 💥 Deleted mlx files${RESET} \n"
 
-re:			fclean all
+re : 			fclean all
 
-.PHONY:		all clean fclean re debug
+norm :
+				@${MAKELIB} ${LIBUTILS} norm
+				@printf "${DUCK} 🐥 Checking Norm for ${NAME}${RESET}\n"
+				@norminette ${PATH_SRCS}
+
+.PHONY : all clean fclean re norm

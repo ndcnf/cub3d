@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/31 11:01:52 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:42:50 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	print_load_asset(t_data *d)
 	printf("SO \"%s\"\n", d->so);
 	printf("WE \"%s\"\n", d->we);
 	printf("EA \"%s\"\n\n", d->ea);
-	printf("F \"%s\"\n", d->f);
-	printf("C \"%s\"\n\n", d->c);
+	printf("F \"%d\"\n", d->f);
+	printf("C \"%d\"\n\n", d->c);
+	printf("Player orientation(%c) at x: \"%f\"\n", d->pos, d->pposx);
+	printf("Player orientation(%c) at y: \"%f\"\n\n", d->pos, d->pposy);
 }
 
 int	main(int ac, char **av)
@@ -47,11 +49,14 @@ int	main(int ac, char **av)
 		return (ERROR);
 	close(fd);
 	if (load_map(&data, fd, av[1]) != SUCCESS)
+	{
 		return (ERROR);
+	}
 	close(fd);
 	printf("✅ load_map(&data, fd, av[1])\n\n");
 	print_load_asset(&data);
 	print_load_map(&data);
+	free_map(&data);
 	FIN PARTIE LOWELL */
 
 	/* PARTIE NADIA */
@@ -70,6 +75,7 @@ int	main(int ac, char **av)
 	mlx_loop(d.mlx);
 
 	/* FIN PARTIE NADIA */
+
 
 	return (SUCCESS);
 }
