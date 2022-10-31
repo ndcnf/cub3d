@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/31 11:57:21 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:05:50 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ typedef struct s_data
 	int		fd_line;
 	int		nb_line_map;
 	size_t	len_line_map; // convertir en INT
-	int		x_len; // remplacer plus tard
-	int		y_len; //remplacer plus tard
+	//int	x_len;
+	//int	y_len;
 	char	**map;
 	char	*tmp;
 	int		start;
@@ -89,7 +89,6 @@ typedef struct s_data
 	int		sizeof_tab;
 	float	pposx;
 	float	pposy;
-	char	p_orient; // transformer en 'pos'
 	char	pos;
 }			t_data;
 
@@ -177,5 +176,6 @@ void	player_is_here(t_data *d);
 void	map2d(t_data *d);
 int		key_on(int key, t_data *d);
 int		close_win(void);
+int		main_n(int ac, char **av);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/31 11:16:17 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:56:44 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int	key_on(int key, t_data *d)
 void	init_map(t_data *d)
 {
 	/////////////
-	d->y_len = 5;
-	d->x_len = 5;
+	d->nb_line_map = 5;
+	d->len_line_map = 5;
 	/////////////
 
-	d->h = d->y_len;
-	d->w = (d->x_len - 1);
+	d->h = d->nb_line_map;
+	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
 	d->m2d = malloc(sizeof(t_minimap));
@@ -152,7 +152,7 @@ void	player_is_here(t_data *d)
 	int	x;
 	int	y;
 
-	printf("posx[%f] / posy[%f] / orient[%c]\n", d->pposx, d->pposy, d->p_orient);
+	printf("posx[%f] / posy[%f] / orient[%c]\n", d->pposx, d->pposy, d->pos);
 
 	x = d->pposx * IMG_PXL + (IMG_PXL/2);
 	y = d->pposy * IMG_PXL + (IMG_PXL/2);
@@ -193,7 +193,7 @@ void	map2d(t_data *d)
 			{
 				d->pposx = x;
 				d->pposy = y;
-				d->p_orient = tm[y][x];
+				d->pos = tm[y][x];
 				on_minimap(d, x, y, '0');
 			}
 			else
