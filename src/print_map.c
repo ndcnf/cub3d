@@ -52,7 +52,7 @@ int	print_full_map(t_data *data, int fd, char *tmp)
 		while (tmp[i] != '\0')
 		{
 			if (tmp[i] == ' ' || tmp[i] == '\n')
-				data->map[data->sizeof_tab][i] = '9';
+				data->map[data->sizeof_tab][i] = '1';
 			else if (init_pos(data, tmp, i) != SUCCESS)
 				return (ERROR);
 			else if (!(tmp[i] == 'N' || tmp[i] == 'S'

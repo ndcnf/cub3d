@@ -49,6 +49,6 @@ void	*ft_calloc_p(size_t count, size_t size)
 	memoryallocation = malloc(count * size);
 	if (memoryallocation == NULL)
 		return (memoryallocation);
-	ft_memset(memoryallocation, '.', count * size);
+	ft_memset(memoryallocation, '1', count * size);
 	return (memoryallocation);
 }

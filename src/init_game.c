@@ -62,37 +62,3 @@ int	load_map(t_data *data, int fd, char *map_cub)
 	printf("✅ read_map(data, fd, map_cub) \n");
 	return (SUCCESS);
 }
-
-/*
-int	read_map(t_data *data, int fd, const char *map_cub)
-{
-	char	*tmp;
-
-	fd = open(map_cub, O_RDONLY);
-	tmp = get_next_line(fd);
-	if (asset(data, fd, tmp) != SUCCESS)
-	{
-		close(fd);
-		return (ERROR);
-	}
-	end_of_file(fd, tmp);
-	close(fd);
-	printf("✅ asset(data, fd) \n");
-	fd = open(map_cub, O_RDONLY);
-	if (pars_map(data, fd) != SUCCESS)
-	{
-		close(fd);
-		return (ERROR);
-	}
-	printf("✅ pars_map(data, fd) \n");
-	close(fd);
-	fd = open(map_cub, O_RDONLY);
-	if (stock_map(data, fd) != SUCCESS)
-	{
-		close(fd);
-		return (ERROR);
-	}
-	close(fd);
-	printf("✅ stock_map(data, fd) \n");
-	return (SUCCESS);
-}*/
