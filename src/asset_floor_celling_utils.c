@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:27:37 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/31 11:49:19 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:55:50 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ static int	check_colors(char **colors, int *out)
 
 int	error_colors(char *tmp, int *out)
 {
-	int		x;
-	int		i;
 	char	**colors;
 
 	colors = ft_split(tmp, ',');

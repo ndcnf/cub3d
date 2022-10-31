@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/31 11:47:09 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:57:21 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ typedef struct s_data
 	int		check_c;
 	int		fd_line;
 	int		nb_line_map;
-	size_t	len_line_map;
+	size_t	len_line_map; // convertir en INT
+	int		x_len; // remplacer plus tard
+	int		y_len; //remplacer plus tard
 	char	**map;
 	char	*tmp;
 	int		start;

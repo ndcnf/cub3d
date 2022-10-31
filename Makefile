@@ -1,5 +1,23 @@
-SRCS_DIR	= ./src/
-SRCS_FILES	=  main.c \
+
+
+#_______________ COLORS
+
+GREEN	= \033[1;32m
+RED 	= \033[1;31m
+ORANGE	= \033[1;33m
+BUILD	= \e[38;5;225m
+SEP		= \e[38;5;120m
+DUCK	= \e[38;5;227m
+RESET	= \033[0m
+
+#_______________ FOLDER
+
+O_DIR           = ./objs/
+SRCS_DIR		= ./src/
+
+#_______________ FILES
+
+SRCS_FILES	= main.c \
 				asset_floor_celling.c \
 				asset_floor_celling_utils.c \
 				check_asset.c \
@@ -12,11 +30,6 @@ SRCS_FILES	=  main.c \
                	stock_map.c \
 				minimap.c
 
-SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
-
-LIBFT		= ./utils
-MAKELIB		= ${MAKE} -C ${LIBFT}
-
 INC_FILES	= cub3d.h
 
 #_______________ OBJS
@@ -25,16 +38,15 @@ OBJS_FILES		:= ${SRCS_FILES:.c=.o}
 OBJS			:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
 PATH_SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
+HEADS_DIR		= ./inc/
 
-O_DIR		= ./objs/
-HEADS		= -I./inc/ -I${LIBFT} -I${LIBX}
+NAME			= cub3d
 
 LIBUTILS		= ./utils
 MLXLIB			= ./mlx
 
-OBJS		+= ${LIBFT}/libutils.a
 
-OBJS		+= ${LIBX}/libmlx.a
+#_______________ RULES
 
 MAKELIB			= ${MAKE} -C
 CC				= gcc
@@ -46,13 +58,9 @@ MLXFLAGS        = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 TSEP            = ${SEP}...${RESET}
 
-NAME		= cub3D
+#_______________ COMMANDS
 
-CC			= cc
-AR			= ar rcs
-MKDIR		= mkdir
-CP			= cp -f
-RM			= rm -f
+all:			${NAME}
 
 ${NAME}:		${O_DIR} ${OBJS}
 				@printf "\n"
