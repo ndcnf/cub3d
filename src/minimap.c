@@ -6,20 +6,26 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/31 09:49:49 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:57:32 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 #include "../inc/key_macos.h"
 
+int	close_win(void)
+{
+	printf(BYE);
+	exit(SUCCESS);
+}
+
 int	key_on(int key, t_data *d)
 {
-	(void)d;
+	(void)d; // supprimer quand une fonction aura ete creee
 	if (key == K_ESCAPE)
 	{
 		printf("ESCAPE\n");
-		//close_win();
+		close_win();
 	}
 	else if (key == K_W || key == K_AR_U)
 	{
@@ -86,7 +92,7 @@ char	**map_test(void)
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
+void	new_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
 	char	*dst;
 
@@ -94,7 +100,6 @@ void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-// uniquement pour test de fonctionnement, adapter ensuite car idem Eduardo & Jerome
 void	minimap_area(t_data *d, int i, int j, int color)
 {
 	int	x;
@@ -107,11 +112,11 @@ void	minimap_area(t_data *d, int i, int j, int color)
 		while (y < ((j + 1) * IMG_PXL))
 		{
 			if (x % 2 && y % 2 && color == DGR)
-				my_mlx_pixel_put(d, x, y, color);
+				new_mlx_pixel_put(d, x, y, color);
 			else if (color == DGR)
-				my_mlx_pixel_put(d, x, y, GRN);
+				new_mlx_pixel_put(d, x, y, GRN);
 			else
-				my_mlx_pixel_put(d, x, y, color);
+				new_mlx_pixel_put(d, x, y, color);
 			y++;
 		}
 		x++;
@@ -141,15 +146,15 @@ void	player_is_here(t_data *d)
 
 	x = d->pposx * IMG_PXL + (IMG_PXL/2);
 	y = d->pposy * IMG_PXL + (IMG_PXL/2);
-	my_mlx_pixel_put(d, x + 1, y + 1, RED);
-	my_mlx_pixel_put(d, x, y + 1, RED);
-	my_mlx_pixel_put(d, x - 1, y + 1, RED);
-	my_mlx_pixel_put(d, x + 1, y - 1, RED);
-	my_mlx_pixel_put(d, x, y - 1, RED);
-	my_mlx_pixel_put(d, x - 1, y - 1, RED);
-	my_mlx_pixel_put(d, x + 1, y, RED);
-	my_mlx_pixel_put(d, x, y, RED);
-	my_mlx_pixel_put(d, x - 1, y, RED);
+	new_mlx_pixel_put(d, x + 1, y + 1, RED);
+	new_mlx_pixel_put(d, x, y + 1, RED);
+	new_mlx_pixel_put(d, x - 1, y + 1, RED);
+	new_mlx_pixel_put(d, x + 1, y - 1, RED);
+	new_mlx_pixel_put(d, x, y - 1, RED);
+	new_mlx_pixel_put(d, x - 1, y - 1, RED);
+	new_mlx_pixel_put(d, x + 1, y, RED);
+	new_mlx_pixel_put(d, x, y, RED);
+	new_mlx_pixel_put(d, x - 1, y, RED);
 }
 
 void	map2d(t_data *d)

@@ -25,6 +25,7 @@
 # define SUCCESS 0
 # define ERROR 1
 # define MAP_START 10
+# define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
 # define WIN_H 512
@@ -213,10 +214,11 @@ int		zero_is_surrounded(t_data *d);
 */
 void	init_map(t_data *d);
 void	minimap_area(t_data *d, int i, int j, int color);
-void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
+void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
 void	player_is_here(t_data *d);
 void	map2d(t_data *d);
 int		key_on(int key, t_data *d);
+int		close_win(void);
 
 #endif
