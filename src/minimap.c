@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/01 14:46:40 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:58:43 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	close_win(void)
 
 int	key_on(int key, t_data *d)
 {
-	(void)d; // supprimer quand une fonction aura ete creee
 	if (key == K_ESCAPE)
 	{
 		printf("ESCAPE\n");
@@ -40,6 +39,7 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_L)
 	{
 		printf("CAMERA GAUCHE\n");
+		look_around(d, K_AR_L);
 		// move(d, KEY_LFT);
 	}
 	else if (key == K_S)
@@ -50,7 +50,7 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_R)
 	{
 		printf("CAMERA DROITE\n");
-
+		look_around(d, K_AR_R);
 		// move(d, KEY_LFT);
 	}
 	else if (key == K_D)
@@ -58,7 +58,37 @@ int	key_on(int key, t_data *d)
 		printf("RIGHT\n");
 		// move(d, KEY_RGT);
 	}
+	printf("angle [%d°]\n", d->angle);
 	return (EXIT_SUCCESS);
+}
+
+void	look_around(t_data *d, int key)
+{
+	if ((d->angle + ROT_ANGL) == 360)
+		d->angle = 0;
+	else if (d->angle + ROT_ANGL > 360)
+	// if (d->angle + ROT_ANGL > 360)
+	{
+		d->angle = d->angle - 360;
+		printf("A\n");
+	}
+	else if ((d->angle + ROT_ANGL) < 0)
+	{
+		d->angle = 360 - ROT_ANGL;
+		printf("B\n");
+	}
+	// else if (d->angle == 0)
+	// 	d->angle = 360;
+	else if (key == K_AR_L)
+	{
+		d->angle += ROT_ANGL;
+		printf("C\n");
+	}
+	else if (key == K_AR_R)
+	{
+		d->angle -= ROT_ANGL;
+		printf("D\n");
+	}
 }
 
 void	init_map(t_data *d)
@@ -167,7 +197,7 @@ void	player_is_here(t_data *d)
 	new_mlx_pixel_put(d, x, y, RED);
 	new_mlx_pixel_put(d, x - 1, y, RED);
 
-	if (d->pos == 'N')
+	if (d->pos == 'N' || (d->angle > 0 && d->angle < 180))
 		new_mlx_pixel_put(d, x, y - 2, BLU);
 	else if (d->pos == 'S')
 		new_mlx_pixel_put(d, x, y + 2, BLU);
@@ -179,6 +209,7 @@ void	player_is_here(t_data *d)
 
 void	player_angle(t_data *d)
 {
+	printf("pos : %d\n", d->pos);
 	if (d->pos == 'N')
 		d->angle = 90;
 	else if (d->pos == 'S')
