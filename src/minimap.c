@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/31 15:56:44 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:08:29 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,17 @@ void	player_is_here(t_data *d)
 	new_mlx_pixel_put(d, x + 1, y, RED);
 	new_mlx_pixel_put(d, x, y, RED);
 	new_mlx_pixel_put(d, x - 1, y, RED);
+
+	if (d->pos == 'N')
+		new_mlx_pixel_put(d, x, y - 2, BLU);
+	else if (d->pos == 'S')
+		new_mlx_pixel_put(d, x, y + 2, BLU);
+	else if (d->pos == 'E')
+		new_mlx_pixel_put(d, x + 2, y, BLU);
+	else if (d->pos == 'W')
+		new_mlx_pixel_put(d, x - 2, y, BLU);
+
+
 }
 
 void	map2d(t_data *d)

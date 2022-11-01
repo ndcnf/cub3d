@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/31 16:05:50 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:08:13 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define WHI 0x00FFFFFF
 # define GRN 0x00336600
 # define DGR 0x004C9900
+# define BLU 0x000000FF
 
 typedef struct	s_minimap
 {
