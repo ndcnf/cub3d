@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/01 12:08:13 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/01 14:45:15 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include "key_macos.h"
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
+#	define BUFFER_SIZE 256
 # endif
 
 # define SUCCESS 0
@@ -81,8 +81,6 @@ typedef struct s_data
 	int		fd_line;
 	int		nb_line_map;
 	size_t	len_line_map; // convertir en INT
-	//int	x_len;
-	//int	y_len;
 	char	**map;
 	char	*tmp;
 	int		start;
@@ -91,6 +89,7 @@ typedef struct s_data
 	float	pposx;
 	float	pposy;
 	char	pos;
+	int		angle;
 }			t_data;
 
 /*
@@ -178,5 +177,6 @@ void	map2d(t_data *d);
 int		key_on(int key, t_data *d);
 int		close_win(void);
 int		main_n(int ac, char **av);
+void	player_angle(t_data *d);
 
 #endif

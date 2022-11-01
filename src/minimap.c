@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/01 12:08:29 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/01 14:46:40 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_R)
 	{
 		printf("CAMERA DROITE\n");
+
 		// move(d, KEY_LFT);
 	}
 	else if (key == K_D)
@@ -174,8 +175,18 @@ void	player_is_here(t_data *d)
 		new_mlx_pixel_put(d, x + 2, y, BLU);
 	else if (d->pos == 'W')
 		new_mlx_pixel_put(d, x - 2, y, BLU);
+}
 
-
+void	player_angle(t_data *d)
+{
+	if (d->pos == 'N')
+		d->angle = 90;
+	else if (d->pos == 'S')
+		d->angle = 270;
+	else if (d->pos == 'W')
+		d->angle = 180;
+	else if (d->pos == 'E')
+		d->angle = 0;
 }
 
 void	map2d(t_data *d)
