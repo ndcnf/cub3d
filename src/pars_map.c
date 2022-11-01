@@ -14,9 +14,9 @@
 
 void	len_line(t_data *data, char *tmp)
 {
-	size_t	x;
+	int	x;
 
-	x = ft_strlen(tmp);
+	x = (int)ft_strlen(tmp);
 	if (x > data->len_line_map)
 		data->len_line_map = x;
 }

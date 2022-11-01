@@ -39,14 +39,16 @@
 # define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
-# define WIN_H 512
-# define WIN_W 512
+# define WIN_W 1080
+# define WIN_H 720
 # define IMG_PXL 64 //16 sera mieux a terme
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
 # define GRN 0x00336600
 # define DGR 0x004C9900
+
+
 
 typedef struct	s_minimap
 {
@@ -79,7 +81,7 @@ typedef struct s_data
 	int		check_c;
 	int		fd_line;
 	int		nb_line_map;
-	size_t	len_line_map; // convertir en INT
+	int		len_line_map; // convertir en INT
 	int		x_len; // remplacer plus tard
 	int		y_len; //remplacer plus tard
 	char	**map;
@@ -97,6 +99,7 @@ typedef struct s_data
  * main.c
  */
 int		main(int ac, char **av);
+int		main_l(int ac, char **av);
 void	print_load_map(t_data *d);
 void	print_load_asset(t_data *d);
 /*
@@ -177,5 +180,11 @@ void	player_is_here(t_data *d);
 void	map2d(t_data *d);
 int		key_on(int key, t_data *d);
 int		close_win(void);
+
+/*
+ * raycasting.c
+ */
+int raycasting(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

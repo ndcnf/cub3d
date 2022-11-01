@@ -63,8 +63,8 @@ int	key_on(int key, t_data *d)
 void	init_map(t_data *d)
 {
 	/////////////
-	d->y_len = 5;
-	d->x_len = 5;
+	d->y_len = d->nb_line_map;
+	d->x_len = (int)d->len_line_map;
 	/////////////
 
 	d->h = d->y_len;

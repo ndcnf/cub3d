@@ -33,12 +33,11 @@ void	print_load_asset(t_data *d)
 	printf("Player orientation(%c) at y: \"%f\"\n\n", d->pos, d->pposy);
 }
 
-int	main(int ac, char **av)
+int	main_l(int ac, char **av)
 {
-	t_data		d;
+	t_data		data;
 	int		fd;
 
-	/* PARTIE LOWELL
 	printf("⏳ Init game\n");
 	ft_bzero(&data, sizeof(t_data));
 	if (args_error(ac) != SUCCESS)
@@ -57,25 +56,13 @@ int	main(int ac, char **av)
 	print_load_asset(&data);
 	print_load_map(&data);
 	free_map(&data);
-	FIN PARTIE LOWELL */
-
-	/* PARTIE NADIA */
-	(void)ac;
-	(void)fd;
-	(void)av;
-	init_map(&d);
-
-	printf("hello?\n");
-
-	map2d(&d);
-
-	mlx_put_image_to_window(d.mlx, d.win, d.m2d->img, 0, 0);
-	mlx_key_hook(d.win, key_on, &d);
-	// mlx_hook(bd.win, X_BTN, 0, close_win, &bd);
-	mlx_loop(d.mlx);
-
-	/* FIN PARTIE NADIA */
-
-
+	raycasting(&data);
 	return (SUCCESS);
+}
+
+int main(int ac, char **av)
+{
+	main_l(ac, av);
+	return (0);
+
 }
