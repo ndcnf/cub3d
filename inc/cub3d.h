@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/01 17:38:42 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:04:28 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,5 +180,6 @@ int		close_win(void);
 int		main_n(int ac, char **av);
 void	player_angle(t_data *d);
 void	look_around(t_data *d, int key);
+int		update_img(t_data *d);
 
 #endif

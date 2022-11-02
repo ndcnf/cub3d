@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/02 10:16:08 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:28:28 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ int	close_win(void)
 {
 	printf(BYE);
 	exit(SUCCESS);
+}
+
+int	update_img(t_data *d)
+{
+	mlx_clear_window(d->mlx, d->win);
+	map2d(d);
+	mlx_put_image_to_window(d->mlx, d->win, d->m2d->img, 0, 0);
+	return (0);
 }
 
 int	key_on(int key, t_data *d)
@@ -40,6 +48,7 @@ int	key_on(int key, t_data *d)
 	{
 		printf("CAMERA GAUCHE\n");
 		look_around(d, K_AR_L);
+		// player_is_here(d);
 		// move(d, KEY_LFT);
 	}
 	else if (key == K_S)
@@ -51,6 +60,7 @@ int	key_on(int key, t_data *d)
 	{
 		printf("CAMERA DROITE\n");
 		look_around(d, K_AR_R);
+		// player_is_here(d);
 		// move(d, KEY_LFT);
 	}
 	else if (key == K_D)
@@ -111,7 +121,7 @@ char	**map_test(void)
 	}
 	tm[0] = "11111";
 	tm[1] = "10001";
-	tm[2] = "110N1";
+	tm[2] = "110W1";
 	tm[3] = "10011";
 	tm[4] = "11111";
 	tm[5] = NULL;
@@ -169,7 +179,7 @@ void	player_is_here(t_data *d)
 	int	x;
 	int	y;
 
-	printf("posx[%f] / posy[%f] / orient[%c]\n", d->pposx, d->pposy, d->pos);
+	// printf("posx[%f] / posy[%f] / orient[%c]\n", d->pposx, d->pposy, d->pos);
 
 	x = d->pposx * IMG_PXL + (IMG_PXL/2);
 	y = d->pposy * IMG_PXL + (IMG_PXL/2);
@@ -186,10 +196,13 @@ void	player_is_here(t_data *d)
 	if (d->pos == 'N' || (d->angle > 0 && d->angle < 180))
 		new_mlx_pixel_put(d, x, y - 2, BLU);
 	else if (d->pos == 'S')
+	// else if (d->pos == 'S' || (d->angle > 180 && d->angle < 360))
 		new_mlx_pixel_put(d, x, y + 2, BLU);
 	else if (d->pos == 'E')
+	// else if (d->pos == 'E' || (d->angle > 180 && d->angle < 360))
 		new_mlx_pixel_put(d, x + 2, y, BLU);
 	else if (d->pos == 'W')
+	// else if (d->pos == 'W' || (d->angle > 180 && d->angle < 360))
 		new_mlx_pixel_put(d, x - 2, y, BLU);
 }
 
