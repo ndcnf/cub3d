@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/02 11:28:28 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:38:26 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,13 @@ int	update_img(t_data *d)
 	mlx_clear_window(d->mlx, d->win);
 	map2d(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->m2d->img, 0, 0);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	key_on(int key, t_data *d)
 {
 	if (key == K_ESCAPE)
-	{
-		printf("ESCAPE\n");
 		close_win();
-	}
 	else if (key == K_W)
 	{
 		printf("UP\n");
@@ -72,6 +69,11 @@ int	key_on(int key, t_data *d)
 	return (EXIT_SUCCESS);
 }
 
+void	move(t_data *d, int key)
+{
+
+}
+
 void	look_around(t_data *d, int key)
 {
 	// printf("AVANT [%d] - ", d->angle); Pour verifier les angles uniquement
@@ -101,6 +103,7 @@ void	init_map(t_data *d)
 	d->m2d = malloc(sizeof(t_minimap));
 	d->m2d->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
 	d->m2d->addr = mlx_get_data_addr(d->m2d->img, &d->m2d->bits_per_pixel, &d->m2d->line_length, &d->m2d->endian);
+	player_angle(d);
 	// d->map.x = 0;
 	// d->map.y = 0;
 }
@@ -179,8 +182,6 @@ void	player_is_here(t_data *d)
 	int	x;
 	int	y;
 
-	// printf("posx[%f] / posy[%f] / orient[%c]\n", d->pposx, d->pposy, d->pos);
-
 	x = d->pposx * IMG_PXL + (IMG_PXL/2);
 	y = d->pposy * IMG_PXL + (IMG_PXL/2);
 	new_mlx_pixel_put(d, x + 1, y + 1, RED);
@@ -239,7 +240,8 @@ void	map2d(t_data *d)
 		y = 0;
 		while (y < d->w)
 		{
-			// definir ailleurs la position du joueur et son orientation
+			// definis dans init_pos() dans print_map.c
+			// qui remonte jusqu'a load_map() appele dans main.c (verfier encore dans Miro)
 			///////////////////////////////////////////////////////////////////////////////
 			if (tm[y][x] == 'N' || tm[y][x] == 'W' ||tm[y][x] == 'E' ||tm[y][x] == 'S')
 			{
