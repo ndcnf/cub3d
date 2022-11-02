@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/01 17:58:43 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:11:58 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,24 @@ int	key_on(int key, t_data *d)
 		printf("RIGHT\n");
 		// move(d, KEY_RGT);
 	}
-	printf("angle [%d°]\n", d->angle);
+	printf("angle [%d°]\n\n", d->angle);
 	return (EXIT_SUCCESS);
 }
 
 void	look_around(t_data *d, int key)
 {
-	if ((d->angle + ROT_ANGL) == 360)
+	printf("AVANT [%d] - ", d->angle);
+	if ((d->angle + ROT_ANGL) == 360 && key == K_AR_L)
+	{
 		d->angle = 0;
+		printf("Z\n");
+	}
+	else if (d->angle == 0 && key == K_AR_R)
+	{
+		d->angle = 360 - ROT_ANGL;
+		printf("X\n");
+	}
 	else if (d->angle + ROT_ANGL > 360)
-	// if (d->angle + ROT_ANGL > 360)
 	{
 		d->angle = d->angle - 360;
 		printf("A\n");
@@ -77,8 +85,6 @@ void	look_around(t_data *d, int key)
 		d->angle = 360 - ROT_ANGL;
 		printf("B\n");
 	}
-	// else if (d->angle == 0)
-	// 	d->angle = 360;
 	else if (key == K_AR_L)
 	{
 		d->angle += ROT_ANGL;
