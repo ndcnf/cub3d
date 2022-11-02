@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/02 10:11:58 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:16:08 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,17 @@ int	key_on(int key, t_data *d)
 
 void	look_around(t_data *d, int key)
 {
-	printf("AVANT [%d] - ", d->angle);
+	// printf("AVANT [%d] - ", d->angle); Pour verifier les angles uniquement
 	if ((d->angle + ROT_ANGL) == 360 && key == K_AR_L)
-	{
 		d->angle = 0;
-		printf("Z\n");
-	}
 	else if (d->angle == 0 && key == K_AR_R)
-	{
 		d->angle = 360 - ROT_ANGL;
-		printf("X\n");
-	}
-	else if (d->angle + ROT_ANGL > 360)
-	{
-		d->angle = d->angle - 360;
-		printf("A\n");
-	}
 	else if ((d->angle + ROT_ANGL) < 0)
-	{
 		d->angle = 360 - ROT_ANGL;
-		printf("B\n");
-	}
 	else if (key == K_AR_L)
-	{
 		d->angle += ROT_ANGL;
-		printf("C\n");
-	}
 	else if (key == K_AR_R)
-	{
 		d->angle -= ROT_ANGL;
-		printf("D\n");
-	}
 }
 
 void	init_map(t_data *d)
