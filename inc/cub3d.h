@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/02 11:04:28 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:30:09 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define WIN_H 512
 # define WIN_W 512
 # define IMG_PXL 64 //16 sera mieux a terme
-# define ROT_ANGL 45 // 360 doit etre divisible par ce nombre
+# define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
@@ -173,7 +173,7 @@ void	init_map(t_data *d);
 void	minimap_area(t_data *d, int i, int j, int color);
 void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
-void	player_is_here(t_data *d);
+void	player_is_here(t_data *d, int c_body, int c_head);
 void	map2d(t_data *d);
 int		key_on(int key, t_data *d);
 int		close_win(void);
@@ -181,5 +181,8 @@ int		main_n(int ac, char **av);
 void	player_angle(t_data *d);
 void	look_around(t_data *d, int key);
 int		update_img(t_data *d);
+void	go_up(t_data *d);
+void	move(t_data *d, int key);
+void	define_player_head(t_data *d, int x, int y, int c_head);
 
 #endif

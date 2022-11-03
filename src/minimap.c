@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/02 18:38:26 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:39:03 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	key_on(int key, t_data *d)
 	else if (key == K_W)
 	{
 		printf("UP\n");
-		// move(d, KEY_UP);
+		move(d, K_W);
 	}
 	else if (key == K_A)
 	{
@@ -71,7 +71,32 @@ int	key_on(int key, t_data *d)
 
 void	move(t_data *d, int key)
 {
+	// pathfinder(bd, IMG_GRD2, bd->p1->x, bd->p1->y);
+	player_is_here(d, WHI, WHI); //inutile si la map se detruit chaque fois ?
+	if (key == K_W)
+		go_up(d);
+	// else if (key == K_S)
+	// 	go_down(d);
+	// else if (key == K_A)
+	// 	go_left(d);
+	// else if (key == K_D)
+	// 	go_right(d);
+}
 
+void	go_up(t_data *d)
+{
+	int	future_x;
+	int	future_y;
+
+	future_y = d->pposy - IMG_PXL;
+	future_x = d->pposx;
+	// if (check_move(bd, future_x, future_y))
+	// {
+	d->pposy = d->pposy - IMG_PXL;
+		// d->pposy = bd->map.y;
+	// }
+	// pathfinder(bd, IMG_P2, d->pposx, d->pposy);
+	player_is_here(d, RED, BLU); //inutile si la map se detruit chaque fois ?
 }
 
 void	look_around(t_data *d, int key)
@@ -177,34 +202,59 @@ void	on_minimap(t_data *d, int x, int y, char type)
 	///////////////////////////////////////////
 }
 
-void	player_is_here(t_data *d)
+void	player_is_here(t_data *d, int c_body, int c_head)
 {
 	int	x;
 	int	y;
 
 	x = d->pposx * IMG_PXL + (IMG_PXL/2);
 	y = d->pposy * IMG_PXL + (IMG_PXL/2);
-	new_mlx_pixel_put(d, x + 1, y + 1, RED);
-	new_mlx_pixel_put(d, x, y + 1, RED);
-	new_mlx_pixel_put(d, x - 1, y + 1, RED);
-	new_mlx_pixel_put(d, x + 1, y - 1, RED);
-	new_mlx_pixel_put(d, x, y - 1, RED);
-	new_mlx_pixel_put(d, x - 1, y - 1, RED);
-	new_mlx_pixel_put(d, x + 1, y, RED);
-	new_mlx_pixel_put(d, x, y, RED);
-	new_mlx_pixel_put(d, x - 1, y, RED);
+	new_mlx_pixel_put(d, x + 1, y + 1, c_body);
+	new_mlx_pixel_put(d, x, y + 1, c_body);
+	new_mlx_pixel_put(d, x - 1, y + 1, c_body);
+	new_mlx_pixel_put(d, x + 1, y - 1, c_body);
+	new_mlx_pixel_put(d, x, y - 1, c_body);
+	new_mlx_pixel_put(d, x - 1, y - 1, c_body);
+	new_mlx_pixel_put(d, x + 1, y, c_body);
+	new_mlx_pixel_put(d, x, y, c_body);
+	new_mlx_pixel_put(d, x - 1, y, c_body);
+	define_player_head(d, x, y, c_head);
+}
 
-	if (d->pos == 'N' || (d->angle > 0 && d->angle < 180))
-		new_mlx_pixel_put(d, x, y - 2, BLU);
-	else if (d->pos == 'S')
-	// else if (d->pos == 'S' || (d->angle > 180 && d->angle < 360))
-		new_mlx_pixel_put(d, x, y + 2, BLU);
-	else if (d->pos == 'E')
-	// else if (d->pos == 'E' || (d->angle > 180 && d->angle < 360))
-		new_mlx_pixel_put(d, x + 2, y, BLU);
-	else if (d->pos == 'W')
-	// else if (d->pos == 'W' || (d->angle > 180 && d->angle < 360))
-		new_mlx_pixel_put(d, x - 2, y, BLU);
+void	define_player_head(t_data *d, int x, int y, int c_head)
+{
+	if ((d->angle >= 0 && d->angle < 22)) // Est
+		new_mlx_pixel_put(d, x + 2, y, c_head);
+	else if (d->angle >= 22 && d->angle < 45)
+		new_mlx_pixel_put(d, x + 2, y - 1, c_head);
+	else if (d->angle >= 45 && d->angle < 67)
+		new_mlx_pixel_put(d, x + 2, y - 2, c_head);
+	else if (d->angle >= 67 && d->angle < 90)
+		new_mlx_pixel_put(d, x + 1, y - 2, c_head);
+	else if (d->angle >= 90 && d->angle < 112) // Nord
+		new_mlx_pixel_put(d, x, y - 2, c_head);
+	else if (d->angle >= 112 && d->angle < 135)
+		new_mlx_pixel_put(d, x - 1, y - 2, c_head);
+	else if (d->angle >= 135 && d->angle < 157)
+		new_mlx_pixel_put(d, x - 2, y - 2, c_head);
+	else if (d->angle >= 157 && d->angle < 180)
+		new_mlx_pixel_put(d, x - 2, y - 1, c_head);
+	else if (d->angle >= 180 && d->angle < 202) // Ouest
+		new_mlx_pixel_put(d, x - 2, y, c_head);
+	else if (d->angle >= 202 && d->angle < 225)
+		new_mlx_pixel_put(d, x - 2, y + 1, c_head);
+	else if (d->angle >= 225 && d->angle < 247)
+		new_mlx_pixel_put(d, x - 2, y + 2, c_head);
+	else if (d->angle >= 247 && d->angle < 270)
+		new_mlx_pixel_put(d, x - 1, y + 2, c_head);
+	else if (d->angle >= 270 && d->angle < 292) // Sud
+		new_mlx_pixel_put(d, x, y + 2, c_head);
+	else if (d->angle >= 292 && d->angle < 315)
+		new_mlx_pixel_put(d, x + 1, y + 2, c_head);
+	else if (d->angle >= 315 && d->angle < 337)
+		new_mlx_pixel_put(d, x + 2, y + 2, c_head);
+	else if (d->angle >= 337 && d->angle <= 360)
+		new_mlx_pixel_put(d, x + 2, y + 1, c_head);
 }
 
 void	player_angle(t_data *d)
@@ -257,5 +307,5 @@ void	map2d(t_data *d)
 		}
 		x++;
 	}
-	player_is_here(d);
+	player_is_here(d, RED, BLU);
 }
