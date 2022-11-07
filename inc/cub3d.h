@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/03 13:30:09 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:46:02 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define WIN_W 512
 # define IMG_PXL 64 //16 sera mieux a terme
 # define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
+# define PXL 0.05
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
@@ -181,7 +182,7 @@ int		main_n(int ac, char **av);
 void	player_angle(t_data *d);
 void	look_around(t_data *d, int key);
 int		update_img(t_data *d);
-void	go_up(t_data *d);
+void	go_forth(t_data *d);
 void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
 

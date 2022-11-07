@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/03 13:39:03 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:58:12 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,53 @@ int	key_on(int key, t_data *d)
 void	move(t_data *d, int key)
 {
 	// pathfinder(bd, IMG_GRD2, bd->p1->x, bd->p1->y);
-	player_is_here(d, WHI, WHI); //inutile si la map se detruit chaque fois ?
+	printf("joueur etait ici : x[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
+	//player_is_here(d, WHI, WHI); //inutile si la map se detruit chaque fois ?
 	if (key == K_W)
-		go_up(d);
+	{
+		go_forth(d);
+		printf("joueur est ici maintenant : x[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
+	}
 	// else if (key == K_S)
 	// 	go_down(d);
 	// else if (key == K_A)
 	// 	go_left(d);
 	// else if (key == K_D)
 	// 	go_right(d);
+
 }
 
-void	go_up(t_data *d)
+void	go_forth(t_data *d)
 {
-	int	future_x;
-	int	future_y;
+	// int	future_x;
+	// int	future_y;
 
-	future_y = d->pposy - IMG_PXL;
-	future_x = d->pposx;
+	// future_y = d->pposy - IMG_PXL;
+	// future_x = d->pposx;
 	// if (check_move(bd, future_x, future_y))
 	// {
-	d->pposy = d->pposy - IMG_PXL;
+	if (d->angle >= 135 && d->angle < 225)
+	{
+		d->pposx = d->pposx - PXL;
+	}
+	else if (d->angle >= 45 && d->angle < 135)
+	{
+		d->pposy = d->pposy - PXL;
+
+	}
+	else if (d->angle >= 225 && d->angle < 315)
+	{
+		d->pposy = d->pposy + PXL;
+	}
+	else
+	{
+		d->pposx = d->pposx + PXL;
+	}
+	// d->pposy = d->pposy - IMG_PXL;
 		// d->pposy = bd->map.y;
 	// }
 	// pathfinder(bd, IMG_P2, d->pposx, d->pposy);
-	player_is_here(d, RED, BLU); //inutile si la map se detruit chaque fois ?
+	//player_is_here(d, RED, BLU); //inutile si la map se detruit chaque fois ?
 }
 
 void	look_around(t_data *d, int key)
@@ -149,7 +171,7 @@ char	**map_test(void)
 	}
 	tm[0] = "11111";
 	tm[1] = "10001";
-	tm[2] = "110W1";
+	tm[2] = "11001";
 	tm[3] = "10011";
 	tm[4] = "11111";
 	tm[5] = NULL;
@@ -290,19 +312,7 @@ void	map2d(t_data *d)
 		y = 0;
 		while (y < d->w)
 		{
-			// definis dans init_pos() dans print_map.c
-			// qui remonte jusqu'a load_map() appele dans main.c (verfier encore dans Miro)
-			///////////////////////////////////////////////////////////////////////////////
-			if (tm[y][x] == 'N' || tm[y][x] == 'W' ||tm[y][x] == 'E' ||tm[y][x] == 'S')
-			{
-				d->pposx = x;
-				d->pposy = y;
-				d->pos = tm[y][x];
-				on_minimap(d, x, y, '0');
-			}
-			else
-			///////////////////////////////////////////////////////////////////////////////
-				on_minimap(d, x, y, tm[y][x]);
+			on_minimap(d, x, y, tm[y][x]);
 			y++;
 		}
 		x++;

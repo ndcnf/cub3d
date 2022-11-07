@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:42:04 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/02 11:28:31 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:43:38 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int	main_n(int ac, char **av)
 	(void)fd;
 	(void)av;
 	init_map(&d);
+
+	d.pposx = 3;
+	d.pposy = 2;
+	d.pos = 'W';
 
 	printf("hello?\n");
 	map2d(&d);
