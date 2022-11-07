@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/07 10:58:12 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:40:10 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,35 +90,33 @@ void	move(t_data *d, int key)
 
 void	go_forth(t_data *d)
 {
-	// int	future_x;
-	// int	future_y;
 
-	// future_y = d->pposy - IMG_PXL;
-	// future_x = d->pposx;
-	// if (check_move(bd, future_x, future_y))
-	// {
-	if (d->angle >= 135 && d->angle < 225)
-	{
-		d->pposx = d->pposx - PXL;
-	}
-	else if (d->angle >= 45 && d->angle < 135)
-	{
-		d->pposy = d->pposy - PXL;
 
-	}
-	else if (d->angle >= 225 && d->angle < 315)
+	if (d->angle >= 0 && d->angle <=180)
 	{
-		d->pposy = d->pposy + PXL;
+		// OK pour 0 - 180
+		d->pposx = d->pposx + PXL * cos((M_PI * d->angle) / 180);
+		d->pposy = d->pposy - PXL * sin((M_PI * d->angle) / 180);
 	}
 	else
 	{
-		d->pposx = d->pposx + PXL;
+		// KO
+		d->pposx = d->pposx - PXL * sin((M_PI * d->angle) / 180);
+		d->pposy = d->pposy + PXL * cos((M_PI * d->angle) / 180);
 	}
-	// d->pposy = d->pposy - IMG_PXL;
-		// d->pposy = bd->map.y;
-	// }
-	// pathfinder(bd, IMG_P2, d->pposx, d->pposy);
-	//player_is_here(d, RED, BLU); //inutile si la map se detruit chaque fois ?
+
+
+
+
+	// if (d->angle >= 135 && d->angle < 225)
+	// 	// d->pposx = d->pposx - PXL;
+	// 	d->pposx = d->pposx + PXL * cos(M_PI * d->angle / 180);
+	// else if (d->angle >= 45 && d->angle < 135)
+	// 	d->pposy = d->pposy - PXL;
+	// else if (d->angle >= 225 && d->angle < 315)
+	// 	d->pposy = d->pposy + PXL;
+	// else
+	// 	d->pposx = d->pposx + PXL;
 }
 
 void	look_around(t_data *d, int key)
