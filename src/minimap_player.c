@@ -18,8 +18,8 @@ void	player_is_here(t_data *d, int c_body, int c_head)
 	int	x;
 	int	y;
 
-	x = d->pposx * IMG_PXL + (IMG_PXL/2);
-	y = d->pposy * IMG_PXL + (IMG_PXL/2);
+	y = d->pposx * IMG_PXL + (IMG_PXL/2);
+	x = d->pposy * IMG_PXL + (IMG_PXL/2);
 	new_mlx_pixel_put(d, x + 1, y + 1, c_body);
 	new_mlx_pixel_put(d, x, y + 1, c_body);
 	new_mlx_pixel_put(d, x - 1, y + 1, c_body);

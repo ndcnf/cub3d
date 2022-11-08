@@ -138,19 +138,19 @@ void	player_angle(t_data *d)
 
 void	map2d(t_data *d)
 {
-	int		x;
-	int		y;
+	int		i;
+	int		j;
 
-	x = 0;
-	while (x < d->h)
+	i = 0;
+	while (i < d->w)
 	{
-		y = 0;
-		while (y < d->w)
+		j = 0;
+		while (j < d->h)
 		{
-			on_minimap(d, x, y, d->map[y][x]);
-			y++;
+			on_minimap(d, i, j, d->map[j][i]);
+			j++;
 		}
-		x++;
+		i++;
 	}
 	player_is_here(d, RED, BLU);
 }
