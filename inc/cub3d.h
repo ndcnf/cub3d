@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/07 15:27:21 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 10:52:49 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void	player_angle(t_data *d);
 void	look_around(t_data *d, int key);
 int		update_img(t_data *d);
 void	go_forth(t_data *d);
+void	go_back(t_data *d);
 void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
 

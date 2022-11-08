@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/07 15:40:10 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 10:58:51 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	key_on(int key, t_data *d)
 	else if (key == K_S)
 	{
 		printf("DOWN\n");
-		// move(d, KEY_DWN);
+		move(d, K_S);
 	}
 	else if (key == K_AR_R)
 	{
@@ -79,8 +79,8 @@ void	move(t_data *d, int key)
 		go_forth(d);
 		printf("joueur est ici maintenant : x[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
 	}
-	// else if (key == K_S)
-	// 	go_down(d);
+	else if (key == K_S)
+		go_back(d);
 	// else if (key == K_A)
 	// 	go_left(d);
 	// else if (key == K_D)
@@ -91,19 +91,16 @@ void	move(t_data *d, int key)
 void	go_forth(t_data *d)
 {
 
+	d->pposx = d->pposx + PXL * cos((M_PI * d->angle) / 180);
+	d->pposy = d->pposy - PXL * sin((M_PI * d->angle) / 180);
 
-	if (d->angle >= 0 && d->angle <=180)
-	{
-		// OK pour 0 - 180
-		d->pposx = d->pposx + PXL * cos((M_PI * d->angle) / 180);
-		d->pposy = d->pposy - PXL * sin((M_PI * d->angle) / 180);
-	}
-	else
-	{
-		// KO
-		d->pposx = d->pposx - PXL * sin((M_PI * d->angle) / 180);
-		d->pposy = d->pposy + PXL * cos((M_PI * d->angle) / 180);
-	}
+}
+
+void	go_back(t_data *d)
+{
+	d->pposx = d->pposx - PXL * cos((M_PI * d->angle) / 180);
+	d->pposy = d->pposy + PXL * sin((M_PI * d->angle) / 180);
+
 
 
 
