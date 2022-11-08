@@ -29,6 +29,7 @@ SRCS_FILES	= main.c \
                	print_map.c \
                	stock_map.c \
 				minimap.c \
+				main_parsing.c \
 				raycasting.c
 
 INC_FILES	= cub3d.h

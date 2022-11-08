@@ -99,7 +99,7 @@ typedef struct s_data
  * main.c
  */
 int		main(int ac, char **av);
-int		main_l(int ac, char **av);
+int		main_parsing(int ac, char **av, t_data *data);
 void	print_load_map(t_data *d);
 void	print_load_asset(t_data *d);
 /*
