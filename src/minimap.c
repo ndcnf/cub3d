@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/08 10:58:51 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:17:27 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@ int	key_on(int key, t_data *d)
 	else if (key == K_A)
 	{
 		printf("LEFT\n");
-		// move(d, KEY_LFT);
+		move(d, K_A);
 	}
 	else if (key == K_AR_L)
 	{
 		printf("CAMERA GAUCHE\n");
 		look_around(d, K_AR_L);
-		// player_is_here(d);
-		// move(d, KEY_LFT);
+
 	}
 	else if (key == K_S)
 	{
@@ -57,13 +56,12 @@ int	key_on(int key, t_data *d)
 	{
 		printf("CAMERA DROITE\n");
 		look_around(d, K_AR_R);
-		// player_is_here(d);
-		// move(d, KEY_LFT);
+
 	}
 	else if (key == K_D)
 	{
 		printf("RIGHT\n");
-		// move(d, KEY_RGT);
+		move(d, K_D);
 	}
 	printf("angle [%d°]\n\n", d->angle);
 	return (EXIT_SUCCESS);
@@ -81,39 +79,36 @@ void	move(t_data *d, int key)
 	}
 	else if (key == K_S)
 		go_back(d);
-	// else if (key == K_A)
-	// 	go_left(d);
-	// else if (key == K_D)
-	// 	go_right(d);
+	else if (key == K_A)
+		go_left(d);
+	else if (key == K_D)
+		go_right(d);
 
 }
 
 void	go_forth(t_data *d)
 {
-
 	d->pposx = d->pposx + PXL * cos((M_PI * d->angle) / 180);
 	d->pposy = d->pposy - PXL * sin((M_PI * d->angle) / 180);
-
 }
 
 void	go_back(t_data *d)
 {
 	d->pposx = d->pposx - PXL * cos((M_PI * d->angle) / 180);
 	d->pposy = d->pposy + PXL * sin((M_PI * d->angle) / 180);
+}
 
+void	go_left(t_data *d)
+{
+	d->pposx = d->pposx - PXL * sin((M_PI * d->angle) / 180);
+	d->pposy = d->pposy - PXL * cos((M_PI * d->angle) / 180);
+}
 
-
-
-
-	// if (d->angle >= 135 && d->angle < 225)
-	// 	// d->pposx = d->pposx - PXL;
-	// 	d->pposx = d->pposx + PXL * cos(M_PI * d->angle / 180);
-	// else if (d->angle >= 45 && d->angle < 135)
-	// 	d->pposy = d->pposy - PXL;
-	// else if (d->angle >= 225 && d->angle < 315)
-	// 	d->pposy = d->pposy + PXL;
-	// else
-	// 	d->pposx = d->pposx + PXL;
+void	go_right(t_data *d)
+{
+	printf("go a droite\n");
+	d->pposx = d->pposx + PXL * sin((M_PI * d->angle) / 180);
+	d->pposy = d->pposy + PXL * cos((M_PI * d->angle) / 180);
 }
 
 void	look_around(t_data *d, int key)
