@@ -51,8 +51,6 @@ int	main_parsing(int ac, char **av, t_data *data)
 	printf("✅ load_map(&data, fd, av[1])\n\n");
 	print_load_asset(data);
 	print_load_map(data);
-	free_map(data);
-	raycasting(data);
 	return (SUCCESS);
 }
 

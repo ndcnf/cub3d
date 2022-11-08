@@ -62,10 +62,8 @@ void	move(t_data *d, int key)
 
 void	init_map(t_data *d)
 {
-	d->y_len = d->nb_line_map; // d->nb_line_map fix
-	d->x_len = d->len_line_map; // d->len_line_map fix: changed size_t in int
-	d->nb_line_map = 5;
-	d->len_line_map = 5;
+//	d->y_len = d->nb_line_map; // d->nb_line_map fix
+//	d->x_len = d->len_line_map;
 	d->h = d->nb_line_map;
 	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
@@ -127,7 +125,7 @@ void	define_player_head(t_data *d, int x, int y, int c_head)
 
 void	player_angle(t_data *d)
 {
-	printf("pos : %d\n", d->pos);
+//	printf("pos : %d\n", d->pos);
 	if (d->pos == 'N')
 		d->angle = 90;
 	else if (d->pos == 'S')
@@ -143,22 +141,13 @@ void	map2d(t_data *d)
 	int		x;
 	int		y;
 
-	// A remplacer apres parsing par **map
-	///////////////////////////////////////////
-	char	**tm;
-
-	tm = map_test();
-	d->h = 5;
-	d->w = 5;
-	///////////////////////////////////////////
-
 	x = 0;
 	while (x < d->h)
 	{
 		y = 0;
 		while (y < d->w)
 		{
-			on_minimap(d, x, y, tm[y][x]);
+			on_minimap(d, x, y, d->map[y][x]);
 			y++;
 		}
 		x++;

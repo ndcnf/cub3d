@@ -31,7 +31,7 @@ SRCS_FILES	= main.c \
 				minimap.c \
 				main_parsing.c \
 				raycasting.c \
-				main_n.c \
+				main_minimap.c \
 				directions.c \
 				minimap_player.c
 

@@ -102,9 +102,13 @@ typedef struct s_data
  * main.c
  */
 int		main(int ac, char **av);
+/*
+ * main_parsing.c
+ */
 int		main_parsing(int ac, char **av, t_data *data);
 void	print_load_map(t_data *d);
 void	print_load_asset(t_data *d);
+int		main_minimap(t_data *d);
 /*
  * main_utils.c FULL
  */
@@ -207,7 +211,7 @@ void	player_is_here(t_data *d, int c_body, int c_head);
 /*
 * main_n.c // SUPPRIMER ENSUITE
 */
-int		main_n(int ac, char **av);
+
 char	**map_test(void);
 
 /*
