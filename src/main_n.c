@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:42:04 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/08 14:37:12 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:51:16 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main_n(int ac, char **av)
 	d.pposy = 2;
 	d.pos = 'W';
 
-	printf("hello?\n");
 	map2d(&d);
 	player_angle(&d);
 
