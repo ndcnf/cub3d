@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/08 11:40:00 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:38:09 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,9 @@ void	init_map(t_data *d);
 void	minimap_area(t_data *d, int i, int j, int color);
 void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
-void	player_is_here(t_data *d, int c_body, int c_head);
 void	map2d(t_data *d);
 int		key_on(int key, t_data *d);
 int		close_win(void);
-int		main_n(int ac, char **av);
 void	player_angle(t_data *d);
 int		update_img(t_data *d);
 
@@ -192,13 +190,19 @@ void	go_back(t_data *d);
 void	go_left(t_data *d);
 void	go_right(t_data *d);
 void	look_around(t_data *d, int key);
-
-
+/*
+* minimap_player.c
+*/
 void	player_head_e(t_data *d, int x, int y, int c_head);
 void	player_head_w(t_data *d, int x, int y, int c_head);
 void	player_head_n(t_data *d, int x, int y, int c_head);
 void	player_head_s(t_data *d, int x, int y, int c_head);
+void	player_is_here(t_data *d, int c_body, int c_head);
 
-
+/*
+* main_n.c // SUPPRIMER ENSUITE
+*/
+int		main_n(int ac, char **av);
+char	**map_test(void);
 
 #endif

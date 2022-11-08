@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/08 11:37:48 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:35:29 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,30 +79,6 @@ void	init_map(t_data *d)
 	// d->map.y = 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// UNIQUEMENT POUR TESTS. SUPPRIMER ENSUITE
-////////////////////////////////////////////////////////////////////////////////
-char	**map_test(void)
-{
-	char **tm;
-	int		i = 0;
-
-	tm = malloc(sizeof(char *) * 6);
-	while (i < 5)
-	{
-		tm[i] = malloc(sizeof(char) * 6);
-		i++;
-	}
-	tm[0] = "11111";
-	tm[1] = "10001";
-	tm[2] = "11001";
-	tm[3] = "10011";
-	tm[4] = "11111";
-	tm[5] = NULL;
-	return(tm);
-}
-////////////////////////////////////////////////////////////////////////////////
-
 void	new_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
 	char	*dst;
@@ -142,17 +118,12 @@ void	on_minimap(t_data *d, int x, int y, char type)
 		minimap_area(d, x, y, DGR);
 }
 
-
-
 void	define_player_head(t_data *d, int x, int y, int c_head)
 {
 	player_head_e(d, x, y, c_head);
 	player_head_w(d, x, y, c_head);
 	player_head_s(d, x, y, c_head);
 	player_head_n(d, x, y, c_head);
-
-
-
 }
 
 void	player_angle(t_data *d)

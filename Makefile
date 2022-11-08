@@ -31,7 +31,7 @@ SRCS_FILES	= main.c \
 				minimap.c \
 				main_n.c \
 				directions.c \
-				minimap_player.c
+				minimap_player.c \
 
 INC_FILES	= cub3d.h
 
