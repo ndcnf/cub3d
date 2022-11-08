@@ -18,5 +18,6 @@ int main(int ac, char **av)
 
 	ft_bzero(&data, sizeof(t_data));
 	main_parsing(ac, av, &data);
+	main_n(ac, av);
 	return (0);
 }

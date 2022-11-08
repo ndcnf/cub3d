@@ -26,14 +26,14 @@ SRCS_FILES	= main.c \
 				init_game.c \
 				main_utils.c \
 				pars_map.c \
-        print_map.c \
-        stock_map.c \
+        		print_map.c \
+        		stock_map.c \
 				minimap.c \
 				main_parsing.c \
-				raycasting.c
+				raycasting.c \
 				main_n.c \
 				directions.c \
-				minimap_player.c \
+				minimap_player.c
 
 INC_FILES	= cub3d.h
 
