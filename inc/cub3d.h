@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/10/31 11:57:21 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:38:09 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include "key_macos.h"
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
+#	define BUFFER_SIZE 256
 # endif
 
 # define SUCCESS 0
@@ -42,11 +42,14 @@
 # define WIN_W 1080
 # define WIN_H 720
 # define IMG_PXL 64 //16 sera mieux a terme
+# define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
+# define PXL 0.05
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
 # define GRN 0x00336600
 # define DGR 0x004C9900
+# define BLU 0x000000FF
 
 
 
@@ -91,8 +94,8 @@ typedef struct s_data
 	int		sizeof_tab;
 	float	pposx;
 	float	pposy;
-	char	p_orient; // transformer en 'pos'
 	char	pos;
+	int		angle;
 }			t_data;
 
 /*
@@ -176,10 +179,36 @@ void	init_map(t_data *d);
 void	minimap_area(t_data *d, int i, int j, int color);
 void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
-void	player_is_here(t_data *d);
 void	map2d(t_data *d);
 int		key_on(int key, t_data *d);
 int		close_win(void);
+void	player_angle(t_data *d);
+int		update_img(t_data *d);
+
+void	move(t_data *d, int key);
+void	define_player_head(t_data *d, int x, int y, int c_head);
+/*
+* directions.c
+*/
+void	go_forth(t_data *d);
+void	go_back(t_data *d);
+void	go_left(t_data *d);
+void	go_right(t_data *d);
+void	look_around(t_data *d, int key);
+/*
+* minimap_player.c
+*/
+void	player_head_e(t_data *d, int x, int y, int c_head);
+void	player_head_w(t_data *d, int x, int y, int c_head);
+void	player_head_n(t_data *d, int x, int y, int c_head);
+void	player_head_s(t_data *d, int x, int y, int c_head);
+void	player_is_here(t_data *d, int c_body, int c_head);
+
+/*
+* main_n.c // SUPPRIMER ENSUITE
+*/
+int		main_n(int ac, char **av);
+char	**map_test(void);
 
 /*
  * raycasting.c

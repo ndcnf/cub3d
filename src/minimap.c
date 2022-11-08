@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/10/31 11:16:17 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:35:29 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,88 +19,64 @@ int	close_win(void)
 	exit(SUCCESS);
 }
 
+int	update_img(t_data *d)
+{
+	mlx_clear_window(d->mlx, d->win);
+	map2d(d);
+	mlx_put_image_to_window(d->mlx, d->win, d->m2d->img, 0, 0);
+	return (EXIT_SUCCESS);
+}
+
 int	key_on(int key, t_data *d)
 {
-	(void)d; // supprimer quand une fonction aura ete creee
 	if (key == K_ESCAPE)
-	{
-		printf("ESCAPE\n");
 		close_win();
-	}
 	else if (key == K_W)
-	{
-		printf("UP\n");
-		// move(d, KEY_UP);
-	}
+		move(d, K_W);
 	else if (key == K_A)
-	{
-		printf("LEFT\n");
-		// move(d, KEY_LFT);
-	}
+		move(d, K_A);
 	else if (key == K_AR_L)
-	{
-		printf("CAMERA GAUCHE\n");
-		// move(d, KEY_LFT);
-	}
+		look_around(d, K_AR_L);
 	else if (key == K_S)
-	{
-		printf("DOWN\n");
-		// move(d, KEY_DWN);
-	}
+		move(d, K_S);
 	else if (key == K_AR_R)
-	{
-		printf("CAMERA DROITE\n");
-		// move(d, KEY_LFT);
-	}
+		look_around(d, K_AR_R);
 	else if (key == K_D)
-	{
-		printf("RIGHT\n");
-		// move(d, KEY_RGT);
-	}
+		move(d, K_D);
 	return (EXIT_SUCCESS);
+}
+
+void	move(t_data *d, int key)
+{
+	printf("joueur etait ici :\nx[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
+	if (key == K_W)
+		go_forth(d);
+	else if (key == K_S)
+		go_back(d);
+	else if (key == K_A)
+		go_left(d);
+	else if (key == K_D)
+		go_right(d);
+	printf("joueur est ici maintenant :\nx[%f]\ny[%f]\n[%d°]\n\n", d->pposx, d->pposy, d->angle);
 }
 
 void	init_map(t_data *d)
 {
-	/////////////
-	d->y_len = d->nb_line_map;
-	d->x_len = (int)d->len_line_map;
-	/////////////
-
-	d->h = d->y_len;
-	d->w = (d->x_len - 1);
+	d->y_len = d->nb_line_map; // d->nb_line_map fix
+	d->x_len = d->len_line_map; // d->len_line_map fix: changed size_t in int
+	d->nb_line_map = 5;
+	d->len_line_map = 5;
+	d->h = d->nb_line_map;
+	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
 	d->m2d = malloc(sizeof(t_minimap));
 	d->m2d->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
 	d->m2d->addr = mlx_get_data_addr(d->m2d->img, &d->m2d->bits_per_pixel, &d->m2d->line_length, &d->m2d->endian);
+	player_angle(d);
 	// d->map.x = 0;
 	// d->map.y = 0;
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// UNIQUEMENT POUR TESTS. SUPPRIMER ENSUITE
-////////////////////////////////////////////////////////////////////////////////
-char	**map_test(void)
-{
-	char **tm;
-	int		i = 0;
-
-	tm = malloc(sizeof(char *) * 6);
-	while (i < 5)
-	{
-		tm[i] = malloc(sizeof(char) * 6);
-		i++;
-	}
-	tm[0] = "11111";
-	tm[1] = "10001";
-	tm[2] = "110N1";
-	tm[3] = "10011";
-	tm[4] = "11111";
-	tm[5] = NULL;
-	return(tm);
-}
-////////////////////////////////////////////////////////////////////////////////
 
 void	new_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
@@ -139,32 +115,27 @@ void	on_minimap(t_data *d, int x, int y, char type)
 		minimap_area(d, x, y, WHI);
 	if (type == '1')
 		minimap_area(d, x, y, DGR);
-
-	// devront etre converties en '1' a terme
-	///////////////////////////////////////////
-	if (type == '9')
-		minimap_area(d, x, y, RED);
-	///////////////////////////////////////////
 }
 
-void	player_is_here(t_data *d)
+void	define_player_head(t_data *d, int x, int y, int c_head)
 {
-	int	x;
-	int	y;
+	player_head_e(d, x, y, c_head);
+	player_head_w(d, x, y, c_head);
+	player_head_s(d, x, y, c_head);
+	player_head_n(d, x, y, c_head);
+}
 
-	printf("posx[%f] / posy[%f] / orient[%c]\n", d->pposx, d->pposy, d->p_orient);
-
-	x = d->pposx * IMG_PXL + (IMG_PXL/2);
-	y = d->pposy * IMG_PXL + (IMG_PXL/2);
-	new_mlx_pixel_put(d, x + 1, y + 1, RED);
-	new_mlx_pixel_put(d, x, y + 1, RED);
-	new_mlx_pixel_put(d, x - 1, y + 1, RED);
-	new_mlx_pixel_put(d, x + 1, y - 1, RED);
-	new_mlx_pixel_put(d, x, y - 1, RED);
-	new_mlx_pixel_put(d, x - 1, y - 1, RED);
-	new_mlx_pixel_put(d, x + 1, y, RED);
-	new_mlx_pixel_put(d, x, y, RED);
-	new_mlx_pixel_put(d, x - 1, y, RED);
+void	player_angle(t_data *d)
+{
+	printf("pos : %d\n", d->pos);
+	if (d->pos == 'N')
+		d->angle = 90;
+	else if (d->pos == 'S')
+		d->angle = 270;
+	else if (d->pos == 'W')
+		d->angle = 180;
+	else if (d->pos == 'E')
+		d->angle = 0;
 }
 
 void	map2d(t_data *d)
@@ -187,21 +158,10 @@ void	map2d(t_data *d)
 		y = 0;
 		while (y < d->w)
 		{
-			// definir ailleurs la position du joueur et son orientation
-			///////////////////////////////////////////////////////////////////////////////
-			if (tm[y][x] == 'N' || tm[y][x] == 'W' ||tm[y][x] == 'E' ||tm[y][x] == 'S')
-			{
-				d->pposx = x;
-				d->pposy = y;
-				d->p_orient = tm[y][x];
-				on_minimap(d, x, y, '0');
-			}
-			else
-			///////////////////////////////////////////////////////////////////////////////
-				on_minimap(d, x, y, tm[y][x]);
+			on_minimap(d, x, y, tm[y][x]);
 			y++;
 		}
 		x++;
 	}
-	player_is_here(d);
+	player_is_here(d, RED, BLU);
 }
