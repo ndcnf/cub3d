@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/08 11:14:24 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:40:00 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,25 @@ int		key_on(int key, t_data *d);
 int		close_win(void);
 int		main_n(int ac, char **av);
 void	player_angle(t_data *d);
-void	look_around(t_data *d, int key);
 int		update_img(t_data *d);
+
+void	move(t_data *d, int key);
+void	define_player_head(t_data *d, int x, int y, int c_head);
+/*
+* directions.c
+*/
 void	go_forth(t_data *d);
 void	go_back(t_data *d);
 void	go_left(t_data *d);
 void	go_right(t_data *d);
-void	move(t_data *d, int key);
-void	define_player_head(t_data *d, int x, int y, int c_head);
+void	look_around(t_data *d, int key);
+
+
+void	player_head_e(t_data *d, int x, int y, int c_head);
+void	player_head_w(t_data *d, int x, int y, int c_head);
+void	player_head_n(t_data *d, int x, int y, int c_head);
+void	player_head_s(t_data *d, int x, int y, int c_head);
+
+
 
 #endif

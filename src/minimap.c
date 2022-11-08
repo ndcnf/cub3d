@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/08 11:17:27 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:37:48 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,98 +32,32 @@ int	key_on(int key, t_data *d)
 	if (key == K_ESCAPE)
 		close_win();
 	else if (key == K_W)
-	{
-		printf("UP\n");
 		move(d, K_W);
-	}
 	else if (key == K_A)
-	{
-		printf("LEFT\n");
 		move(d, K_A);
-	}
 	else if (key == K_AR_L)
-	{
-		printf("CAMERA GAUCHE\n");
 		look_around(d, K_AR_L);
-
-	}
 	else if (key == K_S)
-	{
-		printf("DOWN\n");
 		move(d, K_S);
-	}
 	else if (key == K_AR_R)
-	{
-		printf("CAMERA DROITE\n");
 		look_around(d, K_AR_R);
-
-	}
 	else if (key == K_D)
-	{
-		printf("RIGHT\n");
 		move(d, K_D);
-	}
-	printf("angle [%d°]\n\n", d->angle);
 	return (EXIT_SUCCESS);
 }
 
 void	move(t_data *d, int key)
 {
-	// pathfinder(bd, IMG_GRD2, bd->p1->x, bd->p1->y);
-	printf("joueur etait ici : x[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
-	//player_is_here(d, WHI, WHI); //inutile si la map se detruit chaque fois ?
+	printf("joueur etait ici :\nx[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
 	if (key == K_W)
-	{
 		go_forth(d);
-		printf("joueur est ici maintenant : x[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
-	}
 	else if (key == K_S)
 		go_back(d);
 	else if (key == K_A)
 		go_left(d);
 	else if (key == K_D)
 		go_right(d);
-
-}
-
-void	go_forth(t_data *d)
-{
-	d->pposx = d->pposx + PXL * cos((M_PI * d->angle) / 180);
-	d->pposy = d->pposy - PXL * sin((M_PI * d->angle) / 180);
-}
-
-void	go_back(t_data *d)
-{
-	d->pposx = d->pposx - PXL * cos((M_PI * d->angle) / 180);
-	d->pposy = d->pposy + PXL * sin((M_PI * d->angle) / 180);
-}
-
-void	go_left(t_data *d)
-{
-	d->pposx = d->pposx - PXL * sin((M_PI * d->angle) / 180);
-	d->pposy = d->pposy - PXL * cos((M_PI * d->angle) / 180);
-}
-
-void	go_right(t_data *d)
-{
-	printf("go a droite\n");
-	d->pposx = d->pposx + PXL * sin((M_PI * d->angle) / 180);
-	d->pposy = d->pposy + PXL * cos((M_PI * d->angle) / 180);
-}
-
-void	look_around(t_data *d, int key)
-{
-	// printf("AVANT [%d] - ", d->angle); Pour verifier les angles uniquement
-	if ((d->angle + ROT_ANGL) == 360 && key == K_AR_L)
-		d->angle = 0;
-	else if (d->angle == 0 && key == K_AR_R)
-		d->angle = 360 - ROT_ANGL;
-	else if ((d->angle + ROT_ANGL) < 0)
-		d->angle = 360 - ROT_ANGL;
-	else if (key == K_AR_L)
-		d->angle += ROT_ANGL;
-	else if (key == K_AR_R)
-		d->angle -= ROT_ANGL;
+	printf("joueur est ici maintenant :\nx[%f]\ny[%f]\n[%d°]\n\n", d->pposx, d->pposy, d->angle);
 }
 
 void	init_map(t_data *d)
@@ -206,67 +140,19 @@ void	on_minimap(t_data *d, int x, int y, char type)
 		minimap_area(d, x, y, WHI);
 	if (type == '1')
 		minimap_area(d, x, y, DGR);
-
-	// devront etre converties en '1' a terme
-	///////////////////////////////////////////
-	if (type == '9')
-		minimap_area(d, x, y, RED);
-	///////////////////////////////////////////
 }
 
-void	player_is_here(t_data *d, int c_body, int c_head)
-{
-	int	x;
-	int	y;
 
-	x = d->pposx * IMG_PXL + (IMG_PXL/2);
-	y = d->pposy * IMG_PXL + (IMG_PXL/2);
-	new_mlx_pixel_put(d, x + 1, y + 1, c_body);
-	new_mlx_pixel_put(d, x, y + 1, c_body);
-	new_mlx_pixel_put(d, x - 1, y + 1, c_body);
-	new_mlx_pixel_put(d, x + 1, y - 1, c_body);
-	new_mlx_pixel_put(d, x, y - 1, c_body);
-	new_mlx_pixel_put(d, x - 1, y - 1, c_body);
-	new_mlx_pixel_put(d, x + 1, y, c_body);
-	new_mlx_pixel_put(d, x, y, c_body);
-	new_mlx_pixel_put(d, x - 1, y, c_body);
-	define_player_head(d, x, y, c_head);
-}
 
 void	define_player_head(t_data *d, int x, int y, int c_head)
 {
-	if ((d->angle >= 0 && d->angle < 22)) // Est
-		new_mlx_pixel_put(d, x + 2, y, c_head);
-	else if (d->angle >= 22 && d->angle < 45)
-		new_mlx_pixel_put(d, x + 2, y - 1, c_head);
-	else if (d->angle >= 45 && d->angle < 67)
-		new_mlx_pixel_put(d, x + 2, y - 2, c_head);
-	else if (d->angle >= 67 && d->angle < 90)
-		new_mlx_pixel_put(d, x + 1, y - 2, c_head);
-	else if (d->angle >= 90 && d->angle < 112) // Nord
-		new_mlx_pixel_put(d, x, y - 2, c_head);
-	else if (d->angle >= 112 && d->angle < 135)
-		new_mlx_pixel_put(d, x - 1, y - 2, c_head);
-	else if (d->angle >= 135 && d->angle < 157)
-		new_mlx_pixel_put(d, x - 2, y - 2, c_head);
-	else if (d->angle >= 157 && d->angle < 180)
-		new_mlx_pixel_put(d, x - 2, y - 1, c_head);
-	else if (d->angle >= 180 && d->angle < 202) // Ouest
-		new_mlx_pixel_put(d, x - 2, y, c_head);
-	else if (d->angle >= 202 && d->angle < 225)
-		new_mlx_pixel_put(d, x - 2, y + 1, c_head);
-	else if (d->angle >= 225 && d->angle < 247)
-		new_mlx_pixel_put(d, x - 2, y + 2, c_head);
-	else if (d->angle >= 247 && d->angle < 270)
-		new_mlx_pixel_put(d, x - 1, y + 2, c_head);
-	else if (d->angle >= 270 && d->angle < 292) // Sud
-		new_mlx_pixel_put(d, x, y + 2, c_head);
-	else if (d->angle >= 292 && d->angle < 315)
-		new_mlx_pixel_put(d, x + 1, y + 2, c_head);
-	else if (d->angle >= 315 && d->angle < 337)
-		new_mlx_pixel_put(d, x + 2, y + 2, c_head);
-	else if (d->angle >= 337 && d->angle <= 360)
-		new_mlx_pixel_put(d, x + 2, y + 1, c_head);
+	player_head_e(d, x, y, c_head);
+	player_head_w(d, x, y, c_head);
+	player_head_s(d, x, y, c_head);
+	player_head_n(d, x, y, c_head);
+
+
+
 }
 
 void	player_angle(t_data *d)
