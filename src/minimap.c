@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/09 13:02:30 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:47:24 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,14 @@ void	move(t_data *d, int key)
 
 void	init_map(t_data *d)
 {
-//	d->y_len = d->nb_line_map; // d->nb_line_map fix
-//	d->x_len = d->len_line_map;
 	d->h = d->nb_line_map;
-	printf("nb line [%d]\n", d->nb_line_map);
 	d->w = (d->len_line_map - 1);
-	printf("en_line (-1) [%d]\n", d->len_line_map);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
 	d->m2d = malloc(sizeof(t_minimap));
 	d->m2d->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
-	printf("line_length [%d]\n", d->m2d->line_length);
 	d->m2d->addr = mlx_get_data_addr(d->m2d->img, &d->m2d->bits_per_pixel, &d->m2d->line_length, &d->m2d->endian);
 	player_angle(d);
-	// d->map.x = 0;
-	// d->map.y = 0;
 }
 
 void	new_mlx_pixel_put(t_data *d, int x, int y, int color)

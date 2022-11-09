@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_macos.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esanchez <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:40:25 by esanchez          #+#    #+#             */
-/*   Updated: 2022/08/25 22:40:28 by esanchez         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:50:36 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,7 @@
 # define M_CLK_M 2
 # define M_SCR_U 4
 # define M_SCR_D 5
+
+# define X_BTN 17
 
 #endif
