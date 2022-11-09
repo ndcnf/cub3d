@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/09 11:11:47 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:02:30 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,14 @@ void	init_map(t_data *d)
 //	d->y_len = d->nb_line_map; // d->nb_line_map fix
 //	d->x_len = d->len_line_map;
 	d->h = d->nb_line_map;
+	printf("nb line [%d]\n", d->nb_line_map);
 	d->w = (d->len_line_map - 1);
+	printf("en_line (-1) [%d]\n", d->len_line_map);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
 	d->m2d = malloc(sizeof(t_minimap));
 	d->m2d->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
+	printf("line_length [%d]\n", d->m2d->line_length);
 	d->m2d->addr = mlx_get_data_addr(d->m2d->img, &d->m2d->bits_per_pixel, &d->m2d->line_length, &d->m2d->endian);
 	player_angle(d);
 	// d->map.x = 0;
@@ -89,11 +92,11 @@ void	minimap_area(t_data *d, int i, int j, int color)
 	int	x;
 	int	y;
 
-	x = i * IMG_PXL;
-	while (x < ((i + 1) * IMG_PXL))
+	x = i * d->mm_size;
+	while (x < ((i + 1) * d->mm_size))
 	{
-		y = j * IMG_PXL;
-		while (y < ((j + 1) * IMG_PXL))
+		y = j * d->mm_size;
+		while (y < ((j + 1) * d->mm_size))
 		{
 			if (x % 2 && y % 2 && color == DGR)
 				new_mlx_pixel_put(d, x, y, color);
@@ -109,6 +112,7 @@ void	minimap_area(t_data *d, int i, int j, int color)
 
 void	on_minimap(t_data *d, int x, int y, char type)
 {
+	minimap_size(d);
 	if (type == '0')
 		minimap_area(d, x, y, WHI);
 	if (type == '1')
@@ -125,7 +129,6 @@ void	define_player_head(t_data *d, int x, int y, int c_head)
 
 void	player_angle(t_data *d)
 {
-//	printf("pos : %d\n", d->pos);
 	if (d->pos == 'N')
 		d->angle = 90;
 	else if (d->pos == 'S')
@@ -153,4 +156,14 @@ void	map2d(t_data *d)
 		i++;
 	}
 	player_is_here(d, RED, BLU);
+}
+
+void	minimap_size(t_data *d)
+{
+	if (d->h <= 30 || d->w <= 30)
+		d->mm_size = MM_L;
+	else if ((d->h > 30 && d->h <= 60) || (d->w > 30 && d->w <= 60))
+		d->mm_size = MM_M;
+	else
+		d->mm_size = MM_S;
 }

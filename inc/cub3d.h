@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/08 14:38:09 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:03:22 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@
 # define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
-# define WIN_W 1080
-# define WIN_H 720
-# define IMG_PXL 64 //16 sera mieux a terme
+# define WIN_W 2000 // 1080
+# define WIN_H 1080 // 720
+# define MM_L 16
+# define MM_M 6
+# define MM_S 1
 # define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
 # define PXL 0.05
 
@@ -50,8 +52,6 @@
 # define GRN 0x00336600
 # define DGR 0x004C9900
 # define BLU 0x000000FF
-
-
 
 typedef struct	s_minimap
 {
@@ -68,6 +68,7 @@ typedef struct s_data
 	void	*win;
 	int		w;
 	int		h;
+	int		mm_size;
 	t_minimap	*m2d;
 
 	char	*no;
@@ -84,9 +85,7 @@ typedef struct s_data
 	int		check_c;
 	int		fd_line;
 	int		nb_line_map;
-	int		len_line_map; // convertir en INT
-	int		x_len; // remplacer plus tard
-	int		y_len; //remplacer plus tard
+	int		len_line_map;
 	char	**map;
 	char	*tmp;
 	int		start;
@@ -188,6 +187,7 @@ int		key_on(int key, t_data *d);
 int		close_win(void);
 void	player_angle(t_data *d);
 int		update_img(t_data *d);
+void	minimap_size(t_data *d);
 
 void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
