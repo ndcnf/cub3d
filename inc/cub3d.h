@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/09 13:03:22 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:55:56 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@
 # define DGR 0x004C9900
 # define BLU 0x000000FF
 
-typedef struct	s_minimap
+typedef struct	s_img
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_length;
 	int		endian;
-}	t_minimap;
+}	t_img;
 
 typedef struct s_data
 {
@@ -69,7 +69,7 @@ typedef struct s_data
 	int		w;
 	int		h;
 	int		mm_size;
-	t_minimap	*m2d;
+	t_img	*img;
 
 	char	*no;
 	int		check_no;

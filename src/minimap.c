@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/09 13:47:24 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:57:59 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	update_img(t_data *d)
 {
 	mlx_clear_window(d->mlx, d->win);
 	map2d(d);
-	mlx_put_image_to_window(d->mlx, d->win, d->m2d->img, 0, 0);
+	mlx_put_image_to_window(d->mlx, d->win, d->img->img, 0, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -48,7 +48,6 @@ int	key_on(int key, t_data *d)
 
 void	move(t_data *d, int key)
 {
-	printf("joueur etait ici :\nx[%f]\ny[%f]\n[%d°]\n", d->pposx, d->pposy, d->angle);
 	if (key == K_W)
 		go_forth(d);
 	else if (key == K_S)
@@ -57,7 +56,6 @@ void	move(t_data *d, int key)
 		go_left(d);
 	else if (key == K_D)
 		go_right(d);
-	printf("joueur est ici maintenant :\nx[%f]\ny[%f]\n[%d°]\n\n", d->pposx, d->pposy, d->angle);
 }
 
 void	init_map(t_data *d)
@@ -66,9 +64,10 @@ void	init_map(t_data *d)
 	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
-	d->m2d = malloc(sizeof(t_minimap));
-	d->m2d->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
-	d->m2d->addr = mlx_get_data_addr(d->m2d->img, &d->m2d->bits_per_pixel, &d->m2d->line_length, &d->m2d->endian);
+	d->img = malloc(sizeof(t_img));
+	d->img->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
+	d->img->addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
+	&d->img->line_length, &d->img->endian);
 	player_angle(d);
 }
 
@@ -76,7 +75,7 @@ void	new_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = d->m2d->addr + (y * d->m2d->line_length + x * (d->m2d->bits_per_pixel / 8));
+	dst = d->img->addr + (y * d->img->line_length + x * (d->img->bpp / 8));
 	*(unsigned int*)dst = color;
 }
 
