@@ -12,32 +12,30 @@
 
 #include "../inc/cub3d.h"
 
-int f_and_c(t_data *data)
+void	draw(t_ray *r, int x, t_data *data)
 {
-	int x;
 	int y;
-
-	x = 0;
-	while(x < WIN_W)
+	(void)r;
+	y = 0;
+	while (y < r->drawstart)
 	{
-		y = 0;
-		while(y < WIN_H / 2)
-		{
-			new_mlx_pixel_put(data, x, y, data->f);
-			y++;
-		}
-		x++;
+		my_mlx_pixel_put(data, x, y, data->f);
+		y++;
 	}
-	x = 0;
-	while(x < WIN_W) {
-		y /= 2;
-		while (y < WIN_H) {
-			new_mlx_pixel_put(data, x, y, data->c);
-			y++;
-		}
-		x++;
+	y = r->drawstart;
+//	printf("start %d end %d\n", r->drawstart, r->drawend);
+	while(y < r->drawend)
+	{
+//		printf("in\n");
+		my_mlx_pixel_put(data, x, y, RED);
+		y++;
 	}
-	return(1);
+	y = r->drawend;
+	while (y < WIN_H - 1)
+	{
+		my_mlx_pixel_put(data, x, y, data->c);
+		y++;
+	}
 }
 
 int raycasting(t_data *data)

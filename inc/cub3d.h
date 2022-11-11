@@ -41,9 +41,9 @@
 # define WIN_TITLE "Cub3D : Title TBD"
 # define WIN_W 2000 // 1080
 # define WIN_H 1080 // 720
-# define MM_L 16
-# define MM_M 6
-# define MM_S 1
+# define MM_L 16 // size minimap
+# define MM_M 6 // size minimap
+# define MM_S 1 // size minimap
 # define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
 # define PXL 0.05
 
@@ -52,6 +52,19 @@
 # define GRN 0x00336600
 # define DGR 0x004C9900
 # define BLU 0x000000FF
+
+// variables that couldn't be modified though raycast process
+typedef struct	s_setup
+{
+	int		i;
+}	t_setup;
+
+// variables that could be modified though raycast process
+typedef struct	s_ray
+{
+	int		drawstart;
+	int 	drawend;
+}	t_ray;
 
 typedef struct	s_img
 {
@@ -95,6 +108,8 @@ typedef struct s_data
 	float	pposy;
 	char	pos;
 	int		angle;
+	t_ray	*ray;
+	t_setup	*setup;
 }			t_data;
 
 /*
@@ -207,12 +222,6 @@ void	player_head_w(t_data *d, int x, int y, int c_head);
 void	player_head_n(t_data *d, int x, int y, int c_head);
 void	player_head_s(t_data *d, int x, int y, int c_head);
 void	player_is_here(t_data *d, int c_body, int c_head);
-
-/*
-* main_n.c // SUPPRIMER ENSUITE
-*/
-
-char	**map_test(void);
 
 /*
  * raycasting.c
