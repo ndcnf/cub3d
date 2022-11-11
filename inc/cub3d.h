@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/09 13:55:56 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:12:08 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@
 # define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
-# define WIN_W 2000 // 1080
-# define WIN_H 1080 // 720
+# define WIN_W 320 // 1080
+# define WIN_H 200 // 720
+# define POV 60
+# define ZOOM 3 // How many times WIN_H and WIN_W (6)
 # define MM_L 16
 # define MM_M 6
 # define MM_S 1
 # define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
-# define PXL 0.05
+# define SPEED 0.05
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
@@ -95,6 +97,8 @@ typedef struct s_data
 	float	pposy;
 	char	pos;
 	int		angle;
+	// int		angle_up;
+	// int		angle_down;
 }			t_data;
 
 /*
