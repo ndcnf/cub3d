@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/11 14:12:08 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/16 11:08:30 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,25 @@ typedef struct	s_img
 	int		endian;
 }	t_img;
 
+typedef struct	s_raycasting
+{
+	float	map_check;
+	int		map_sz;
+	float	ray_start;
+	float	ray_len;
+	int		step;
+	float	ray_dir;
+	float	step_sz;
+}	t_raycasting;
+
+typedef struct	s_rayunits
+{
+	float	dist_max;
+	float	dist;
+	int		tile_found;
+	float	intersection;
+}	t_rayunits;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -72,6 +91,9 @@ typedef struct s_data
 	int		h;
 	int		mm_size;
 	t_img	*img;
+	t_raycasting *x;
+	t_raycasting *y;
+	t_rayunits	*ray;
 
 	char	*no;
 	int		check_no;
@@ -97,8 +119,6 @@ typedef struct s_data
 	float	pposy;
 	char	pos;
 	int		angle;
-	// int		angle_up;
-	// int		angle_down;
 }			t_data;
 
 /*
