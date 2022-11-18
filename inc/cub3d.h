@@ -62,11 +62,11 @@ typedef struct	s_setup
 }	t_setup;
 
 // variables that could be modified though raycast process
-typedef struct	s_ray
-{
-	int		drawstart;
-	int 	drawend;
-}	t_ray;
+//typedef struct	s_ray
+//{
+//	int		drawstart;
+//	int 	drawend;
+//}	t_ray;
 
 typedef struct	s_img
 {
@@ -151,7 +151,7 @@ typedef struct s_data
 	float	pposy;
 	char	pos;
 	int		angle;
-	t_ray	*ray;
+//	t_ray	*ray;
 	t_setup	*setup;
 }			t_data;
 
@@ -269,8 +269,7 @@ void	player_is_here(t_data *d, int c_body, int c_head);
 /*
  * raycasting.c
  */
-int raycasting(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int 	main_raycasting(t_data *data);
 
 /*
  * angles.c

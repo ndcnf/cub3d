@@ -23,6 +23,7 @@ int	update_img(t_data *d)
 {
 	mlx_clear_window(d->mlx, d->win);
 	map2d(d);
+	main_raycasting(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img->img, 0, 0);
 	return (EXIT_SUCCESS);
 }
