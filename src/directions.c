@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:30:21 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/18 13:52:43 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:31:41 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	go_forth(t_data *d)
 	d->pposx = d->pposx + SPEED * cos((M_PI * d->angle) / 180);
 	// d->pposy = d->pposy - SPEED * sin(dtorad(d));
 	d->pposy = d->pposy - SPEED * sin((M_PI * d->angle) / 180);
-	printf("FORTH x [%f]\ny [%f]\nangle [%d]\n", d->pposx, d->pposy, d->angle);
-	printf("mapx [%d] - mapy [%d]\n\n", d->x->map, d->y->map); // conversion OK
+
+	printf("FORTH x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
+	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n\n", d->x->map, d->y->map); // conversion OK
 
 }
 
@@ -43,16 +45,20 @@ void	go_back(t_data *d)
 {
 	d->pposx = d->pposx - SPEED * cos((M_PI * d->angle) / 180);
 	d->pposy = d->pposy + SPEED * sin((M_PI * d->angle) / 180);
-	printf("BACK x [%f]\ny [%f]\nangle [%d]\n", d->pposx, d->pposy, d->angle);
-	printf("mapx [%d] - mapy [%d]\n\n", d->x->map, d->y->map); // conversion OK
+
+	printf("BACK x ---------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
+	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n\n", d->x->map, d->y->map); // conversion OK
 }
 
 void	go_left(t_data *d)
 {
 	d->pposx = d->pposx - SPEED * sin((M_PI * d->angle) / 180);
 	d->pposy = d->pposy - SPEED * cos((M_PI * d->angle) / 180);
-	printf("LEFT x [%f]\ny [%f]\nangle [%d]\n", d->pposx, d->pposy, d->angle);
-	printf("mapx [%d] - mapy [%d]\n\n", d->x->map, d->y->map); // conversion OK
+
+	printf("LEFT x ---------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
+	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n\n", d->x->map, d->y->map); // conversion OK
 
 }
 
@@ -60,6 +66,8 @@ void	go_right(t_data *d)
 {
 	d->pposx = d->pposx + SPEED * sin((M_PI * d->angle) / 180);
 	d->pposy = d->pposy + SPEED * cos((M_PI * d->angle) / 180);
-	printf("RIGHT x [%f]\ny [%f]\nangle [%d]\n", d->pposx, d->pposy, d->angle);
-	printf("mapx [%d] - mapy [%d]\n\n", d->x->map, d->y->map); // conversion OK
+
+	printf("RIGHT x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
+	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n\n", d->x->map, d->y->map); // conversion OK
 }
