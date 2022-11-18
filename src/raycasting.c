@@ -12,11 +12,30 @@
 
 #include "../inc/cub3d.h"
 
+int init_ray();
+int ray_dir();
+
 
 int main_raycasting(t_data *data)
 {
+	int 	x;
 
+	x = 0;
+	while (x < WIN_W)
+	{
+		init_ray(d);
+		ray_dir(d, x);
+		delta_rad(d);
+		hit(d);
+		dir_move(d);
+//		side(d);
+//		draw_set(d);
+		draw(d, x);
+		x++;
+	}
+	return (SUCCESS);
 }
+
 
 
 
