@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 13:49:11 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:19:05 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ int main_raycasting(t_data *d)
 
 	set = d->angle * (M_PI / 180);
 	x = 0;
-	d->x->camera = 2 * x / (double) WIN_H * ZOOM - 1;
+	d->x->camera = 2 * x / WIN_H * ZOOM - 1; // pas de double, sinon angle n'est pas correct
 	while (x <  WIN_W * ZOOM)
 	{
 		d->x->map = (int)d->pposx;
