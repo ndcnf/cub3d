@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/16 11:08:30 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:59:12 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,36 @@ typedef struct	s_raycasting
 	int		map_sz;
 	float	ray_start;
 	float	ray_len;
-	int		step;
-	float	ray_dir;
+	// int		step;
+	// float	ray_dir;
 	float	step_sz;
+
+	//repris de s_ray
+	double	dir;
+	double	plane;
+	int		map;
+	double	sidedist;
+	double	deltadist;
+	double	camera; // uniquement pour x
+	double	ray_dir;
+	int		step;
+
 }	t_raycasting;
 
 typedef struct	s_rayunits
 {
 	float	dist_max;
 	float	dist;
-	int		tile_found;
+	int		tile_found; // = hit
 	float	intersection;
+
+	//repris de s_ray
+	int		hit;
+	int		side;
+	double	perpwalldist;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
 }	t_rayunits;
 
 typedef struct s_data
@@ -243,5 +262,11 @@ char	**map_test(void);
  */
 int raycasting(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+/*
+ * angles.c
+ */
+int	dtorad(t_data *d);
+
 
 #endif

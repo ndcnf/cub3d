@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:34:27 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/09 13:02:37 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:58:02 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	player_is_here(t_data *d, int c_body, int c_head)
 
 void	player_head_e(t_data *d, int x, int y, int c_head)
 {
-	if ((d->angle >= 0 && d->angle < 22)) // Est
+	if ((d->angle >= 0 && d->angle < 22))
 		new_mlx_pixel_put(d, x + 2, y, c_head);
 	else if (d->angle >= 22 && d->angle < 45)
 		new_mlx_pixel_put(d, x + 2, y - 1, c_head);
@@ -46,7 +46,7 @@ void	player_head_e(t_data *d, int x, int y, int c_head)
 
 void	player_head_n(t_data *d, int x, int y, int c_head)
 {
-	if (d->angle >= 90 && d->angle < 112) // Nord
+	if (d->angle >= 90 && d->angle < 112)
 		new_mlx_pixel_put(d, x, y - 2, c_head);
 	else if (d->angle >= 112 && d->angle < 135)
 		new_mlx_pixel_put(d, x - 1, y - 2, c_head);
@@ -58,7 +58,7 @@ void	player_head_n(t_data *d, int x, int y, int c_head)
 
 void	player_head_w(t_data *d, int x, int y, int c_head)
 {
-	if (d->angle >= 180 && d->angle < 202) // Ouest
+	if (d->angle >= 180 && d->angle < 202)
 		new_mlx_pixel_put(d, x - 2, y, c_head);
 	else if (d->angle >= 202 && d->angle < 225)
 		new_mlx_pixel_put(d, x - 2, y + 1, c_head);
@@ -70,7 +70,7 @@ void	player_head_w(t_data *d, int x, int y, int c_head)
 
 void	player_head_s(t_data *d, int x, int y, int c_head)
 {
-	if (d->angle >= 270 && d->angle < 292) // Sud
+	if (d->angle >= 270 && d->angle < 292)
 		new_mlx_pixel_put(d, x, y + 2, c_head);
 	else if (d->angle >= 292 && d->angle < 315)
 		new_mlx_pixel_put(d, x + 1, y + 2, c_head);

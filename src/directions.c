@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:30:21 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/11 14:09:36 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:17:04 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	look_around(t_data *d, int key)
 
 void	go_forth(t_data *d)
 {
+
+	// d->pposx = d->pposx + SPEED * cos(dtorad(d));
 	d->pposx = d->pposx + SPEED * cos((M_PI * d->angle) / 180);
+	// d->pposy = d->pposy - SPEED * sin(dtorad(d));
 	d->pposy = d->pposy - SPEED * sin((M_PI * d->angle) / 180);
 }
 

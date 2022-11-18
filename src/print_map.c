@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:30:47 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/09 11:06:23 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:01:44 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int	init_pos(t_data *data, const char *tmp, int i)
 		if (data->pposx == -1 && data->pposy == -1)
 		{
 			data->pos = tmp[i];
+			// data->pposx = (float)i + 0.5;
 			data->pposx = (float)i;
+			// data->pposy = (float)data->sizeof_tab + 0.5;
 			data->pposy = (float)data->sizeof_tab;
 			data->map[data->sizeof_tab][i] = '0';
 		}
