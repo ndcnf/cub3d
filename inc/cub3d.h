@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/09 13:55:56 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:59:12 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@
 # define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
-# define WIN_W 2000 // 1080
-# define WIN_H 1080 // 720
+# define WIN_W 320 // 1080
+# define WIN_H 200 // 720
+# define POV 60
+# define ZOOM 3 // How many times WIN_H and WIN_W (6)
 # define MM_L 16 // size minimap
 # define MM_M 6 // size minimap
 # define MM_S 1 // size minimap
 # define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
-# define PXL 0.05
+# define SPEED 0.05
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
@@ -75,6 +77,44 @@ typedef struct	s_img
 	int		endian;
 }	t_img;
 
+typedef struct	s_raycasting
+{
+	float	map_check;
+	int		map_sz;
+	float	ray_start;
+	float	ray_len;
+	// int		step;
+	// float	ray_dir;
+	float	step_sz;
+
+	//repris de s_ray
+	double	dir;
+	double	plane;
+	int		map;
+	double	sidedist;
+	double	deltadist;
+	double	camera; // uniquement pour x
+	double	ray_dir;
+	int		step;
+
+}	t_raycasting;
+
+typedef struct	s_rayunits
+{
+	float	dist_max;
+	float	dist;
+	int		tile_found; // = hit
+	float	intersection;
+
+	//repris de s_ray
+	int		hit;
+	int		side;
+	double	perpwalldist;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+}	t_rayunits;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -83,6 +123,9 @@ typedef struct s_data
 	int		h;
 	int		mm_size;
 	t_img	*img;
+	t_raycasting *x;
+	t_raycasting *y;
+	t_rayunits	*ray;
 
 	char	*no;
 	int		check_no;
@@ -228,5 +271,11 @@ void	player_is_here(t_data *d, int c_body, int c_head);
  */
 int raycasting(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+/*
+ * angles.c
+ */
+int	dtorad(t_data *d);
+
 
 #endif

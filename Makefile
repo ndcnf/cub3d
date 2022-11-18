@@ -33,7 +33,8 @@ SRCS_FILES	= main.c \
 				raycasting.c \
 				main_minimap.c \
 				directions.c \
-				minimap_player.c
+				minimap_player.c \
+				angles.c
 
 INC_FILES	= cub3d.h
 

@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   angles.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 11:00:58 by nchennaf         ###   ########.fr       */
+/*   Created: 2022/11/18 09:59:39 by nchennaf          #+#    #+#             */
+/*   Updated: 2022/11/18 10:16:32 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+#include "../inc/key_macos.h"
 
-int main(int ac, char **av)
+int	dtorad(t_data *d)
 {
-	t_data		data;
-
-	ft_bzero(&data, sizeof(t_data));
-	if (main_parsing(ac, av, &data) != SUCCESS)
-		return (0);
-	main_minimap(&data);
-	// raycasting(&data);
-	free_map(&data);
-	return (0);
+	return (M_PI * d->angle / 180);
 }

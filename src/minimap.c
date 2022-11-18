@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/09 13:57:59 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:10:30 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,20 @@ int	key_on(int key, t_data *d)
 	else if (key == K_A)
 		move(d, K_A);
 	else if (key == K_AR_L)
+	{
 		look_around(d, K_AR_L);
+		// printf("angle L : [%d]\nangle down : [%d]\nangle up : [%d]\n", d->angle, d->angle_down, d->angle_up);
+	}
 	else if (key == K_S)
 		move(d, K_S);
 	else if (key == K_AR_R)
+	{
 		look_around(d, K_AR_R);
+		// printf("angle R : [%d]\nangle down : [%d]\nangle up : [%d]\n", d->angle, d->angle_down, d->angle_up);
+		// d->angle_down = look_around(d, K_AR_R);
+
+
+	}
 	else if (key == K_D)
 		move(d, K_D);
 	return (EXIT_SUCCESS);
@@ -63,9 +72,11 @@ void	init_map(t_data *d)
 	d->h = d->nb_line_map;
 	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
-	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
+	d->win = mlx_new_window(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM), WIN_TITLE);
+	// d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
 	d->img = malloc(sizeof(t_img));
-	d->img->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
+	d->img->img = mlx_new_image(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM));
+	// d->img->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
 	d->img->addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
 	&d->img->line_length, &d->img->endian);
 	player_angle(d);

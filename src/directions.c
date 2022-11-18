@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:30:21 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/08 14:42:09 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:17:04 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,27 @@ void	look_around(t_data *d, int key)
 
 void	go_forth(t_data *d)
 {
-	d->pposx = d->pposx + PXL * cos((M_PI * d->angle) / 180);
-	d->pposy = d->pposy - PXL * sin((M_PI * d->angle) / 180);
+
+	// d->pposx = d->pposx + SPEED * cos(dtorad(d));
+	d->pposx = d->pposx + SPEED * cos((M_PI * d->angle) / 180);
+	// d->pposy = d->pposy - SPEED * sin(dtorad(d));
+	d->pposy = d->pposy - SPEED * sin((M_PI * d->angle) / 180);
 }
 
 void	go_back(t_data *d)
 {
-	d->pposx = d->pposx - PXL * cos((M_PI * d->angle) / 180);
-	d->pposy = d->pposy + PXL * sin((M_PI * d->angle) / 180);
+	d->pposx = d->pposx - SPEED * cos((M_PI * d->angle) / 180);
+	d->pposy = d->pposy + SPEED * sin((M_PI * d->angle) / 180);
 }
 
 void	go_left(t_data *d)
 {
-	d->pposx = d->pposx - PXL * sin((M_PI * d->angle) / 180);
-	d->pposy = d->pposy - PXL * cos((M_PI * d->angle) / 180);
+	d->pposx = d->pposx - SPEED * sin((M_PI * d->angle) / 180);
+	d->pposy = d->pposy - SPEED * cos((M_PI * d->angle) / 180);
 }
 
 void	go_right(t_data *d)
 {
-	d->pposx = d->pposx + PXL * sin((M_PI * d->angle) / 180);
-	d->pposy = d->pposy + PXL * cos((M_PI * d->angle) / 180);
+	d->pposx = d->pposx + SPEED * sin((M_PI * d->angle) / 180);
+	d->pposy = d->pposy + SPEED * cos((M_PI * d->angle) / 180);
 }
