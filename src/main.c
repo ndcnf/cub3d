@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 11:00:58 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:35:50 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int init_struct(t_data *d)
 {
-	d = ft_calloc(1, sizeof(t_data));
-	if (alloc_check(d) != SUCCESS)
-		return (ERROR);
+	// d = ft_calloc(1, sizeof(t_data));
+	// if (alloc_check(d) != SUCCESS)
+	// 	return (ERROR);
 	d->ray = ft_calloc(1, sizeof(t_rayunits));
 	if (alloc_check(d) != SUCCESS)
 		return (ERROR);

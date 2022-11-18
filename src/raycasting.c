@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 10:57:34 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:39:17 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,8 +297,6 @@ int main_raycasting(t_data *d)
 
 	set = d->angle * (M_PI / 180);
 	x = 0;
-	d->x->camera = 0;
-	printf("d->x->camera %f\n", d->x->camera);
 	d->x->camera = 2 * x / (double) WIN_H * ZOOM - 1;
 	while (x <  WIN_W * ZOOM)
 	{
@@ -310,13 +308,13 @@ int main_raycasting(t_data *d)
 	 	* each time step_x or step_y will be incremented,
 	 	* map_x and map_x will be updated to check if the square is a wall
 	 	*/
-//		start_orientation(d, set);
-//		raydir_n_delta(d, x);
-//		step_n_sidedist(d);
-//		hit(d);
-//		side(d);
-//		draw_set(d);
-//		draw(d, x);
+		start_orientation(d, set);
+		raydir_n_delta(d, x);
+		step_n_sidedist(d);
+		hit(d);
+		side(d);
+		draw_set(d);
+		draw(d, x);
 		x++;
 	}
 	return (SUCCESS);
