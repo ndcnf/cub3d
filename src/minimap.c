@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/11 14:10:30 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:15:05 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,14 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_L)
 	{
 		look_around(d, K_AR_L);
-		// printf("angle L : [%d]\nangle down : [%d]\nangle up : [%d]\n", d->angle, d->angle_down, d->angle_up);
+		printf("angle L : [%d]\n", d->angle);
 	}
 	else if (key == K_S)
 		move(d, K_S);
 	else if (key == K_AR_R)
 	{
 		look_around(d, K_AR_R);
-		// printf("angle R : [%d]\nangle down : [%d]\nangle up : [%d]\n", d->angle, d->angle_down, d->angle_up);
-		// d->angle_down = look_around(d, K_AR_R);
-
-
+		printf("angle R : [%d]\n", d->angle);
 	}
 	else if (key == K_D)
 		move(d, K_D);
