@@ -6,24 +6,41 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/21 11:32:54 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:20:47 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 
-void	start_orientation(t_data *d, double rad)
+// void	start_orientation(t_data *d, double rad)
+void	start_orientation(t_data *d)
 {
-	double	o_dir_x;
-	double	o_plane_x;
+	// double	o_dir_x;
+	// double	o_plane_x;
 
-	o_dir_x = d->x->dir;
-	o_plane_x = d->x->plane;
-	d->x->dir = d->x->dir * cos(rad) - d->y->dir * sin(rad);
-	d->y->dir = o_dir_x * sin(rad) + d->y->dir * cos(rad);
-	d->x->plane = d->x->plane * cos(rad) - d->y->plane * sin(rad);
-	d->y->plane = o_plane_x * sin(rad) + d->y->plane * cos(rad);
+	// o_dir_x = d->x->dir;
+	// o_plane_x = d->x->plane;
+
+	d->x->o_plane = d->x->plane;
+	d->x->o_dir = d->x->dir;
+	// // d->x->dir = d->x->dir * cos(rad) - d->y->dir * sin(rad);
+	// // d->y->dir = o_dir_x * sin(rad) + d->y->dir * cos(rad);
+	// d->x->plane = d->x->plane * cos(rad) - d->y->plane * sin(rad);
+	// d->y->plane = o_plane_x * sin(rad) + d->y->plane * cos(rad);
+
+	// d->x->dir = d->x->dir * sin(dtorad(d)) - d->y->dir * cos(dtorad(d));
+	// d->y->dir = d->x->o_dir * cos(dtorad(d)) + d->y->dir * sin(dtorad(d));
+	// d->x->dir = d->x->dir * cos(dtorad(d)) - d->y->dir * sin(dtorad(d));
+	// d->y->dir = d->x->o_dir * sin(dtorad(d)) + d->y->dir * cos(dtorad(d));
+	// d->x->plane = d->x->plane * cos(dtorad(d)) - d->y->plane * sin(dtorad(d));
+	// d->y->plane = d->x->o_plane * sin(dtorad(d)) + d->y->plane * cos(dtorad(d));
+
+	// printf("x->dir ------------------ [%f]\n", d->x->dir);					// 1	|	1
+	// printf("y->dir ------------------ [%f]\n", d->y->dir);					// 1	|	1
+	// printf("x->plane ------------------ [%f]\n", d->x->plane);					// 1	|	1
+	// printf("y->plane ------------------ [%f]\n", d->y->plane);					// 1	|	1
+
 }
 //todo
 /*
@@ -120,7 +137,8 @@ void	init_player_dir(t_data *d)
 void	raydir_n_delta(t_data *d, int x)
 {
 	//calculate ray position and direction
-	d->x->camera = 2 * x / (double)WIN_W - 1;
+	d->x->camera = 2 * x / (float)WIN_H - 1; // pas de double, sinon angle n'est pas correct
+	// d->x->camera = 2 * x / (double)WIN_W - 1;
 	/*
 	 * cameraX is the x-coordinate on the camera plane that the current
 	 * x-coordinate of the screen represents, done this way so that the right side
@@ -218,6 +236,16 @@ void	hit(t_data *d)
 //	printf("map[%d][%d]\n", d->y->map, d->x->map);
 	while (d->ray->hit == 0)
 	{
+		// printf("x->deltadist ------------- [%f]\n", d->x->deltadist);
+		// printf("y->deltadist ------------- [%f]\n", d->y->deltadist);
+		// printf("perpwalldist ------------- [%f]\n", d->ray->perpwalldist);
+
+		// printf("x->sidedist -------------- [%f]\n", d->x->sidedist);				// inf	|	inf
+		// printf("y->sidedist -------------- [%f]\n", d->y->sidedist);				// inf	|	inf
+		// printf("side --------------------- [%d]\n", d->ray->side);					// 0 	|	1
+		// printf("x->step ------------------ [%d]\n", d->x->step);					// 1	|	1
+		// printf("y->step ------------------ [%d]\n", d->y->step);					// 1	|	1
+
 		if (d->x->sidedist < d->y->sidedist)
 		{
 			d->x->sidedist += d->x->deltadist;
@@ -250,6 +278,14 @@ void	side(t_data *d)
 		d->ray->perpwalldist = (d->x->sidedist - d->x->deltadist);
 	else
 		d->ray->perpwalldist = (d->y->sidedist - d->y->deltadist);
+
+	// printf("side --------------------- [%d]\n", d->ray->side);					// 1
+	// printf("x->sidedist -------------- [%f]\n", d->x->sidedist);					// inf
+	// printf("y->sidedist -------------- [%f]\n", d->y->sidedist);					// inf
+	// printf("x->deltadist ------------- [%f]\n", d->x->deltadist);				// inf
+	// printf("y->deltadist ------------- [%f]\n", d->y->deltadist);				// inf
+	// printf("perpwalldist ------------- [%f]\n", d->ray->perpwalldist);			// nan
+
 }
 
 //todo
@@ -259,16 +295,21 @@ void	draw_set(t_data *d)
 	d->ray->lineheight = (int)(WIN_H / d->ray->perpwalldist);
 	// d->ray->lineheight = (int)(WIN_W / d->ray->perpwalldist);
 	//calculate lowest and highest pixel to fill in current stripe
-	d->ray->drawstart = -(d->ray->lineheight) / 2 + WIN_H / 2;
+	d->ray->drawstart = -(d->ray->lineheight) / 2 + (WIN_H / 2);
 	// d->ray->drawstart = -(d->ray->lineheight) / 2 + WIN_W / 2;
+
 	if (d->ray->drawstart < 0)
 		d->ray->drawstart = 0;
 	d->ray->drawend = d->ray->lineheight / 2 + WIN_H / 2;
 	// d->ray->drawend = d->ray->lineheight / 2 + WIN_W / 2;
-	if (d->ray->drawend <= WIN_H /*|| r->drawend >= 0*/)
+	if (d->ray->drawend >= WIN_H /*|| r->drawend >= 0*/) // <=
 		d->ray->drawend = WIN_H - 1;
 	// if (d->ray->drawend <= WIN_W /*|| r->drawend >= 0*/)
 	// 	d->ray->drawend = WIN_W - 1;
+	// printf("drawstart ------------ [%d]\n", d->ray->drawstart);					// -nimporte quoi
+	// printf("drawend -------------- [%d]\n", d->ray->drawend);
+	// printf("lineheight ----------- [%d]\n", d->ray->lineheight);					// -minimum int
+	// printf("perpwalldist --------- [%f]\n", d->ray->perpwalldist);				//nan
 }
 
 void	draw(t_data *d, int x)
@@ -278,21 +319,25 @@ void	draw(t_data *d, int x)
 	y = 0;
 	while (y <= d->ray->drawstart)
 	{
-		new_mlx_pixel_put(d, x, y, d->f);
+		new_mlx_pixel_put(d, x, y, d->c);
+		// new_mlx_pixel_put(d, x, y, d->f);
 		y++;
 	}
 	y = d->ray->drawstart;
 	while(y <= d->ray->drawend && y < WIN_H)
 	{
-		new_mlx_pixel_put(d, x, y, RED);
+		new_mlx_pixel_put(d, x, y, DGR);
 		y++;
 	}
 	y = d->ray->drawend;
 	while (y < WIN_H)
 	{
-		new_mlx_pixel_put(d, x, y, d->c);
+		new_mlx_pixel_put(d, x, y, d->f);
+		// new_mlx_pixel_put(d, x, y, d->c);
 		y++;
 	}
+	// printf("drawstart ------------ [%d]\n", d->ray->drawstart);
+	// printf("drawend -------------- [%d]\n", d->ray->drawend);
 }
 
 int main_raycasting(t_data *d)
@@ -302,26 +347,25 @@ int main_raycasting(t_data *d)
 
 	set = d->angle * (M_PI / 180);
 	x = 0;
-	d->x->camera = 2 * x / WIN_H - 1; // pas de double, sinon angle n'est pas correct
+	// d->x->camera = 2 * x / WIN_H - 1; // pas de double, sinon angle n'est pas correct
 	while (x <  WIN_W)
 	{
 		d->x->map = (int)d->pposx;
 		d->y->map = (int)d->pposy;
-		// printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map); // conversion OK
-		// printf("pposx ------------ [%f]\npposy ------------ [%f]\n\n", d->pposx, d->pposy); // conversion OK
-
 		/*
 	 	* which box of the map we're in.
 	 	* Reminder : mx and my are the int for our map[my][mx]
 	 	* each time step_x or step_y will be incremented,
 	 	* map_x and map_x will be updated to check if the square is a wall
 	 	*/
-		start_orientation(d, set);
+		// start_orientation(d, set);
+		// start_orientation(d);
 		raydir_n_delta(d, x);
 		step_n_sidedist(d);
 		hit(d);
 		side(d);
 		draw_set(d);
+		// exit(0); //UNIQUEMENT pour debugg
 		draw(d, x);
 		x++;
 	}

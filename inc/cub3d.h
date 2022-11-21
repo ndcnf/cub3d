@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/21 11:21:53 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:01:49 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ typedef struct	s_raycasting
 	double	camera; // uniquement pour x
 	double	ray_dir;
 	int		step;
+
+	float	o_dir;
+	float	o_plane;
 
 }	t_raycasting;
 
@@ -249,6 +252,8 @@ void	minimap_size(t_data *d);
 
 void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
+void	init_move(t_data *d);
+// void	init_move(t_data *d, float dir);
 /*
 * directions.c
 */
@@ -274,7 +279,8 @@ int 	main_raycasting(t_data *data);
 /*
  * angles.c
  */
-int	dtorad(t_data *d);
+// int	dtorad(t_data *d);
+float	dtorad(t_data *d);
 
 
 #endif
