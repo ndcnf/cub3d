@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:34:27 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/17 13:58:02 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:09:15 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	player_is_here(t_data *d, int c_body, int c_head)
 	int	x;
 	int	y;
 
-	y = d->pposy * d->mm_size + (d->mm_size/2);
-	x = d->pposx * d->mm_size + (d->mm_size/2);
+	y = d->pposy * d->mm_size;
+	// y = d->pposy * d->mm_size + (d->mm_size/2);
+	x = d->pposx * d->mm_size;
+	// x = d->pposx * d->mm_size + (d->mm_size/2);
 	new_mlx_pixel_put(d, x + 1, y + 1, c_body);
 	new_mlx_pixel_put(d, x, y + 1, c_body);
 	new_mlx_pixel_put(d, x - 1, y + 1, c_body);

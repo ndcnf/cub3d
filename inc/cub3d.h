@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 10:59:12 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/21 11:21:53 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@
 # define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
-# define WIN_W 320 // 1080
-# define WIN_H 200 // 720
-# define POV 60
 # define ZOOM 3 // How many times WIN_H and WIN_W (6)
+# define WIN_W (320 * ZOOM) // 1080
+# define WIN_H (200 * ZOOM) // 720
+# define POV 60
 # define MM_L 16 // size minimap
 # define MM_M 6 // size minimap
 # define MM_S 1 // size minimap

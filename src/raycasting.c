@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 14:23:59 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/21 11:32:54 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,14 +256,19 @@ void	side(t_data *d)
 void	draw_set(t_data *d)
 {
 	//Calculate height of line to draw on screen
-	d->ray->lineheight = (int)(WIN_W / d->ray->perpwalldist);
+	d->ray->lineheight = (int)(WIN_H / d->ray->perpwalldist);
+	// d->ray->lineheight = (int)(WIN_W / d->ray->perpwalldist);
 	//calculate lowest and highest pixel to fill in current stripe
-	d->ray->drawstart = -(d->ray->lineheight) / 2 + WIN_W / 2;
+	d->ray->drawstart = -(d->ray->lineheight) / 2 + WIN_H / 2;
+	// d->ray->drawstart = -(d->ray->lineheight) / 2 + WIN_W / 2;
 	if (d->ray->drawstart < 0)
 		d->ray->drawstart = 0;
-	d->ray->drawend = d->ray->lineheight / 2 + WIN_W / 2;
-	if (d->ray->drawend <= WIN_W /*|| r->drawend >= 0*/)
-		d->ray->drawend = WIN_W - 1;
+	d->ray->drawend = d->ray->lineheight / 2 + WIN_H / 2;
+	// d->ray->drawend = d->ray->lineheight / 2 + WIN_W / 2;
+	if (d->ray->drawend <= WIN_H /*|| r->drawend >= 0*/)
+		d->ray->drawend = WIN_H - 1;
+	// if (d->ray->drawend <= WIN_W /*|| r->drawend >= 0*/)
+	// 	d->ray->drawend = WIN_W - 1;
 }
 
 void	draw(t_data *d, int x)
@@ -297,11 +302,14 @@ int main_raycasting(t_data *d)
 
 	set = d->angle * (M_PI / 180);
 	x = 0;
-	d->x->camera = 2 * x / (WIN_H * ZOOM) - 1; // pas de double, sinon angle n'est pas correct
-	while (x <  WIN_W * ZOOM)
+	d->x->camera = 2 * x / WIN_H - 1; // pas de double, sinon angle n'est pas correct
+	while (x <  WIN_W)
 	{
 		d->x->map = (int)d->pposx;
 		d->y->map = (int)d->pposy;
+		// printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map); // conversion OK
+		// printf("pposx ------------ [%f]\npposy ------------ [%f]\n\n", d->pposx, d->pposy); // conversion OK
+
 		/*
 	 	* which box of the map we're in.
 	 	* Reminder : mx and my are the int for our map[my][mx]

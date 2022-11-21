@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/18 14:15:05 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/21 11:23:50 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	close_win(void)
 int	update_img(t_data *d)
 {
 	mlx_clear_window(d->mlx, d->win);
-	map2d(d);
+	//floor and ceilling ici
 	main_raycasting(d);
+	map2d(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img->img, 0, 0);
 	return (EXIT_SUCCESS);
 }
@@ -70,10 +71,10 @@ void	init_map(t_data *d)
 	d->h = d->nb_line_map;
 	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
-	d->win = mlx_new_window(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM), WIN_TITLE);
+	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
 	// d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
 	d->img = malloc(sizeof(t_img));
-	d->img->img = mlx_new_image(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM));
+	d->img->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
 	// d->img->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
 	d->img->addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
 	&d->img->line_length, &d->img->endian);
