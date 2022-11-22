@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/21 20:01:05 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/22 11:26:38 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_L)
 	{
 		look_around(d, K_AR_L);
-		// d->x->dir = d->x->dir * cos(ROT_ANGL) - d->y->dir * sin(ROT_ANGL);
-		// d->y->dir = d->x->o_dir * sin(ROT_ANGL) + d->y->dir * cos(ROT_ANGL);
-		// d->x->plane = d->x->plane * cos(ROT_ANGL) - d->y->plane * sin(ROT_ANGL);
-		// d->y->plane = d->x->o_plane * sin(ROT_ANGL) + d->y->plane * cos(ROT_ANGL);
+		d->x->dir = d->x->dir * cos(-SPEED) - d->y->dir * sin(-SPEED);
+		d->y->dir = d->x->o_dir * sin(-SPEED) + d->y->dir * cos(-SPEED);
+		d->x->plane = d->x->plane * cos(-SPEED) - d->y->plane * sin(-SPEED);
+		d->y->plane = d->x->o_plane * sin(-SPEED) + d->y->plane * cos(-SPEED);
 		// d->x->dir = d->x->dir * cos(dtorad(d)) - d->y->dir * sin(dtorad(d));
 		// d->y->dir = d->x->o_dir * sin(dtorad(d)) + d->y->dir * cos(dtorad(d));
 		// d->x->plane = d->x->plane * cos(dtorad(d)) - d->y->plane * sin(dtorad(d));
@@ -78,6 +78,10 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_R)
 	{
 		look_around(d, K_AR_R);
+		d->x->dir = d->x->dir * cos(SPEED) - d->y->dir * sin(SPEED);
+		d->y->dir = d->x->o_dir * sin(SPEED) + d->y->dir * cos(SPEED);
+		d->x->plane = d->x->plane * cos(SPEED) - d->y->plane * sin(SPEED);
+		d->y->plane = d->x->o_plane * sin(SPEED) + d->y->plane * cos(SPEED);
 		// d->x->dir = d->x->dir * cos(-dtorad(d)) - d->y->dir * sin(-dtorad(d));
 		// d->y->dir = d->x->o_dir * sin(-dtorad(d)) + d->y->dir * cos(-dtorad(d));
 		// d->x->plane = d->x->plane * cos(-dtorad(d)) - d->y->plane * sin(-dtorad(d));

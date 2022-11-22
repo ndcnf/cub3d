@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/21 20:20:47 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:24:58 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,7 @@ void	draw_set(t_data *d)
 		d->ray->drawstart = 0;
 	d->ray->drawend = d->ray->lineheight / 2 + WIN_H / 2;
 	// d->ray->drawend = d->ray->lineheight / 2 + WIN_W / 2;
-	if (d->ray->drawend >= WIN_H /*|| r->drawend >= 0*/) // <=
+	if (d->ray->drawend >= WIN_H /*|| r->drawend >= 0*/)
 		d->ray->drawend = WIN_H - 1;
 	// if (d->ray->drawend <= WIN_W /*|| r->drawend >= 0*/)
 	// 	d->ray->drawend = WIN_W - 1;
