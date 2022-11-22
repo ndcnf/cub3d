@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:30:21 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/22 14:41:41 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:22:14 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ void	go_left(t_data *d)
 	d->pposx = d->pposx - SPEED * sin((M_PI * d->angle) / 180);
 	d->pposy = d->pposy - SPEED * cos((M_PI * d->angle) / 180);
 
-	d->x->dir = d->x->dir * cos(ROT_ANGL) - d->y->dir * sin(ROT_ANGL);
-	d->y->dir = d->x->o_dir * sin(ROT_ANGL) + d->y->dir * cos(ROT_ANGL);
-	d->x->plane = d->x->plane * cos(ROT_ANGL) - d->y->plane * sin(ROT_ANGL);
-	d->y->plane = d->x->o_plane * sin(ROT_ANGL) + d->y->plane * cos(ROT_ANGL);
+	// d->x->dir = d->x->dir * cos(SPEED) - d->y->dir * sin(SPEED);
+	// d->y->dir = d->x->o_dir * sin(SPEED) + d->y->dir * cos(SPEED);
+	// d->x->plane = d->x->plane * cos(SPEED) - d->y->plane * sin(SPEED);
+	// d->y->plane = d->x->o_plane * sin(SPEED) + d->y->plane * cos(SPEED);
 
 	printf("LEFT x ---------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
 	printf("d->x->camera ---- [%f]\n", d->x->camera);
@@ -100,6 +100,11 @@ void	go_right(t_data *d)
 {
 	d->pposx = d->pposx + SPEED * sin((M_PI * d->angle) / 180);
 	d->pposy = d->pposy + SPEED * cos((M_PI * d->angle) / 180);
+
+	// d->x->dir = d->x->dir * cos(SPEED) - d->y->dir * sin(SPEED);
+	// d->y->dir = d->x->o_dir * sin(SPEED) + d->y->dir * cos(SPEED);
+	// d->x->plane = d->x->plane * cos(SPEED) - d->y->plane * sin(SPEED);
+	// d->y->plane = d->x->o_plane * sin(SPEED) + d->y->plane * cos(SPEED);
 
 	printf("RIGHT x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
 	printf("d->x->camera ---- [%f]\n", d->x->camera);

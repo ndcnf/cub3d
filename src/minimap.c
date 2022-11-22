@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/22 14:45:14 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:39:36 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	key_on(int key, t_data *d)
 		printf("d->x->camera ---- [%f]\n", d->x->camera);
 		printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 		printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
-		printf("xplane ---------- [%f]\nyplane ------------ [%f]\n", d->x->plane, d->y->plane);
+		printf("xplane ---------- [%f]\nyplane ---------- [%f]\n", d->x->plane, d->y->plane);
 	}
 	else if (key == K_S)
 		move(d, K_S);
@@ -92,7 +92,7 @@ int	key_on(int key, t_data *d)
 		printf("d->x->camera ---- [%f]\n", d->x->camera);
 		printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 		printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
-		printf("xplane ---------- [%f]\nyplane ------------ [%f]\n", d->x->plane, d->y->plane);
+		printf("xplane ---------- [%f]\nyplane ---------- [%f]\n", d->x->plane, d->y->plane);
 	}
 	else if (key == K_D)
 		move(d, K_D);

@@ -6,13 +6,16 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/22 14:26:39 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:00:58 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 
+////////////////////////////////////////////////////////////////////////////////
+// Fonction rendue caduque car l''orientation en radian est donnee avant
+////////////////////////////////////////////////////////////////////////////////
 // void	start_orientation(t_data *d, double rad)
 void	start_orientation(t_data *d)
 {
@@ -35,12 +38,6 @@ void	start_orientation(t_data *d)
 	// d->y->dir = d->x->o_dir * sin(dtorad(d)) + d->y->dir * cos(dtorad(d));
 	// d->x->plane = d->x->plane * cos(dtorad(d)) - d->y->plane * sin(dtorad(d));
 	// d->y->plane = d->x->o_plane * sin(dtorad(d)) + d->y->plane * cos(dtorad(d));
-
-	// printf("x->dir ------------------ [%f]\n", d->x->dir);					// 1	|	1
-	// printf("y->dir ------------------ [%f]\n", d->y->dir);					// 1	|	1
-	// printf("x->plane ------------------ [%f]\n", d->x->plane);					// 1	|	1
-	// printf("y->plane ------------------ [%f]\n", d->y->plane);					// 1	|	1
-
 }
 //todo
 /*
@@ -137,7 +134,7 @@ void	init_player_dir(t_data *d)
 void	raydir_n_delta(t_data *d, int x)
 {
 	//calculate ray position and direction
-	d->x->camera = 2 * x / (float)WIN_H - 1; // pas de double, sinon angle n'est pas correct
+	d->x->camera = 2 * x / (float)WIN_H - 1;
 	// d->x->camera = 2 * x / (double)WIN_W - 1;
 	/*
 	 * cameraX is the x-coordinate on the camera plane that the current
@@ -191,7 +188,7 @@ void	step_n_sidedist(t_data *d)
 {
 	//calculate step and initial sideDist
 	d->ray->hit = 0;
-//	printf("sidedist_y %f when raydir_y - %f\n", d->y->sidedist, d->y->ray_dir);
+	//	printf("sidedist_y %f when raydir_y - %f\n", d->y->sidedist, d->y->ray_dir);
 
 	/*
 	 * Reminder: the right side of the screen will get coordinate 1, the center of the screen gets
@@ -214,14 +211,12 @@ void	step_n_sidedist(t_data *d)
 		d->y->step = -1;
 		d->y->sidedist = (d->pposy - (float)d->y->map) * d->y->deltadist;
 //		printf("sidedist_y %f when raydir_y - %f\n", d->y->sidedist, d->y->ray_dir);
-
 	}
 	else
 	{
 		d->y->step = 1;
 		d->y->sidedist = (d->y->map + 1.0 - d->pposy) * d->y->deltadist;
 //		printf("sidedist_y %f when raydir_y - %f\n", d->y->sidedist, d->y->ray_dir);
-
 	}
 }
 
@@ -242,7 +237,7 @@ void	hit(t_data *d)
 
 		// printf("x->sidedist -------------- [%f]\n", d->x->sidedist);				// inf	|	inf
 		// printf("y->sidedist -------------- [%f]\n", d->y->sidedist);				// inf	|	inf
-		// printf("side --------------------- [%d]\n", d->ray->side);					// 0 	|	1
+		// printf("side --------------------- [%d]\n", d->ray->side);				// 0 	|	1
 		// printf("x->step ------------------ [%d]\n", d->x->step);					// 1	|	1
 		// printf("y->step ------------------ [%d]\n", d->y->step);					// 1	|	1
 
@@ -319,25 +314,21 @@ void	draw(t_data *d, int x)
 	y = 0;
 	while (y <= d->ray->drawstart)
 	{
-		new_mlx_pixel_put(d, x, y, d->c);
-		// new_mlx_pixel_put(d, x, y, d->f);
+		new_mlx_pixel_put(d, x, y, d->c);											// avant d->f
 		y++;
 	}
 	y = d->ray->drawstart;
 	while(y <= d->ray->drawend && y < WIN_H)
 	{
-		new_mlx_pixel_put(d, x, y, GRN);
+		new_mlx_pixel_put(d, x, y, DGR);
 		y++;
 	}
 	y = d->ray->drawend;
 	while (y < WIN_H)
 	{
-		new_mlx_pixel_put(d, x, y, d->f);
-		// new_mlx_pixel_put(d, x, y, d->c);
+		new_mlx_pixel_put(d, x, y, d->f);											// avant d->c
 		y++;
 	}
-	// printf("drawstart ------------ [%d]\n", d->ray->drawstart);
-	// printf("drawend -------------- [%d]\n", d->ray->drawend);
 }
 
 int main_raycasting(t_data *d)

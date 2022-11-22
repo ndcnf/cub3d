@@ -3,8 +3,8 @@ SO ./assets/normal_south.xpm
 WE ./assets/normal_west.xpm
 EA ./assets/normal_east.xpm
 
-F 1,1,1
-C 0,0,100
+F 140,1,1
+C 0,139,139
 
 1111111111111111111111111
 1000000000110000000000001
