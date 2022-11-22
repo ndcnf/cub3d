@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/21 20:24:58 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:26:39 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,7 +326,7 @@ void	draw(t_data *d, int x)
 	y = d->ray->drawstart;
 	while(y <= d->ray->drawend && y < WIN_H)
 	{
-		new_mlx_pixel_put(d, x, y, DGR);
+		new_mlx_pixel_put(d, x, y, GRN);
 		y++;
 	}
 	y = d->ray->drawend;

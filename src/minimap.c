@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/22 11:26:38 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:45:14 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,16 @@ void	init_move(t_data *d)
 	// d->x->plane = d->x->plane * cos(dir) - d->y->plane * sin(dir);
 	// d->y->plane = d->x->o_plane * sin(dir) + d->y->plane * cos(dir);
 
-	printf("INIT x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
-	printf("d->x->camera ---- [%f]\n", d->x->camera);
-	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n\n", d->x->map, d->y->map); // conversion OK
-	printf("xdir ------------ [%f]\nydir ------------ [%f]\n\n", d->x->dir, d->y->dir); // conversion OK
+	// printf("INIT x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
+	// printf("d->x->camera ---- [%f]\n", d->x->camera);
+	// printf("mapx ------------ [%d]\nmapy ------------ [%d]\n\n", d->x->map, d->y->map); // conversion OK
+	// printf("xdir ------------ [%f]\nydir ------------ [%f]\n\n", d->x->dir, d->y->dir); // conversion OK
 }
 
 int	key_on(int key, t_data *d)
 {
-	// d->x->o_dir = d->x->dir;
-	// d->x->o_plane = d->x->plane;
-
+	d->x->o_dir = d->x->dir;
+	d->x->o_plane = d->x->plane;
 	if (key == K_ESCAPE)
 		close_win();
 	else if (key == K_W)
@@ -70,8 +69,11 @@ int	key_on(int key, t_data *d)
 		// d->y->dir = d->x->o_dir * sin(dtorad(d)) + d->y->dir * cos(dtorad(d));
 		// d->x->plane = d->x->plane * cos(dtorad(d)) - d->y->plane * sin(dtorad(d));
 		// d->y->plane = d->x->o_plane * sin(dtorad(d)) + d->y->plane * cos(dtorad(d));
-
-		printf("angle L : [%d]\n", d->angle);
+		printf("LOOK (L)x ------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
+		printf("d->x->camera ---- [%f]\n", d->x->camera);
+		printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
+		printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
+		printf("xplane ---------- [%f]\nyplane ------------ [%f]\n", d->x->plane, d->y->plane);
 	}
 	else if (key == K_S)
 		move(d, K_S);
@@ -86,7 +88,11 @@ int	key_on(int key, t_data *d)
 		// d->y->dir = d->x->o_dir * sin(-dtorad(d)) + d->y->dir * cos(-dtorad(d));
 		// d->x->plane = d->x->plane * cos(-dtorad(d)) - d->y->plane * sin(-dtorad(d));
 		// d->y->plane = d->x->o_plane * sin(-dtorad(d)) + d->y->plane * cos(-dtorad(d));
-		printf("angle R : [%d]\n", d->angle);
+		printf("LOOK (R)x ------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
+		printf("d->x->camera ---- [%f]\n", d->x->camera);
+		printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
+		printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
+		printf("xplane ---------- [%f]\nyplane ------------ [%f]\n", d->x->plane, d->y->plane);
 	}
 	else if (key == K_D)
 		move(d, K_D);
