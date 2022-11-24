@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/22 16:00:58 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:01:19 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,19 @@ void	draw_set(t_data *d)
 	// printf("perpwalldist --------- [%f]\n", d->ray->perpwalldist);				//nan
 }
 
+int		color_side(t_data *d)
+{
+	if (d->ray->side == 0 && d->x->ray_dir < 0)
+		return (LGN);
+	else if (d->ray->side == 0 && d->x->ray_dir >= 0)
+		return (PNK);
+	else if (d->ray->side == 1 && d->y->ray_dir < 0)
+		return (RED);
+	else
+	// else if (d->ray->side == 1 && d->y->ray_dir >= 0)
+		return (BLU);
+}
+
 void	draw(t_data *d, int x)
 {
 	int y;
@@ -314,19 +327,19 @@ void	draw(t_data *d, int x)
 	y = 0;
 	while (y <= d->ray->drawstart)
 	{
-		new_mlx_pixel_put(d, x, y, d->c);											// avant d->f
+		new_mlx_pixel_put(d, x, y, d->c);
 		y++;
 	}
 	y = d->ray->drawstart;
 	while(y <= d->ray->drawend && y < WIN_H)
 	{
-		new_mlx_pixel_put(d, x, y, DGR);
+		new_mlx_pixel_put(d, x, y, color_side(d));
 		y++;
 	}
 	y = d->ray->drawend;
 	while (y < WIN_H)
 	{
-		new_mlx_pixel_put(d, x, y, d->f);											// avant d->c
+		new_mlx_pixel_put(d, x, y, d->f);
 		y++;
 	}
 }

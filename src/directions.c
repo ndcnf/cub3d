@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:30:21 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/22 16:22:14 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:28:13 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	look_around(t_data *d, int key)
 	// d->y->dir = d->x->o_dir * sin(dtorad(d)) + d->y->dir * cos(dtorad(d));
 	// d->x->plane = d->x->plane * cos(dtorad(d)) - d->y->plane * sin(dtorad(d));
 	// d->y->plane = d->x->o_plane * sin(dtorad(d)) + d->y->plane * cos(dtorad(d));
+	// d->x->dir = d->x->dir * cos(SPEED) - d->y->dir * sin(SPEED);
+	// d->y->dir = d->x->o_dir * sin(SPEED) + d->y->dir * cos(SPEED);
+	// d->x->plane = d->x->plane * cos(SPEED) - d->y->plane * sin(SPEED);
+	// d->y->plane = d->x->o_plane * sin(SPEED) + d->y->plane * cos(SPEED);
 }
 
 void	go_forth(t_data *d)
@@ -78,8 +82,8 @@ void	go_back(t_data *d)
 
 void	go_left(t_data *d)
 {
-	d->x->o_dir = d->x->dir;
-	d->x->o_plane = d->x->plane;
+	// d->x->o_dir = d->x->dir;
+	// d->x->o_plane = d->x->plane;
 
 	d->pposx = d->pposx - SPEED * sin((M_PI * d->angle) / 180);
 	d->pposy = d->pposy - SPEED * cos((M_PI * d->angle) / 180);

@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/21 20:01:49 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:53:13 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@
 # define GRN 0x00336600
 # define DGR 0x004C9900
 # define BLU 0x000000FF
+# define CYN 0x0087D3F8
+# define LGN 0x00A8E4A0
+# define PNK 0x00F984E5
+# define BLK 0x00000000
 
 // variables that couldn't be modified though raycast process
 typedef struct	s_setup
@@ -275,6 +279,7 @@ void	player_is_here(t_data *d, int c_body, int c_head);
  * raycasting.c
  */
 int 	main_raycasting(t_data *data);
+int		color_side(t_data *d);
 
 /*
  * angles.c
