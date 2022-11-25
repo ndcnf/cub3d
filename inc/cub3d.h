@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/24 14:53:13 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:08:03 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@
 # define ZOOM 3 // How many times WIN_H and WIN_W (6)
 # define WIN_W (320 * ZOOM) // 1080
 # define WIN_H (200 * ZOOM) // 720
-# define POV 60
 # define MM_L 16 // size minimap
 # define MM_M 6 // size minimap
 # define MM_S 1 // size minimap
-# define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
+# define ROT_ANGL 3 // 360 doit etre divisible par ce nombre //18
 # define SPEED 0.05
 
 # define RED 0x00FF0000

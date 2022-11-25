@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/24 15:01:19 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:05:07 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,8 @@ void	step_n_sidedist(t_data *d)
 	if (d->x->ray_dir < 0)
 	{
 		d->x->step = -1;
-		d->x->sidedist = (d->pposx - (float)d->x->map) * d->x->deltadist;
+		d->x->sidedist = (d->pposx - d->x->map) * d->x->deltadist; // idem lodev
+		// d->x->sidedist = (d->pposx - (float)d->x->map) * d->x->deltadist; // origine
 //		printf("sidedist_x %f when raydir_x - %f\n", d->x->sidedist, d->x->ray_dir);
 	}
 	else
@@ -209,7 +210,8 @@ void	step_n_sidedist(t_data *d)
 	if (d->y->ray_dir < 0)
 	{
 		d->y->step = -1;
-		d->y->sidedist = (d->pposy - (float)d->y->map) * d->y->deltadist;
+		d->y->sidedist = (d->pposy - d->y->map) * d->y->deltadist; // idem lodev
+		// d->y->sidedist = (d->pposy - (float)d->y->map) * d->y->deltadist; // origine
 //		printf("sidedist_y %f when raydir_y - %f\n", d->y->sidedist, d->y->ray_dir);
 	}
 	else
@@ -228,19 +230,8 @@ void	hit(t_data *d)
  * 	in stepX and stepY. Those variables are always either -1 or +1.
  */
 {
-//	printf("map[%d][%d]\n", d->y->map, d->x->map);
 	while (d->ray->hit == 0)
 	{
-		// printf("x->deltadist ------------- [%f]\n", d->x->deltadist);
-		// printf("y->deltadist ------------- [%f]\n", d->y->deltadist);
-		// printf("perpwalldist ------------- [%f]\n", d->ray->perpwalldist);
-
-		// printf("x->sidedist -------------- [%f]\n", d->x->sidedist);				// inf	|	inf
-		// printf("y->sidedist -------------- [%f]\n", d->y->sidedist);				// inf	|	inf
-		// printf("side --------------------- [%d]\n", d->ray->side);				// 0 	|	1
-		// printf("x->step ------------------ [%d]\n", d->x->step);					// 1	|	1
-		// printf("y->step ------------------ [%d]\n", d->y->step);					// 1	|	1
-
 		if (d->x->sidedist < d->y->sidedist)
 		{
 			d->x->sidedist += d->x->deltadist;
@@ -273,14 +264,6 @@ void	side(t_data *d)
 		d->ray->perpwalldist = (d->x->sidedist - d->x->deltadist);
 	else
 		d->ray->perpwalldist = (d->y->sidedist - d->y->deltadist);
-
-	// printf("side --------------------- [%d]\n", d->ray->side);					// 1
-	// printf("x->sidedist -------------- [%f]\n", d->x->sidedist);					// inf
-	// printf("y->sidedist -------------- [%f]\n", d->y->sidedist);					// inf
-	// printf("x->deltadist ------------- [%f]\n", d->x->deltadist);				// inf
-	// printf("y->deltadist ------------- [%f]\n", d->y->deltadist);				// inf
-	// printf("perpwalldist ------------- [%f]\n", d->ray->perpwalldist);			// nan
-
 }
 
 //todo
@@ -301,10 +284,6 @@ void	draw_set(t_data *d)
 		d->ray->drawend = WIN_H - 1;
 	// if (d->ray->drawend <= WIN_W /*|| r->drawend >= 0*/)
 	// 	d->ray->drawend = WIN_W - 1;
-	// printf("drawstart ------------ [%d]\n", d->ray->drawstart);					// -nimporte quoi
-	// printf("drawend -------------- [%d]\n", d->ray->drawend);
-	// printf("lineheight ----------- [%d]\n", d->ray->lineheight);					// -minimum int
-	// printf("perpwalldist --------- [%f]\n", d->ray->perpwalldist);				//nan
 }
 
 int		color_side(t_data *d)
@@ -316,7 +295,6 @@ int		color_side(t_data *d)
 	else if (d->ray->side == 1 && d->y->ray_dir < 0)
 		return (RED);
 	else
-	// else if (d->ray->side == 1 && d->y->ray_dir >= 0)
 		return (BLU);
 }
 
@@ -347,9 +325,9 @@ void	draw(t_data *d, int x)
 int main_raycasting(t_data *d)
 {
 	int 	x;
-	double 	set;
+	// double 	set;
 
-	set = d->angle * (M_PI / 180);
+	// set = d->angle * (M_PI / 180);
 	x = 0;
 	// d->x->camera = 2 * x / WIN_H - 1; // pas de double, sinon angle n'est pas correct
 	while (x <  WIN_W)
@@ -369,7 +347,6 @@ int main_raycasting(t_data *d)
 		hit(d);
 		side(d);
 		draw_set(d);
-		// exit(0); //UNIQUEMENT pour debugg
 		draw(d, x);
 		x++;
 	}

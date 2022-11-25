@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:30:21 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/22 16:28:13 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:43:05 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,13 @@ void	go_forth(t_data *d)
 	// d->pposx = d->pposx + SPEED * cos((M_PI * d->angle) / 180);
 	d->pposy = d->pposy - SPEED * sin(dtorad(d));
 	// d->y->dir = sin((M_PI * d->angle) / 180);
+	// d->y->dir = sin((M_PI * d->angle) / 180);
 	// d->pposy = d->pposy - SPEED * sin((M_PI * d->angle) / 180);
 
 	printf("FORTH x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
 	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("step x ---------- [%d]\n", d->x->step);
+	printf("step y ---------- [%d]\n", d->y->step);
 	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 	printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
 	printf("xplane ---------- [%f]\nyplane ---------- [%f]\n\n", d->x->plane, d->y->plane);
@@ -73,8 +76,11 @@ void	go_back(t_data *d)
 	d->pposx = d->pposx - SPEED * cos((M_PI * d->angle) / 180);
 	d->pposy = d->pposy + SPEED * sin((M_PI * d->angle) / 180);
 
+
 	printf("BACK x ---------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
 	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("step x ---------- [%d]\n", d->x->step);
+	printf("step y ---------- [%d]\n", d->y->step);
 	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 	printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
 	printf("xplane ---------- [%f]\nyplane ---------- [%f]\n\n", d->x->plane, d->y->plane);
@@ -82,8 +88,8 @@ void	go_back(t_data *d)
 
 void	go_left(t_data *d)
 {
-	// d->x->o_dir = d->x->dir;
-	// d->x->o_plane = d->x->plane;
+	d->x->o_dir = d->x->dir;
+	d->x->o_plane = d->x->plane;
 
 	d->pposx = d->pposx - SPEED * sin((M_PI * d->angle) / 180);
 	d->pposy = d->pposy - SPEED * cos((M_PI * d->angle) / 180);
@@ -95,6 +101,8 @@ void	go_left(t_data *d)
 
 	printf("LEFT x ---------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
 	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("step x ---------- [%d]\n", d->x->step);
+	printf("step y ---------- [%d]\n", d->y->step);
 	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 	printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
 	printf("xplane ---------- [%f]\nyplane ---------- [%f]\n\n", d->x->plane, d->y->plane);
@@ -102,6 +110,9 @@ void	go_left(t_data *d)
 
 void	go_right(t_data *d)
 {
+	// d->x->o_dir = d->x->dir;
+	// d->x->o_plane = d->x->plane;
+
 	d->pposx = d->pposx + SPEED * sin((M_PI * d->angle) / 180);
 	d->pposy = d->pposy + SPEED * cos((M_PI * d->angle) / 180);
 
@@ -110,8 +121,15 @@ void	go_right(t_data *d)
 	// d->x->plane = d->x->plane * cos(SPEED) - d->y->plane * sin(SPEED);
 	// d->y->plane = d->x->o_plane * sin(SPEED) + d->y->plane * cos(SPEED);
 
+	// d->x->dir = d->x->dir * cos(SPEED) - d->y->dir * sin(SPEED);
+	// d->y->dir = d->x->o_dir * sin(SPEED) + d->y->dir * cos(SPEED);
+	// d->x->plane = d->x->plane * cos(SPEED) - d->y->plane * sin(SPEED);
+	// d->y->plane = d->x->o_plane * sin(SPEED) + d->y->plane * cos(SPEED);
+
 	printf("RIGHT x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
 	printf("d->x->camera ---- [%f]\n", d->x->camera);
+	printf("step x ---------- [%d]\n", d->x->step);
+	printf("step y ---------- [%d]\n", d->y->step);
 	printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 	printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
 	printf("xplane ---------- [%f]\nyplane ---------- [%f]\n\n", d->x->plane, d->y->plane);
