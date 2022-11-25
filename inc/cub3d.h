@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 10:59:12 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:24:56 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@
 # define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
-# define WIN_W 320 // 1080
-# define WIN_H 200 // 720
-# define POV 60
-# define ZOOM 3 // How many times WIN_H and WIN_W (6)
+# define ZOOM 4 // How many times WIN_H and WIN_W (6)
+# define WIN_W (320 * ZOOM) // 1080
+# define WIN_H (200 * ZOOM) // 720
 # define MM_L 16 // size minimap
 # define MM_M 6 // size minimap
 # define MM_S 1 // size minimap
-# define ROT_ANGL 18 // 360 doit etre divisible par ce nombre
+# define ROT_ANGL 3 // 360 doit etre divisible par ce nombre //18 avant, 3 assez bonne
 # define SPEED 0.05
 
 # define RED 0x00FF0000
@@ -54,6 +53,10 @@
 # define GRN 0x00336600
 # define DGR 0x004C9900
 # define BLU 0x000000FF
+# define CYN 0x0087D3F8
+# define LGN 0x00A8E4A0
+# define PNK 0x00F984E5
+# define BLK 0x00000000
 
 // variables that couldn't be modified though raycast process
 typedef struct	s_setup
@@ -79,13 +82,13 @@ typedef struct	s_img
 
 typedef struct	s_raycasting
 {
-	float	map_check;
-	int		map_sz;
-	float	ray_start;
-	float	ray_len;
-	// int		step;
-	// float	ray_dir;
-	float	step_sz;
+	// float	map_check;
+	// int		map_sz;
+	// float	ray_start;
+	// float	ray_len;
+	// // int		step;
+	// // float	ray_dir;
+	// float	step_sz;
 
 	//repris de s_ray
 	double	dir;
@@ -97,14 +100,17 @@ typedef struct	s_raycasting
 	double	ray_dir;
 	int		step;
 
+	float	o_dir;
+	float	o_plane;
+
 }	t_raycasting;
 
 typedef struct	s_rayunits
 {
-	float	dist_max;
-	float	dist;
-	int		tile_found; // = hit
-	float	intersection;
+	// float	dist_max;
+	// float	dist;
+	// int		tile_found; // = hit
+	// float	intersection;
 
 	//repris de s_ray
 	int		hit;
@@ -249,6 +255,8 @@ void	minimap_size(t_data *d);
 
 void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
+void	init_move(t_data *d, float dir);
+// void	init_move(t_data *d, float dir);
 /*
 * directions.c
 */
@@ -270,11 +278,14 @@ void	player_is_here(t_data *d, int c_body, int c_head);
  * raycasting.c
  */
 int 	main_raycasting(t_data *data);
+int		color_side(t_data *d);
 
 /*
  * angles.c
  */
-int	dtorad(t_data *d);
+// int	dtorad(t_data *d);
+float	dtorad(int deg);
+// float	dtorad(t_data *d);
 
 
 #endif

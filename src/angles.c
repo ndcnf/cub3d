@@ -6,14 +6,14 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 09:59:39 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/18 10:16:32 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:55:12 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 #include "../inc/key_macos.h"
 
-int	dtorad(t_data *d)
+float	dtorad(int deg)
 {
-	return (M_PI * d->angle / 180);
+	return (M_PI * (float)deg / 180);
 }
