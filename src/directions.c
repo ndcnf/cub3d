@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:30:21 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/25 14:14:10 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:33:39 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,25 @@ void	look_around(t_data *d, int key)
 
 void	go_forth(t_data *d)
 {
+	float	oldx;
+	float	oldy;
 
+	oldx = d->pposx;
+	oldy = d->pposy;
 	d->pposx += d->x->dir * SPEED;
 	// d->pposx = d->pposx + SPEED * cos(dtorad(d));
 	// d->pposx = d->pposx + SPEED * cos((M_PI * d->angle) / 180);
-
 	d->pposy += d->y->dir * SPEED;
 	// d->pposy = d->pposy - SPEED * sin(dtorad(d));
 	// d->y->dir = sin((M_PI * d->angle) / 180);
 	// d->y->dir = sin((M_PI * d->angle) / 180);
 	// d->pposy = d->pposy - SPEED * sin((M_PI * d->angle) / 180);
+	if (d->map[(int)d->pposy][(int)d->pposx] == '1')
+	{
+		d->pposx = oldx;
+		d->pposy = oldy;
+	}
+
 
 	printf("FORTH x --------- [%f]\ny --------------- [%f]\nangle ----------- [%d]\n", d->pposx, d->pposy, d->angle);
 	printf("d->x->camera ---- [%f]\n", d->x->camera);
@@ -76,9 +85,18 @@ void	go_forth(t_data *d)
 
 void	go_back(t_data *d)
 {
+	float	oldx;
+	float	oldy;
+
+	oldx = d->pposx;
+	oldy = d->pposy;
 	d->pposx -= d->x->dir * SPEED;
 	d->pposy -= d->y->dir * SPEED;
-
+	if (d->map[(int)d->pposy][(int)d->pposx] == '1')
+	{
+		d->pposx = oldx;
+		d->pposy = oldy;
+	}
 
 	// d->pposx = d->pposx - SPEED * cos((M_PI * d->angle) / 180);
 	// d->pposy = d->pposy + SPEED * sin((M_PI * d->angle) / 180);
@@ -95,12 +113,21 @@ void	go_back(t_data *d)
 
 void	go_left(t_data *d)
 {
+	float	oldx;
+	float	oldy;
+
+	oldx = d->pposx;
+	oldy = d->pposy;
 	d->x->o_dir = d->x->dir;
 	d->x->o_plane = d->x->plane;
 
 	d->pposx += d->y->dir * SPEED;
 	d->pposy -= d->x->dir * SPEED;
-
+	if (d->map[(int)d->pposy][(int)d->pposx] == '1')
+	{
+		d->pposx = oldx;
+		d->pposy = oldy;
+	}
 	// d->pposx = d->pposx - SPEED * sin((M_PI * d->angle) / 180);
 	// d->pposy = d->pposy - SPEED * cos((M_PI * d->angle) / 180);
 
@@ -120,12 +147,21 @@ void	go_left(t_data *d)
 
 void	go_right(t_data *d)
 {
+	float	oldx;
+	float	oldy;
+
+	oldx = d->pposx;
+	oldy = d->pposy;
 	// d->x->o_dir = d->x->dir;
 	// d->x->o_plane = d->x->plane;
 
 	d->pposx -= d->y->dir * SPEED;
 	d->pposy += d->x->dir * SPEED;
-
+	if (d->map[(int)d->pposy][(int)d->pposx] == '1')
+	{
+		d->pposx = oldx;
+		d->pposy = oldy;
+	}
 	// d->pposx = d->pposx + SPEED * sin((M_PI * d->angle) / 180);
 	// d->pposy = d->pposy + SPEED * cos((M_PI * d->angle) / 180);
 

@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/25 15:23:03 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:24:56 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define MM_M 6 // size minimap
 # define MM_S 1 // size minimap
 # define ROT_ANGL 3 // 360 doit etre divisible par ce nombre //18 avant, 3 assez bonne
-# define SPEED 0.05 // autre valeur dangereuse ?
+# define SPEED 0.05
 
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
