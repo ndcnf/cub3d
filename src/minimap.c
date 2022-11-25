@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/25 12:03:26 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:19:13 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	close_win(void)
 
 int	update_img(t_data *d)
 {
-	mlx_clear_window(d->mlx, d->win);
+	// mlx_clear_window(d->mlx, d->win);
 	//floor and ceiling ici
 	main_raycasting(d);
 	map2d(d);
@@ -29,13 +29,15 @@ int	update_img(t_data *d)
 	return (EXIT_SUCCESS);
 }
 
-void	init_move(t_data *d)
-// void	init_move(t_data *d, float dir)
+void	init_move(t_data *d, float dir)
 {
 	d->x->plane = 0.66;
 	d->y->plane = 0;
 	d->x->o_dir = d->x->dir;
 	d->x->o_plane = d->x->plane;
+	printf("DIIIIIR [%f]\n", dir);
+	d->x->plane = d->x->plane * cos(dir) - d->y->plane * sin(dir);
+	d->y->plane = d->x->o_plane * sin(dir) + d->y->plane * cos(dir);
 
 	// d->x->dir = d->x->dir * cos(dir) - d->y->dir * sin(dir);
 	// d->y->dir = d->x->o_dir * sin(dir) + d->y->dir * cos(dir);
@@ -61,11 +63,16 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_L)
 	{
 		look_around(d, K_AR_L);
-		d->x->dir = d->x->dir * cos(-SPEED) - d->y->dir * sin(-SPEED);
-		d->y->dir = d->x->o_dir * sin(-SPEED) + d->y->dir * cos(-SPEED);
+		d->x->dir = d->x->dir * cos(-dtorad(ROT_ANGL)) - d->y->dir * sin(-dtorad(ROT_ANGL));
+		d->y->dir = d->x->o_dir * sin(-dtorad(ROT_ANGL)) + d->y->dir * cos(-dtorad(ROT_ANGL));
 		d->x->o_plane = d->x->plane;
-		d->x->plane = d->x->plane * cos(-SPEED) - d->y->plane * sin(-SPEED);
-		d->y->plane = d->x->o_plane * sin(-SPEED) + d->y->plane * cos(-SPEED);
+		d->x->plane = d->x->plane * cos(-dtorad(ROT_ANGL)) - d->y->plane * sin(-dtorad(ROT_ANGL));
+		d->y->plane = d->x->o_plane * sin(-dtorad(ROT_ANGL)) + d->y->plane * cos(-dtorad(ROT_ANGL));
+		// d->x->dir = d->x->dir * cos(-SPEED) - d->y->dir * sin(-SPEED);
+		// d->y->dir = d->x->o_dir * sin(-SPEED) + d->y->dir * cos(-SPEED);
+		// d->x->o_plane = d->x->plane;
+		// d->x->plane = d->x->plane * cos(-SPEED) - d->y->plane * sin(-SPEED);
+		// d->y->plane = d->x->o_plane * sin(-SPEED) + d->y->plane * cos(-SPEED);
 		// d->x->dir = d->x->dir * cos(dtorad(d)) - d->y->dir * sin(dtorad(d));
 		// d->y->dir = d->x->o_dir * sin(dtorad(d)) + d->y->dir * cos(dtorad(d));
 		// d->x->plane = d->x->plane * cos(dtorad(d)) - d->y->plane * sin(dtorad(d));
@@ -74,10 +81,10 @@ int	key_on(int key, t_data *d)
 		printf("d->x->camera ---- [%f]\n", d->x->camera);
 		printf("step x ---------- [%d]\n", d->x->step);
 		printf("step y ---------- [%d]\n", d->y->step);
-		printf("xdir*cos -------- [%f]\n", d->x->dir * cos(-SPEED));
-		printf("ydir*sin -------- [%f]\n", d->y->dir * sin(-SPEED));
-		printf("xodir*sin ------- [%f]\n", d->x->o_dir * sin(-SPEED));
-		printf("ydir*cos -------- [%f]\n", d->y->dir * cos(-SPEED));
+		// printf("xdir*cos -------- [%f]\n", d->x->dir * cos(-SPEED));
+		// printf("ydir*sin -------- [%f]\n", d->y->dir * sin(-SPEED));
+		// printf("xodir*sin ------- [%f]\n", d->x->o_dir * sin(-SPEED));
+		// printf("ydir*cos -------- [%f]\n", d->y->dir * cos(-SPEED));
 		printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 		printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
 		printf("xplane ---------- [%f]\nyplane ---------- [%f]\n\n", d->x->plane, d->y->plane);
@@ -87,11 +94,11 @@ int	key_on(int key, t_data *d)
 	else if (key == K_AR_R)
 	{
 		look_around(d, K_AR_R);
-		d->x->dir = d->x->dir * cos(SPEED) - d->y->dir * sin(SPEED);
-		d->y->dir = d->x->o_dir * sin(SPEED) + d->y->dir * cos(SPEED);
+		d->x->dir = d->x->dir * cos(dtorad(ROT_ANGL)) - d->y->dir * sin(dtorad(ROT_ANGL));
+		d->y->dir = d->x->o_dir * sin(dtorad(ROT_ANGL)) + d->y->dir * cos(dtorad(ROT_ANGL));
 		d->x->o_plane = d->x->plane;
-		d->x->plane = d->x->plane * cos(SPEED) - d->y->plane * sin(SPEED);
-		d->y->plane = d->x->o_plane * sin(SPEED) + d->y->plane * cos(SPEED);
+		d->x->plane = d->x->plane * cos(dtorad(ROT_ANGL)) - d->y->plane * sin(dtorad(ROT_ANGL));
+		d->y->plane = d->x->o_plane * sin(dtorad(ROT_ANGL)) + d->y->plane * cos(dtorad(ROT_ANGL));
 
 		// d->x->dir = d->x->dir * cos(-dtorad(d)) - d->y->dir * sin(-dtorad(d));
 		// d->y->dir = d->x->o_dir * sin(-dtorad(d)) + d->y->dir * cos(-dtorad(d));
@@ -101,10 +108,10 @@ int	key_on(int key, t_data *d)
 		printf("d->x->camera ---- [%f]\n", d->x->camera);
 		printf("step x ---------- [%d]\n", d->x->step);
 		printf("step y ---------- [%d]\n", d->y->step);
-		printf("xdir*cos -------- [%f]\n", d->x->dir * cos(SPEED));
-		printf("ydir*sin -------- [%f]\n", d->y->dir * sin(SPEED));
-		printf("xodir*sin ------- [%f]\n", d->x->o_dir * sin(SPEED));
-		printf("ydir*cos -------- [%f]\n", d->y->dir * cos(SPEED));
+		// printf("xdir*cos -------- [%f]\n", d->x->dir * cos(SPEED));
+		// printf("ydir*sin -------- [%f]\n", d->y->dir * sin(SPEED));
+		// printf("xodir*sin ------- [%f]\n", d->x->o_dir * sin(SPEED));
+		// printf("ydir*cos -------- [%f]\n", d->y->dir * cos(SPEED));
 		printf("mapx ------------ [%d]\nmapy ------------ [%d]\n", d->x->map, d->y->map);
 		printf("xdir ------------ [%f]\nydir ------------ [%f]\n", d->x->dir, d->y->dir);
 		printf("xplane ---------- [%f]\nyplane ---------- [%f]\n\n", d->x->plane, d->y->plane);
@@ -189,37 +196,31 @@ void	define_player_head(t_data *d, int x, int y, int c_head)
 
 void	player_angle(t_data *d)
 {
+	d->x->dir = 0;
+	d->y->dir = 0;
 	if (d->pos == 'N')
 	{
 		d->angle = 90;
-		d->x->dir = 0;
 		d->y->dir = -1;
-		init_move(d);
-		// init_move(d, 0);
+		init_move(d, 0);
 	}
 	else if (d->pos == 'S')
 	{
 		d->angle = 270;
-		d->x->dir = 0;
 		d->y->dir = 1;
-		init_move(d);
-		// init_move(d, M_PI);
+		init_move(d, M_PI);
 	}
 	else if (d->pos == 'W')
 	{
 		d->angle = 180;
 		d->x->dir = -1;
-		d->y->dir = 0;
-		init_move(d);
-		// init_move(d, -(M_PI / 2));
+		init_move(d, -(M_PI / 2));
 	}
 	else if (d->pos == 'E')
 	{
 		d->angle = 0;
 		d->x->dir = 1;
-		d->y->dir = 0;
-		init_move(d);
-		// init_move(d, M_PI / 2);
+		init_move(d, (M_PI / 2));
 	}
 }
 
