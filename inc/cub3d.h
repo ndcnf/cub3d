@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 16:58:18 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:40:35 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,18 +230,9 @@ int		zero_is_surrounded(t_data *d);
 */
 void	init_map(t_data *d);
 void	minimap_area(t_data *d, int i, int j, int color);
-void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
-void	map2d(t_data *d);
-int		key_on(int key, t_data *d);
-int		close_win(void);
-void	player_angle(t_data *d);
 int		update_img(t_data *d);
-void	minimap_size(t_data *d);
-
-void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
-void	init_move(t_data *d, float dir);
 /*
 * directions.c
 */
@@ -272,6 +263,7 @@ void	side(t_data *d);
  * angles.c
  */
 float	dtorad(int deg);
+void	player_angle(t_data *d);
 
 /*
  * drawing.c
@@ -280,4 +272,20 @@ void	draw_set(t_data *d);
 void	draw(t_data *d, int x);
 int		color_side(t_data *d);
 
+/*
+ * moves.c
+ */
+void	move(t_data *d, int key);
+void	init_move(t_data *d, float dir, int deg, int rad);
+/*
+ * main_minimap.c
+ */
+void	minimap_size(t_data *d);
+void	map2d(t_data *d);
+/*
+ * mlx_utils.c
+ */
+void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
+int		close_win(void);
+int		key_on(int key, t_data *d);
 #endif

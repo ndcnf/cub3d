@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angles.c                                           :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 09:59:39 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/28 17:29:49 by nchennaf         ###   ########.fr       */
+/*   Created: 2022/11/28 17:37:32 by nchennaf          #+#    #+#             */
+/*   Updated: 2022/11/28 17:39:35 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-#include "../inc/key_macos.h"
 
-float	dtorad(int deg)
+void	new_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
-	return (M_PI * (float)deg / 180);
+	char	*dst;
+
+	dst = d->img->addr + (y * d->img->line_length + x * (d->img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
-void	player_angle(t_data *d)
+int	close_win(void)
 {
-	d->x->dir = 0;
-	d->y->dir = 0;
-	if (d->pos == 'N')
-		init_move(d, 0, 90, -1);
-	else if (d->pos == 'S')
-		init_move(d, M_PI, 270, 1);
-	else if (d->pos == 'W')
-		init_move(d, -(M_PI / 2), 180, -1);
-	else if (d->pos == 'E')
-		init_move(d, (M_PI / 2), 0, 1);
+	printf(BYE);
+	exit(SUCCESS);
+}
+
+int	update_img(t_data *d)
+{
+	main_raycasting(d);
+	map2d(d);
+	mlx_put_image_to_window(d->mlx, d->win, d->img->img, 0, 0);
+	return (EXIT_SUCCESS);
 }

@@ -35,7 +35,9 @@ SRCS_FILES	= main.c \
 				directions.c \
 				minimap_player.c \
 				angles.c \
-				drawing.c
+				drawing.c \
+				moves.c \
+				mlx_utils.c
 				#textures.c \
 
 

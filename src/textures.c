@@ -6,42 +6,23 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:58:25 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/28 15:40:05 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:46:04 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// int		color_side(t_data *d)
-// {
-// 	// if (d->ray->side == 0 && d->x->ray_dir < 0)
-// 	// 	return (LGN);
-// 	// else if (d->ray->side == 0 && d->x->ray_dir >= 0)
-// 	if (d->ray->side == 0 && d->x->ray_dir >= 0)
-// 		// return (PNK);
-// 		d->x->tex = TEX_SIZE - d->x->tex - 1;
-// 	else if (d->ray->side == 1 && d->y->ray_dir < 0)
-// 		// return (RED);
-// 		d->x->tex = TEX_SIZE - d->x->tex - 1;
-
-// 	// else
-// 	// 	return (BLU);
-// }
-
-
 void	load(t_data *d)
 {
-	d->n = ft_calloc(1, sizeof(t_img));
-	// d->n
-	d->e = ft_calloc(1, sizeof(t_img));
-	d->w = ft_calloc(1, sizeof(t_img));
-	d->s = ft_calloc(1, sizeof(t_img));
+	d->north = ft_calloc(1, sizeof(t_img));
+	d->east = ft_calloc(1, sizeof(t_img));
+	d->west = ft_calloc(1, sizeof(t_img));
+	d->south = ft_calloc(1, sizeof(t_img));
 }
 
 void	texture_init(t_data *d)
 {
 	d->ray->tex_num = d->map[d->x->map][d->y->map] - 1;
-
 	if (d->ray->side == 0)
 		d->x->wall = d->pposy + d->ray->perpwalldist * d->y->ray_dir;
 	else
@@ -70,5 +51,4 @@ void	load_tex(t_data *d, int x)
 		d->ray->buffer[i][x];
 		i++;
 	}
-
 }
