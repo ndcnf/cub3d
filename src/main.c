@@ -6,17 +6,14 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 13:38:00 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:07:08 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int init_struct(t_data *d)
+int	init_struct(t_data *d)
 {
-	// d = ft_calloc(1, sizeof(t_data));
-	// if (alloc_check(d) != SUCCESS)
-	// 	return (ERROR);
 	d->ray = ft_calloc(1, sizeof(t_rayunits));
 	if (alloc_check(d) != SUCCESS)
 		return (ERROR);
@@ -29,7 +26,7 @@ int init_struct(t_data *d)
 	return (SUCCESS);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_data		data;
 
@@ -39,7 +36,6 @@ int main(int ac, char **av)
 	if (main_parsing(ac, av, &data) != SUCCESS)
 		return (0);
 	main_minimap(&data);
-	// raycasting(&data);
 	free_map(&data);
 	return (0);
 }

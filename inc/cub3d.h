@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 14:55:29 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:58:18 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,6 @@
 # define PNK 0x00F984E5
 # define BLK 0x00000000
 
-// variables that couldn't be modified though raycast process
-// typedef struct	s_setup
-// {
-// 	int		i;
-// }	t_setup;
-
 typedef struct	s_img
 {
 	void	*img;
@@ -88,14 +82,13 @@ typedef struct	s_raycasting
 	int		map;
 	double	sidedist;
 	double	deltadist;
-	double	camera; // uniquement pour x
+	double	camera;
 	double	ray_dir;
 	int		step;
 	float	o_dir;
 	float	o_plane;
-
-	float	wall; // x
-	int		tex; // x
+	float	wall;
+	int		tex;
 }	t_raycasting;
 
 typedef struct	s_rayunits
@@ -106,10 +99,9 @@ typedef struct	s_rayunits
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
-
 	float	tex_pos;
 	float	step;
-	int		color; //unsigned int (uint32)
+	int		color;
 	int		tex_num;
 	int		**buffer;
 }	t_rayunits;
@@ -125,38 +117,35 @@ typedef struct s_data
 	t_raycasting	*x;
 	t_raycasting	*y;
 	t_rayunits		*ray;
-	t_img			*s;
-	t_img			*n;
-	t_img			*e;
-	t_img			*w;
-
-	char	*no;
-	int		check_no;
-	char	*so;
-	int		check_so;
-	char	*we;
-	int		check_we;
-	char	*ea;
-	int		check_ea;
-	int 	f;
-	int		check_f;
-	int 	c;
-	int		check_c;
-	int		fd_line;
-	int		nb_line_map;
-	int		len_line_map;
-	char	**map;
-	char	*tmp;
-	int		start;
-	int		malloc_check;
-	int		sizeof_tab;
-	float	pposx;
-	float	pposy;
-	char	pos;
-	int		angle;
-//	t_ray	*ray;
-	// t_setup	*setup;
-}			t_data;
+	t_img			*south;
+	t_img			*north;
+	t_img			*east;
+	t_img			*west;
+	char			*no;
+	int				check_no;
+	char			*so;
+	int				check_so;
+	char			*we;
+	int				check_we;
+	char			*ea;
+	int				check_ea;
+	int 			f;
+	int				check_f;
+	int 			c;
+	int				check_c;
+	int				fd_line;
+	int				nb_line_map;
+	int				len_line_map;
+	char			**map;
+	char			*tmp;
+	int				start;
+	int				malloc_check;
+	int				sizeof_tab;
+	float			pposx;
+	float			pposy;
+	char			pos;
+	int				angle;
+}	t_data;
 
 /*
  * main.c
@@ -253,7 +242,6 @@ void	minimap_size(t_data *d);
 void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
 void	init_move(t_data *d, float dir);
-// void	init_move(t_data *d, float dir);
 /*
 * directions.c
 */
@@ -275,12 +263,21 @@ void	player_is_here(t_data *d, int c_body, int c_head);
  * raycasting.c
  */
 int 	main_raycasting(t_data *data);
-int		color_side(t_data *d);
+void	raydir_n_delta(t_data *d, int x);
+void	step_n_sidedist(t_data *d);
+void	hit(t_data *d);
+void	side(t_data *d);
 
 /*
  * angles.c
  */
 float	dtorad(int deg);
 
+/*
+ * drawing.c
+ */
+void	draw_set(t_data *d);
+void	draw(t_data *d, int x);
+int		color_side(t_data *d);
 
 #endif
