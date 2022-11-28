@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/28 17:39:37 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:03:39 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	init_map(t_data *d)
 	d->h = d->nb_line_map;
 	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
-	d->win = mlx_new_window(d->mlx, WIN_W, WIN_H, WIN_TITLE);
+	d->win = mlx_new_window(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM), WIN_TITLE);
 	d->img = malloc(sizeof(t_img));
-	d->img->img = mlx_new_image(d->mlx, WIN_W, WIN_H);
+	d->img->img = mlx_new_image(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM));
 	d->img->addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
 	&d->img->line_length, &d->img->endian);
 	player_angle(d);

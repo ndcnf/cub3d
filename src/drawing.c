@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:36:57 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/28 16:39:33 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:05:18 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	draw(t_data *d, int x)
 		y++;
 	}
 	y = d->ray->drawstart;
-	while (y <= d->ray->drawend && y < WIN_H)
+	while (y <= d->ray->drawend && y < (WIN_H * ZOOM))
 	{
 		new_mlx_pixel_put(d, x, y, color_side(d));
 		y++;
 	}
 	y = d->ray->drawend;
-	while (y < WIN_H)
+	while (y < (WIN_H * ZOOM))
 	{
 		new_mlx_pixel_put(d, x, y, d->f);
 		y++;
@@ -38,14 +38,14 @@ void	draw(t_data *d, int x)
 
 void	draw_set(t_data *d)
 {
-	d->ray->lineheight = (int)(WIN_H / d->ray->perpwalldist);
-	d->ray->drawstart = -(d->ray->lineheight) / 2 + (WIN_H / 2);
+	d->ray->lineheight = (int)((WIN_H * ZOOM) / d->ray->perpwalldist);
+	d->ray->drawstart = -(d->ray->lineheight) / 2 + ((WIN_H * ZOOM) / 2);
 	if (d->ray->drawstart < 0)
 		d->ray->drawstart = 0;
-	d->ray->drawend = d->ray->lineheight / 2 + WIN_H / 2;
-	if (d->ray->drawend >= WIN_H)
-	// if (d->ray->drawend >= WIN_H /*|| r->drawend >= 0*/)
-		d->ray->drawend = WIN_H - 1;
+	d->ray->drawend = d->ray->lineheight / 2 + (WIN_H * ZOOM) / 2;
+	if (d->ray->drawend >= (WIN_H * ZOOM))
+	// if (d->ray->drawend >= (WIN_H * ZOOM) /*|| r->drawend >= 0*/)
+		d->ray->drawend = (WIN_H * ZOOM) - 1;
 }
 
 int	color_side(t_data *d)

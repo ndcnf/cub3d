@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 16:39:46 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:05:36 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	raydir_n_delta(t_data *d, int x)
 {
-	d->x->camera = 2 * x / (float)WIN_H - 1;
+	d->x->camera = 2 * x / (float)(WIN_H * ZOOM) - 1;
 	d->x->ray_dir = d->x->dir + d->x->plane * d->x->camera;
 	d->y->ray_dir = d->y->dir + d->y->plane * d->x->camera;
 	if (d->x->ray_dir == 0)
@@ -86,7 +86,7 @@ int	main_raycasting(t_data *d)
 	int	x;
 
 	x = 0;
-	while (x < WIN_W)
+	while (x < (WIN_W * ZOOM))
 	{
 		d->x->map = (int)d->pposx;
 		d->y->map = (int)d->pposy;

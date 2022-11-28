@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:58:25 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/28 17:46:04 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:05:51 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	load_tex(t_data *d, int x)
 	int	i;
 
 	d->ray->step = 1.0 * TEX_SIZE / TEX_SIZE;
-	d->ray->tex_pos = (d->ray->drawstart - WIN_H / 2 + d->ray->lineheight / 2) * d->ray->step;
+	d->ray->tex_pos = (d->ray->drawstart - (WIN_H * ZOOM) / 2 + d->ray->lineheight / 2) * d->ray->step;
 	i = d->ray->drawstart;
 	while (i < d->ray->drawend)
 	{
