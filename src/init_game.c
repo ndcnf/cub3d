@@ -46,14 +46,15 @@ int	read_map(t_data *data, int fd, const char *map_cub)
 
 int	load_map(t_data *data, int fd, char *map_cub)
 {
-	data->no = NULL;
-	data->so = NULL;
-	data->we = NULL;
-	data->ea = NULL;
 	data->f = -1;
 	data->c = -1;
 	data->pposx = -1;
 	data->pposy = -1;
+	data->img = ft_calloc(1, sizeof(t_img));
+	data->img_no = ft_calloc(1, sizeof(t_img));
+	data->img_so = ft_calloc(1, sizeof(t_img));
+	data->img_ea = ft_calloc(1, sizeof(t_img));
+	data->img_we = ft_calloc(1, sizeof(t_img));
 	if (read_map(data, fd, map_cub) != 1)
 	{
 		free_map(data);

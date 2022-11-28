@@ -49,6 +49,11 @@ void	free_map(t_data *data)
 	safe_free(data->we);
 	safe_free(data->so);
 	safe_free(data->mlx);
+	safe_free(data->img_no);
+	safe_free(data->img_so);
+	safe_free(data->img_ea);
+	safe_free(data->img_we);
+	safe_free(data->img);
 	free_tab((void *)data->map);
 }
 

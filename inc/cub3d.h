@@ -72,13 +72,29 @@
 // 	int		i;
 // }	t_setup;
 
+//typedef struct s_imgptr {
+//	char	*path;
+//	void	*img;
+//	int		w;
+//	int		h;
+//
+//	int		*pix;
+//	int		bits;
+//	int		line_length;
+//	int		endian;
+//}	t_imgptr;
+
+
 typedef struct	s_img
 {
 	void	*img;
+	int		*pxs;
 	char	*addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
+	int 	w;
+	int 	h;
 }	t_img;
 
 typedef struct	s_raycasting
@@ -125,10 +141,10 @@ typedef struct s_data
 	t_raycasting	*x;
 	t_raycasting	*y;
 	t_rayunits		*ray;
-	t_img			*s;
-	t_img			*n;
-	t_img			*e;
-	t_img			*w;
+	t_img			*img_so;
+	t_img			*img_no;
+	t_img			*img_ea;
+	t_img			*img_we;
 
 	char	*no;
 	int		check_no;
@@ -183,12 +199,13 @@ int		safe_open_map_name_cub(const char *mn);
 int		read_map(t_data *data, int fd, const char *map_cub);
 int		load_map(t_data *data, int fd, char *map_cub);
 /*
-* asset_floor_celling.c
+* asset_floor_celling.c FULL
 */
 int		pars_f_n_c(t_data *data, char *tmp);
 int		get_asset(t_data *data, char *tmp);
 int		asset_all_good(t_data *d);
 int		asset(t_data *data, int fd, char *tmp);
+void	load_img(t_data *d, t_img *i, char *as);
 /*
  * asset_floor_celling_utils.c FULL
  */
@@ -275,8 +292,13 @@ void	player_is_here(t_data *d, int c_body, int c_head);
  * raycasting.c
  */
 int 	main_raycasting(t_data *data);
-int		color_side(t_data *d);
 
+/*
+ * textures.c
+ */
+int		color_side(t_data *d, int pix);
+int 	tex_pix(t_data *d, int pix);
+void	load_tex(t_data *d);
 /*
  * angles.c
  */
