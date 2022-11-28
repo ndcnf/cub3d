@@ -34,7 +34,8 @@ SRCS_FILES	= main.c \
 				main_minimap.c \
 				directions.c \
 				minimap_player.c \
-				angles.c
+				angles.c \
+				textures.c
 
 INC_FILES	= cub3d.h
 

@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:54:23 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/25 15:19:13 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:28:39 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	init_move(t_data *d, float dir)
 	d->y->plane = 0;
 	d->x->o_dir = d->x->dir;
 	d->x->o_plane = d->x->plane;
-	printf("DIIIIIR [%f]\n", dir);
 	d->x->plane = d->x->plane * cos(dir) - d->y->plane * sin(dir);
 	d->y->plane = d->x->o_plane * sin(dir) + d->y->plane * cos(dir);
 

@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/18 13:48:33 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:38:00 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int init_struct(t_data *d)
 	return (SUCCESS);
 }
 
-
 int main(int ac, char **av)
 {
 	t_data		data;
@@ -40,7 +39,6 @@ int main(int ac, char **av)
 	if (main_parsing(ac, av, &data) != SUCCESS)
 		return (0);
 	main_minimap(&data);
-	printf("MAIN\n\nx [%f]\ny [%f]\nangle [%d]\n", data.pposx, data.pposy, data.angle);
 	// raycasting(&data);
 	free_map(&data);
 	return (0);

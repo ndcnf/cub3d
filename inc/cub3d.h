@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/25 15:24:56 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:55:29 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,23 @@
 # define BYE "Bye\n"
 
 # define WIN_TITLE "Cub3D : Title TBD"
-# define ZOOM 4 // How many times WIN_H and WIN_W (6)
-# define WIN_W (320 * ZOOM) // 1080
-# define WIN_H (200 * ZOOM) // 720
-# define MM_L 16 // size minimap
-# define MM_M 6 // size minimap
-# define MM_S 1 // size minimap
-# define ROT_ANGL 3 // 360 doit etre divisible par ce nombre //18 avant, 3 assez bonne
-# define SPEED 0.05
 
+// Window size
+# define ZOOM 4
+# define WIN_W (320 * ZOOM)
+# define WIN_H (200 * ZOOM)
+
+// Minimap size
+# define MM_L 16
+# define MM_M 6
+# define MM_S 1
+
+// Misc.
+# define ROT_ANGL 3
+# define SPEED 0.05
+# define TEX_SIZE 64
+
+// Colors
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
 # define GRN 0x00336600
@@ -59,17 +67,10 @@
 # define BLK 0x00000000
 
 // variables that couldn't be modified though raycast process
-typedef struct	s_setup
-{
-	int		i;
-}	t_setup;
-
-// variables that could be modified though raycast process
-//typedef struct	s_ray
-//{
-//	int		drawstart;
-//	int 	drawend;
-//}	t_ray;
+// typedef struct	s_setup
+// {
+// 	int		i;
+// }	t_setup;
 
 typedef struct	s_img
 {
@@ -82,15 +83,6 @@ typedef struct	s_img
 
 typedef struct	s_raycasting
 {
-	// float	map_check;
-	// int		map_sz;
-	// float	ray_start;
-	// float	ray_len;
-	// // int		step;
-	// // float	ray_dir;
-	// float	step_sz;
-
-	//repris de s_ray
 	double	dir;
 	double	plane;
 	int		map;
@@ -99,39 +91,44 @@ typedef struct	s_raycasting
 	double	camera; // uniquement pour x
 	double	ray_dir;
 	int		step;
-
 	float	o_dir;
 	float	o_plane;
 
+	float	wall; // x
+	int		tex; // x
 }	t_raycasting;
 
 typedef struct	s_rayunits
 {
-	// float	dist_max;
-	// float	dist;
-	// int		tile_found; // = hit
-	// float	intersection;
-
-	//repris de s_ray
 	int		hit;
 	int		side;
 	double	perpwalldist;
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
+
+	float	tex_pos;
+	float	step;
+	int		color; //unsigned int (uint32)
+	int		tex_num;
+	int		**buffer;
 }	t_rayunits;
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	int		w;
-	int		h;
-	int		mm_size;
-	t_img	*img;
-	t_raycasting *x;
-	t_raycasting *y;
-	t_rayunits	*ray;
+	void			*mlx;
+	void			*win;
+	int				w;
+	int				h;
+	int				mm_size;
+	t_img			*img;
+	t_raycasting	*x;
+	t_raycasting	*y;
+	t_rayunits		*ray;
+	t_img			*s;
+	t_img			*n;
+	t_img			*e;
+	t_img			*w;
 
 	char	*no;
 	int		check_no;
@@ -158,7 +155,7 @@ typedef struct s_data
 	char	pos;
 	int		angle;
 //	t_ray	*ray;
-	t_setup	*setup;
+	// t_setup	*setup;
 }			t_data;
 
 /*
@@ -283,9 +280,7 @@ int		color_side(t_data *d);
 /*
  * angles.c
  */
-// int	dtorad(t_data *d);
 float	dtorad(int deg);
-// float	dtorad(t_data *d);
 
 
 #endif
