@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 17:40:35 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:57:11 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include "key_macos.h"
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 256
+#  define BUFFER_SIZE 256
 # endif
 
 # define SUCCESS 0
@@ -38,7 +38,7 @@
 # define MAP_START 10
 # define BYE "Bye\n"
 
-# define WIN_TITLE "Cub3D : Title TBD"
+# define WIN_TITLE "Cub3D: Title TBD"
 
 // Window size
 # define ZOOM 4
@@ -66,7 +66,7 @@
 # define PNK 0x00F984E5
 # define BLK 0x00000000
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -75,7 +75,7 @@ typedef struct	s_img
 	int		endian;
 }	t_img;
 
-typedef struct	s_raycasting
+typedef struct s_raycasting
 {
 	double	dir;
 	double	plane;
@@ -91,7 +91,7 @@ typedef struct	s_raycasting
 	int		tex;
 }	t_raycasting;
 
-typedef struct	s_rayunits
+typedef struct s_rayunits
 {
 	int		hit;
 	int		side;
@@ -129,9 +129,9 @@ typedef struct s_data
 	int				check_we;
 	char			*ea;
 	int				check_ea;
-	int 			f;
+	int				f;
 	int				check_f;
-	int 			c;
+	int				c;
 	int				check_c;
 	int				fd_line;
 	int				nb_line_map;
@@ -253,7 +253,7 @@ void	player_is_here(t_data *d, int c_body, int c_head);
 /*
  * raycasting.c
  */
-int 	main_raycasting(t_data *data);
+int		main_raycasting(t_data *data);
 void	raydir_n_delta(t_data *d, int x);
 void	step_n_sidedist(t_data *d);
 void	hit(t_data *d);
