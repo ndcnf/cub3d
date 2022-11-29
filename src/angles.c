@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 09:59:39 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/28 17:29:49 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/29 14:31:19 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,13 @@ void	player_angle(t_data *d)
 	else if (d->pos == 'S')
 		init_move(d, M_PI, 270, 1);
 	else if (d->pos == 'W')
-		init_move(d, -(M_PI / 2), 180, -1);
+	{
+		d->x->dir = -1;
+		init_move(d, -(M_PI / 2), 180, 0);
+	}
 	else if (d->pos == 'E')
-		init_move(d, (M_PI / 2), 0, 1);
+	{
+		d->x->dir = 1;
+		init_move(d, (M_PI / 2), 0, 0);
+	}
 }
