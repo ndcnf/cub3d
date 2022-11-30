@@ -54,6 +54,9 @@ void	free_map(t_data *data)
 	safe_free(data->img_ea);
 	safe_free(data->img_we);
 	safe_free(data->img);
+	safe_free(data->x);
+	safe_free(data->y);
+	safe_free(data->ray);
 	free_tab((void *)data->map);
 }
 
