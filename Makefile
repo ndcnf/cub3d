@@ -91,7 +91,6 @@ ${O_DIR}%.o:${SRCS_DIR}%.c
 				@${CC} ${CFLAGS} -I${HEADS_DIR} -o $@ -c $<
 				@printf "\e[1K\r${BUILD} 🚧 $@ from $<${RESET}"
 
-
 clean :
 				@${RM} ${O_DIR}
 

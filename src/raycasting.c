@@ -14,7 +14,7 @@
 
 void	raydir_n_delta(t_data *d, int x)
 {
-	d->x->camera = 2 * x / (float)(WIN_H * ZOOM) - 1;
+	d->x->camera = 2 * x / (float)(WIN_H * ZOOM) - 1 - 0.66;
 	d->x->ray_dir = d->x->dir + d->x->plane * d->x->camera;
 	d->y->ray_dir = d->y->dir + d->y->plane * d->x->camera;
 	if (d->x->ray_dir == 0)

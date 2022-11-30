@@ -66,13 +66,17 @@
 # define PNK 0x00F984E5
 # define BLK 0x00000000
 
+
 typedef struct s_img
 {
 	void	*img;
+	int		*pxs;
 	char	*addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
+	int 	w;
+	int 	h;
 }	t_img;
 
 typedef struct s_raycasting
@@ -104,6 +108,10 @@ typedef struct s_rayunits
 	int		color;
 	int		tex_num;
 	int		**buffer;
+
+	int		texwidth; //textures
+	int 	texheight; //textures
+	double 	wall;
 }	t_rayunits;
 
 typedef struct s_data
@@ -117,11 +125,11 @@ typedef struct s_data
 	t_raycasting	*x;
 	t_raycasting	*y;
 	t_rayunits		*ray;
-	t_img			*south;
-	t_img			*north;
-	t_img			*east;
-	t_img			*west;
-	char			*no;
+	t_img			*img_so;
+	t_img			*img_no;
+	t_img			*img_ea;
+	t_img			*img_we;
+  char			*no;
 	int				check_no;
 	char			*so;
 	int				check_so;
@@ -147,6 +155,7 @@ typedef struct s_data
 	int				angle;
 }	t_data;
 
+
 /*
  * main.c
  */
@@ -159,7 +168,7 @@ void	print_load_map(t_data *d);
 void	print_load_asset(t_data *d);
 int		main_minimap(t_data *d);
 /*
- * main_utils.c FULL
+ * main_utils.c
  */
 void	safe_free(void *x);
 int		p_error(char *error);
@@ -178,8 +187,9 @@ int		pars_f_n_c(t_data *data, char *tmp);
 int		get_asset(t_data *data, char *tmp);
 int		asset_all_good(t_data *d);
 int		asset(t_data *data, int fd, char *tmp);
+void	load_img(t_data *d, t_img *i, char *asset);
 /*
- * asset_floor_celling_utils.c FULL
+ * asset_floor_celling_utils.c
  */
 int		map_start(t_data *d, char *tmp);
 int		error_colors(char *tmp, int *out);
@@ -187,7 +197,7 @@ int		pars_f(t_data *data, char *tmp);
 int		pars_c(t_data *data, char *tmp);
 int		translated_colors(int *out, char *s);
 /*
-* check_asset.c FULL
+* check_asset.c
 */
 int		no(t_data *data, char *tmp);
 int		so(t_data *data, char *tmp);
@@ -249,7 +259,6 @@ void	player_head_w(t_data *d, int x, int y, int c_head);
 void	player_head_n(t_data *d, int x, int y, int c_head);
 void	player_head_s(t_data *d, int x, int y, int c_head);
 void	player_is_here(t_data *d, int c_body, int c_head);
-
 /*
  * raycasting.c
  */
@@ -258,20 +267,24 @@ void	raydir_n_delta(t_data *d, int x);
 void	step_n_sidedist(t_data *d);
 void	hit(t_data *d);
 void	side(t_data *d);
-
+/*
+ * textures.c
+ */
+void	init_asset(t_data *d);
+int		color_side(t_data *d, int pix);
+int 	tex_pix(t_data *d, int pix);
+//void	load_tex(t_data *d);
 /*
  * angles.c
  */
 float	dtorad(int deg);
 void	player_angle(t_data *d);
-
 /*
  * drawing.c
  */
 void	draw_set(t_data *d);
 void	draw(t_data *d, int x);
 int		color_side(t_data *d);
-
 /*
  * moves.c
  */

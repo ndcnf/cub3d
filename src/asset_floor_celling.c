@@ -12,6 +12,12 @@
 
 #include "../inc/cub3d.h"
 
+void load_img(t_data *d, t_img *i, char *asset)
+{
+	i->img = mlx_xpm_file_to_image(d->mlx, asset, &i->w, &i->h);
+	i->pxs = (int *)mlx_get_data_addr(i->img, &i->bpp, &i->line_length, &i->endian);
+}
+
 int	pars_f_n_c(t_data *data, char *tmp)
 {
 	if (ft_strncmp(tmp, "F", 1) == SUCCESS)

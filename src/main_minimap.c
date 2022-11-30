@@ -15,6 +15,7 @@
 int	main_minimap(t_data *d)
 {
 	init_map(d);
+	init_asset(d);
 	map2d(d);
 	mlx_hook(d->win, 2, (1L << 0), key_on, d);
 	mlx_loop_hook(d->mlx, update_img, d);
