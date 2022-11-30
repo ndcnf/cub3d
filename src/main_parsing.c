@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 17:41:15 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:04:53 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	main_parsing(int ac, char **av, t_data *data)
 
 	printf("⏳ Init game\n");
 	if (args_error(ac) != SUCCESS)
+	{
+		free_map(data);
 		return (ERROR);
+	}
 	printf("✅ args_error(ac)\n");
 	fd = safe_open_map_name_cub(av[1]);
 	if (fd == -1)
