@@ -112,6 +112,7 @@ typedef struct	s_raycasting
 
 	float	wall; // x
 	int		tex; // x
+
 }	t_raycasting;
 
 typedef struct	s_rayunits
@@ -128,6 +129,10 @@ typedef struct	s_rayunits
 	int		color; //unsigned int (uint32)
 	int		tex_num;
 	int		**buffer;
+
+	int		texwidth; //textures
+	int 	texheight; //textures
+	double 	wall;
 }	t_rayunits;
 
 typedef struct s_data
@@ -205,7 +210,7 @@ int		pars_f_n_c(t_data *data, char *tmp);
 int		get_asset(t_data *data, char *tmp);
 int		asset_all_good(t_data *d);
 int		asset(t_data *data, int fd, char *tmp);
-void	load_img(t_data *d, t_img *i, char *as);
+void	load_img(t_data *d, t_img *i, char *asset);
 /*
  * asset_floor_celling_utils.c FULL
  */
@@ -296,9 +301,11 @@ int 	main_raycasting(t_data *data);
 /*
  * textures.c
  */
+
+void	init_asset(t_data *d);
 int		color_side(t_data *d, int pix);
 int 	tex_pix(t_data *d, int pix);
-void	load_tex(t_data *d);
+//void	load_tex(t_data *d);
 /*
  * angles.c
  */

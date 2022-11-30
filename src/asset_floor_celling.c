@@ -12,9 +12,9 @@
 
 #include "../inc/cub3d.h"
 
-void load_img(t_data *d, t_img *i, char *as)
+void load_img(t_data *d, t_img *i, char *asset)
 {
-	i->img = mlx_xpm_file_to_image(d->mlx, as, &i->w, &i->h);
+	i->img = mlx_xpm_file_to_image(d->mlx, asset, &i->w, &i->h);
 	i->pxs = (int *)mlx_get_data_addr(i->img, &i->bpp, &i->line_length, &i->endian);
 }
 

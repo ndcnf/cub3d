@@ -15,6 +15,7 @@
 int	main_minimap(t_data *d)
 {
 	init_map(d);
+	init_asset(d);
 	map2d(d);
 	// player_angle(d); // de trop
 	mlx_hook(d->win, 2, (1L<<0), key_on, d);
