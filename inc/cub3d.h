@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/25 15:24:56 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:02:43 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include "key_macos.h"
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 256
+#  define BUFFER_SIZE 256
 # endif
 
 # define SUCCESS 0
@@ -38,16 +38,24 @@
 # define MAP_START 10
 # define BYE "Bye\n"
 
-# define WIN_TITLE "Cub3D : Title TBD"
-# define ZOOM 4 // How many times WIN_H and WIN_W (6)
-# define WIN_W (320 * ZOOM) // 1080
-# define WIN_H (200 * ZOOM) // 720
-# define MM_L 16 // size minimap
-# define MM_M 6 // size minimap
-# define MM_S 1 // size minimap
-# define ROT_ANGL 3 // 360 doit etre divisible par ce nombre //18 avant, 3 assez bonne
-# define SPEED 0.05
+# define WIN_TITLE "Cub3D: Title TBD"
 
+// Window size
+# define ZOOM 4
+# define WIN_W 320
+# define WIN_H 200
+
+// Minimap size
+# define MM_L 16
+# define MM_M 6
+# define MM_S 1
+
+// Misc.
+# define ROT_ANGL 3
+# define SPEED 0.05
+# define TEX_SIZE 64
+
+// Colors
 # define RED 0x00FF0000
 # define WHI 0x00FFFFFF
 # define GRN 0x00336600
@@ -58,20 +66,7 @@
 # define PNK 0x00F984E5
 # define BLK 0x00000000
 
-// variables that couldn't be modified though raycast process
-typedef struct	s_setup
-{
-	int		i;
-}	t_setup;
-
-// variables that could be modified though raycast process
-//typedef struct	s_ray
-//{
-//	int		drawstart;
-//	int 	drawend;
-//}	t_ray;
-
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -80,86 +75,77 @@ typedef struct	s_img
 	int		endian;
 }	t_img;
 
-typedef struct	s_raycasting
+typedef struct s_raycasting
 {
-	// float	map_check;
-	// int		map_sz;
-	// float	ray_start;
-	// float	ray_len;
-	// // int		step;
-	// // float	ray_dir;
-	// float	step_sz;
-
-	//repris de s_ray
 	double	dir;
 	double	plane;
 	int		map;
 	double	sidedist;
 	double	deltadist;
-	double	camera; // uniquement pour x
+	double	camera;
 	double	ray_dir;
 	int		step;
-
 	float	o_dir;
 	float	o_plane;
-
+	float	wall;
+	int		tex;
 }	t_raycasting;
 
-typedef struct	s_rayunits
+typedef struct s_rayunits
 {
-	// float	dist_max;
-	// float	dist;
-	// int		tile_found; // = hit
-	// float	intersection;
-
-	//repris de s_ray
 	int		hit;
 	int		side;
 	double	perpwalldist;
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
+	float	tex_pos;
+	float	step;
+	int		color;
+	int		tex_num;
+	int		**buffer;
 }	t_rayunits;
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	int		w;
-	int		h;
-	int		mm_size;
-	t_img	*img;
-	t_raycasting *x;
-	t_raycasting *y;
-	t_rayunits	*ray;
-
-	char	*no;
-	int		check_no;
-	char	*so;
-	int		check_so;
-	char	*we;
-	int		check_we;
-	char	*ea;
-	int		check_ea;
-	int 	f;
-	int		check_f;
-	int 	c;
-	int		check_c;
-	int		fd_line;
-	int		nb_line_map;
-	int		len_line_map;
-	char	**map;
-	char	*tmp;
-	int		start;
-	int		malloc_check;
-	int		sizeof_tab;
-	float	pposx;
-	float	pposy;
-	char	pos;
-	int		angle;
-//	t_ray	*ray;
-	t_setup	*setup;
-}			t_data;
+	void			*mlx;
+	void			*win;
+	int				w;
+	int				h;
+	int				mm_size;
+	t_img			*img;
+	t_raycasting	*x;
+	t_raycasting	*y;
+	t_rayunits		*ray;
+	t_img			*south;
+	t_img			*north;
+	t_img			*east;
+	t_img			*west;
+	char			*no;
+	int				check_no;
+	char			*so;
+	int				check_so;
+	char			*we;
+	int				check_we;
+	char			*ea;
+	int				check_ea;
+	int				f;
+	int				check_f;
+	int				c;
+	int				check_c;
+	int				fd_line;
+	int				nb_line_map;
+	int				len_line_map;
+	char			**map;
+	char			*tmp;
+	int				start;
+	int				malloc_check;
+	int				sizeof_tab;
+	float			pposx;
+	float			pposy;
+	char			pos;
+	int				angle;
+}	t_data;
 
 /*
  * main.c
@@ -244,19 +230,9 @@ int		zero_is_surrounded(t_data *d);
 */
 void	init_map(t_data *d);
 void	minimap_area(t_data *d, int i, int j, int color);
-void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
-void	map2d(t_data *d);
-int		key_on(int key, t_data *d);
-int		close_win(void);
-void	player_angle(t_data *d);
 int		update_img(t_data *d);
-void	minimap_size(t_data *d);
-
-void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
-void	init_move(t_data *d, float dir);
-// void	init_move(t_data *d, float dir);
 /*
 * directions.c
 */
@@ -277,15 +253,39 @@ void	player_is_here(t_data *d, int c_body, int c_head);
 /*
  * raycasting.c
  */
-int 	main_raycasting(t_data *data);
-int		color_side(t_data *d);
+int		main_raycasting(t_data *data);
+void	raydir_n_delta(t_data *d, int x);
+void	step_n_sidedist(t_data *d);
+void	hit(t_data *d);
+void	side(t_data *d);
 
 /*
  * angles.c
  */
-// int	dtorad(t_data *d);
 float	dtorad(int deg);
-// float	dtorad(t_data *d);
+void	player_angle(t_data *d);
 
+/*
+ * drawing.c
+ */
+void	draw_set(t_data *d);
+void	draw(t_data *d, int x);
+int		color_side(t_data *d);
 
+/*
+ * moves.c
+ */
+void	move(t_data *d, int key);
+void	init_move(t_data *d, float dir, int deg, int rad);
+/*
+ * main_minimap.c
+ */
+void	minimap_size(t_data *d);
+void	map2d(t_data *d);
+/*
+ * mlx_utils.c
+ */
+void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
+int		close_win(void);
+int		key_on(int key, t_data *d);
 #endif
