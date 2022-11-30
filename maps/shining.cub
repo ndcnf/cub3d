@@ -1,7 +1,7 @@
-NO ./assets/normal_north.xpm
-SO ./assets/normal_south.xpm
-WE ./assets/normal_west.xpm
-EA ./assets/normal_east.xpm
+NO ./assets/OpenfootageNETVinesII_03.xpm
+SO ./assets/OpenfootageNETVinesII_05.xpm
+WE ./assets/OpenfootageNETVinesII_06.xpm
+EA ./assets/OpenfootageNETVinesII_07.xpm
 
 F 240,248,255
 C 198,230,251
