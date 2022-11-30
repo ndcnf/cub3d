@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:32:02 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/25 11:05:07 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:05:36 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	raydir_n_delta(t_data *d, int x)
 {
-	d->x->camera = 2 * x / (float)WIN_H - 1 - 0.66;
+	d->x->camera = 2 * x / (float)(WIN_H * ZOOM) - 1 - 0.66;
 	d->x->ray_dir = d->x->dir + d->x->plane * d->x->camera;
 	d->y->ray_dir = d->y->dir + d->y->plane * d->x->camera;
 	if (d->x->ray_dir == 0)
@@ -81,51 +81,12 @@ void	side(t_data *d)
 		d->ray->perpwalldist = (d->y->sidedist - d->y->deltadist);
 }
 
-void	draw_set(t_data *d)
+int	main_raycasting(t_data *d)
 {
-	d->ray->lineheight = (int)(WIN_H / d->ray->perpwalldist);
-	d->ray->drawstart = -(d->ray->lineheight) / 2 + (WIN_H / 2);
-	if (d->ray->drawstart < 0)
-		d->ray->drawstart = 0;
-	d->ray->drawend = d->ray->lineheight / 2 + WIN_H / 2;
-	if (d->ray->drawend >= WIN_H /*|| r->drawend >= 0*/)
-		d->ray->drawend = WIN_H - 1;
-}
-
-
-void	draw(t_data *d, int x)
-{
-	int y;
-	int pix;
-
-	y = 0;
-	while (y <= d->ray->drawstart)
-	{
-		new_mlx_pixel_put(d, x, y, d->c);
-		y++;
-	}
-	y = d->ray->drawstart;
-	pix = 0;
-	while(y <= d->ray->drawend && y < WIN_H)
-	{
-		pix = tex_pix(d, pix);
-		new_mlx_pixel_put(d, x, y, color_side(d, pix));
-		y++;
-	}
-	y = d->ray->drawend;
-	while (y < WIN_H)
-	{
-		new_mlx_pixel_put(d, x, y, d->f);
-		y++;
-	}
-}
-
-int main_raycasting(t_data *d)
-{
-	int 	x;
+	int	x;
 
 	x = 0;
-	while (x <  WIN_W)
+	while (x < (WIN_W * ZOOM))
 	{
 		d->x->map = (int)d->pposx;
 		d->y->map = (int)d->pposy;

@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:58:25 by nchennaf          #+#    #+#             */
-/*   Updated: 2022/11/28 15:40:05 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:08:49 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void init_asset(t_data *d)
 //	else
 //
 //}
-
-
 
 int tex_pix(t_data *d, int pix)
 {

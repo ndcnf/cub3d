@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 14:55:29 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:02:43 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include "key_macos.h"
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 256
+#  define BUFFER_SIZE 256
 # endif
 
 # define SUCCESS 0
@@ -38,12 +38,12 @@
 # define MAP_START 10
 # define BYE "Bye\n"
 
-# define WIN_TITLE "Cub3D : Title TBD"
+# define WIN_TITLE "Cub3D: Title TBD"
 
 // Window size
 # define ZOOM 4
-# define WIN_W (320 * ZOOM)
-# define WIN_H (200 * ZOOM)
+# define WIN_W 320
+# define WIN_H 200
 
 // Minimap size
 # define MM_L 16
@@ -66,26 +66,8 @@
 # define PNK 0x00F984E5
 # define BLK 0x00000000
 
-// variables that couldn't be modified though raycast process
-// typedef struct	s_setup
-// {
-// 	int		i;
-// }	t_setup;
 
-//typedef struct s_imgptr {
-//	char	*path;
-//	void	*img;
-//	int		w;
-//	int		h;
-//
-//	int		*pix;
-//	int		bits;
-//	int		line_length;
-//	int		endian;
-//}	t_imgptr;
-
-
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	int		*pxs;
@@ -97,25 +79,23 @@ typedef struct	s_img
 	int 	h;
 }	t_img;
 
-typedef struct	s_raycasting
+typedef struct s_raycasting
 {
 	double	dir;
 	double	plane;
 	int		map;
 	double	sidedist;
 	double	deltadist;
-	double	camera; // uniquement pour x
+	double	camera;
 	double	ray_dir;
 	int		step;
 	float	o_dir;
 	float	o_plane;
-
-	float	wall; // x
-	int		tex; // x
-
+	float	wall;
+	int		tex;
 }	t_raycasting;
 
-typedef struct	s_rayunits
+typedef struct s_rayunits
 {
 	int		hit;
 	int		side;
@@ -123,10 +103,9 @@ typedef struct	s_rayunits
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
-
 	float	tex_pos;
 	float	step;
-	int		color; //unsigned int (uint32)
+	int		color;
 	int		tex_num;
 	int		**buffer;
 
@@ -150,34 +129,32 @@ typedef struct s_data
 	t_img			*img_no;
 	t_img			*img_ea;
 	t_img			*img_we;
+  char			*no;
+	int				check_no;
+	char			*so;
+	int				check_so;
+	char			*we;
+	int				check_we;
+	char			*ea;
+	int				check_ea;
+	int				f;
+	int				check_f;
+	int				c;
+	int				check_c;
+	int				fd_line;
+	int				nb_line_map;
+	int				len_line_map;
+	char			**map;
+	char			*tmp;
+	int				start;
+	int				malloc_check;
+	int				sizeof_tab;
+	float			pposx;
+	float			pposy;
+	char			pos;
+	int				angle;
+}	t_data;
 
-	char	*no;
-	int		check_no;
-	char	*so;
-	int		check_so;
-	char	*we;
-	int		check_we;
-	char	*ea;
-	int		check_ea;
-	int 	f;
-	int		check_f;
-	int 	c;
-	int		check_c;
-	int		fd_line;
-	int		nb_line_map;
-	int		len_line_map;
-	char	**map;
-	char	*tmp;
-	int		start;
-	int		malloc_check;
-	int		sizeof_tab;
-	float	pposx;
-	float	pposy;
-	char	pos;
-	int		angle;
-//	t_ray	*ray;
-	// t_setup	*setup;
-}			t_data;
 
 /*
  * main.c
@@ -191,7 +168,7 @@ void	print_load_map(t_data *d);
 void	print_load_asset(t_data *d);
 int		main_minimap(t_data *d);
 /*
- * main_utils.c FULL
+ * main_utils.c
  */
 void	safe_free(void *x);
 int		p_error(char *error);
@@ -204,7 +181,7 @@ int		safe_open_map_name_cub(const char *mn);
 int		read_map(t_data *data, int fd, const char *map_cub);
 int		load_map(t_data *data, int fd, char *map_cub);
 /*
-* asset_floor_celling.c FULL
+* asset_floor_celling.c
 */
 int		pars_f_n_c(t_data *data, char *tmp);
 int		get_asset(t_data *data, char *tmp);
@@ -212,7 +189,7 @@ int		asset_all_good(t_data *d);
 int		asset(t_data *data, int fd, char *tmp);
 void	load_img(t_data *d, t_img *i, char *asset);
 /*
- * asset_floor_celling_utils.c FULL
+ * asset_floor_celling_utils.c
  */
 int		map_start(t_data *d, char *tmp);
 int		error_colors(char *tmp, int *out);
@@ -220,7 +197,7 @@ int		pars_f(t_data *data, char *tmp);
 int		pars_c(t_data *data, char *tmp);
 int		translated_colors(int *out, char *s);
 /*
-* check_asset.c FULL
+* check_asset.c
 */
 int		no(t_data *data, char *tmp);
 int		so(t_data *data, char *tmp);
@@ -263,19 +240,9 @@ int		zero_is_surrounded(t_data *d);
 */
 void	init_map(t_data *d);
 void	minimap_area(t_data *d, int i, int j, int color);
-void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
 void	on_minimap(t_data *d, int i, int j, char type);
-void	map2d(t_data *d);
-int		key_on(int key, t_data *d);
-int		close_win(void);
-void	player_angle(t_data *d);
 int		update_img(t_data *d);
-void	minimap_size(t_data *d);
-
-void	move(t_data *d, int key);
 void	define_player_head(t_data *d, int x, int y, int c_head);
-void	init_move(t_data *d, float dir);
-// void	init_move(t_data *d, float dir);
 /*
 * directions.c
 */
@@ -292,16 +259,17 @@ void	player_head_w(t_data *d, int x, int y, int c_head);
 void	player_head_n(t_data *d, int x, int y, int c_head);
 void	player_head_s(t_data *d, int x, int y, int c_head);
 void	player_is_here(t_data *d, int c_body, int c_head);
-
 /*
  * raycasting.c
  */
-int 	main_raycasting(t_data *data);
-
+int		main_raycasting(t_data *data);
+void	raydir_n_delta(t_data *d, int x);
+void	step_n_sidedist(t_data *d);
+void	hit(t_data *d);
+void	side(t_data *d);
 /*
  * textures.c
  */
-
 void	init_asset(t_data *d);
 int		color_side(t_data *d, int pix);
 int 	tex_pix(t_data *d, int pix);
@@ -310,6 +278,27 @@ int 	tex_pix(t_data *d, int pix);
  * angles.c
  */
 float	dtorad(int deg);
-
-
+void	player_angle(t_data *d);
+/*
+ * drawing.c
+ */
+void	draw_set(t_data *d);
+void	draw(t_data *d, int x);
+int		color_side(t_data *d);
+/*
+ * moves.c
+ */
+void	move(t_data *d, int key);
+void	init_move(t_data *d, float dir, int deg, int rad);
+/*
+ * main_minimap.c
+ */
+void	minimap_size(t_data *d);
+void	map2d(t_data *d);
+/*
+ * mlx_utils.c
+ */
+void	new_mlx_pixel_put(t_data *d, int x, int y, int color);
+int		close_win(void);
+int		key_on(int key, t_data *d);
 #endif
