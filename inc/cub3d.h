@@ -6,7 +6,7 @@
 /*   By: nchennaf <nchennaf@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:33:16 by lzima             #+#    #+#             */
-/*   Updated: 2022/11/28 18:02:43 by nchennaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:00:20 by nchennaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define ZOOM 4
 # define WIN_W 320
 # define WIN_H 200
+# define RATIO 0.8
 
 // Minimap size
 # define MM_L 16
