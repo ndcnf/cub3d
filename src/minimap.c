@@ -40,7 +40,6 @@ void	init_map(t_data *d)
 	d->w = (d->len_line_map - 1);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM), WIN_TITLE);
-//	d->img = malloc(sizeof(t_img));
 	d->img->img = mlx_new_image(d->mlx, (WIN_W * ZOOM), (WIN_H * ZOOM));
 	d->img->addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
 	&d->img->line_length, &d->img->endian);

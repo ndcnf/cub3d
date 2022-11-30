@@ -12,19 +12,19 @@
 
 #include "../inc/cub3d.h"
 
-int		color_side(t_data *d, int pixel)
+int	color_side(t_data *d, int pixel)
 {
 	if (d->ray->side == 0 && d->x->ray_dir < 0)
-		return (d->img_we->pxs[pixel]); // WE
+		return (d->img_we->pxs[pixel]);
 	else if (d->ray->side == 0 && d->x->ray_dir >= 0)
-		return (d->img_ea->pxs[pixel]); // EA
+		return (d->img_ea->pxs[pixel]);
 	else if (d->ray->side == 1 && d->y->ray_dir < 0)
-		return (d->img_no->pxs[pixel]); // NO
+		return (d->img_no->pxs[pixel]);
 	else
-		return (d->img_so->pxs[pixel]); //SO
+		return (d->img_so->pxs[pixel]);
 }
 
-void init_asset(t_data *d)
+void	init_asset(t_data *d)
 {
 	load_img(d, d->img_no, d->no);
 	load_img(d, d->img_we, d->we);
@@ -32,10 +32,10 @@ void init_asset(t_data *d)
 	load_img(d, d->img_ea, d->ea);
 }
 
-int rendering(t_data *d)
+int	rendering(t_data *d)
 {
 	d->ray->texwidth = d->img_no->w;
-	d->ray->texheight =d->img_no->h;
+	d->ray->texheight = d->img_no->h;
 	if (d->ray->side == 0)
 		d->ray->wall = d->pposy + (d->ray->perpwalldist * d->y->ray_dir);
 	else
@@ -49,14 +49,15 @@ int rendering(t_data *d)
 	return (SUCCESS);
 }
 
-int paint_tex(t_data *d, int x, int start)
+int	paint_tex(t_data *d, int x, int start)
 {
-	int pixel;
-	int color;
-	
+	int	pixel;
+	int	color;
+
 	rendering(d);
 	d->ray->step = 1.0 * d->ray->texheight / d->ray->lineheight;
-	d->ray->tex_pos = (d->ray->drawstart - ((WIN_H * ZOOM) / 2) + d->ray->lineheight / 2) * d->ray->step;
+	d->ray->tex_pos = (d->ray->drawstart - ((WIN_H * ZOOM) / 2) \
+	+ d->ray->lineheight / 2) * d->ray->step;
 	while (start < d->ray->drawend)
 	{
 		d->y->tex = (int)d->ray->tex_pos & (d->ray->texheight - 1);

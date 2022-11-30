@@ -38,7 +38,7 @@
 # define MAP_START 10
 # define BYE "Bye\n"
 
-# define WIN_TITLE "Cub3D: Title TBD"
+# define WIN_TITLE "Cub3D: Find our secret map, where Angela will meet..."
 
 // Window size
 # define ZOOM 4
@@ -66,7 +66,6 @@
 # define PNK 0x00F984E5
 # define BLK 0x00000000
 
-
 typedef struct s_img
 {
 	void	*img;
@@ -75,8 +74,8 @@ typedef struct s_img
 	int		bpp;
 	int		line_length;
 	int		endian;
-	int 	w;
-	int 	h;
+	int		w;
+	int		h;
 }	t_img;
 
 typedef struct s_raycasting
@@ -104,12 +103,9 @@ typedef struct s_rayunits
 	int		drawend;
 	double	tex_pos;
 	double	step;
-//	int		color;
-//	int		tex_num;
-//	int		**buffer;
 	int		texwidth;
-	int 	texheight;
-	double 	wall;
+	int		texheight;
+	double	wall;
 }	t_rayunits;
 
 typedef struct s_data
@@ -127,7 +123,7 @@ typedef struct s_data
 	t_img			*img_no;
 	t_img			*img_ea;
 	t_img			*img_we;
-  char			*no;
+	char			*no;
 	int				check_no;
 	char			*so;
 	int				check_so;
@@ -152,7 +148,6 @@ typedef struct s_data
 	char			pos;
 	int				angle;
 }	t_data;
-
 
 /*
  * main.c
@@ -270,8 +265,8 @@ void	side(t_data *d);
  */
 void	init_asset(t_data *d);
 int		color_side(t_data *d, int pix);
-int 	paint_tex(t_data *d, int x, int start);
-int 	rendering(t_data *d);
+int		paint_tex(t_data *d, int x, int start);
+int		rendering(t_data *d);
 /*
  * angles.c
  */
