@@ -37,8 +37,8 @@ SRCS_FILES	= main.c \
 				angles.c \
 				drawing.c \
 				moves.c \
-				mlx_utils.c
-				#textures.c \
+				mlx_utils.c \
+				textures.c
 
 
 INC_FILES	= cub3d.h
@@ -64,7 +64,7 @@ CC				= gcc
 AR              = ar rcs
 MKDIR           = mkdir -p
 RM              = rm -rf
-CFLAGS          = -Wall -Wextra -Werror -g3 -fsanitize=address -Imlx
+CFLAGS          = -Wall -Wextra -Werror -g3 -Imlx #-fsanitize=address
 MLXFLAGS        = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 TSEP            = ${SEP}...${RESET}

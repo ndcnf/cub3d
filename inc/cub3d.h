@@ -52,7 +52,7 @@
 
 // Misc.
 # define ROT_ANGL 3
-# define SPEED 0.05
+# define SPEED 0.20
 # define TEX_SIZE 64
 
 // Colors
@@ -91,7 +91,6 @@ typedef struct s_raycasting
 	int		step;
 	float	o_dir;
 	float	o_plane;
-	float	wall;
 	int		tex;
 }	t_raycasting;
 
@@ -103,14 +102,13 @@ typedef struct s_rayunits
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
-	float	tex_pos;
-	float	step;
-	int		color;
-	int		tex_num;
-	int		**buffer;
-
-	int		texwidth; //textures
-	int 	texheight; //textures
+	double	tex_pos;
+	double	step;
+//	int		color;
+//	int		tex_num;
+//	int		**buffer;
+	int		texwidth;
+	int 	texheight;
 	double 	wall;
 }	t_rayunits;
 
@@ -272,8 +270,8 @@ void	side(t_data *d);
  */
 void	init_asset(t_data *d);
 int		color_side(t_data *d, int pix);
-int 	tex_pix(t_data *d, int pix);
-//void	load_tex(t_data *d);
+int 	paint_tex(t_data *d, int x, int start);
+int 	rendering(t_data *d);
 /*
  * angles.c
  */
@@ -284,7 +282,6 @@ void	player_angle(t_data *d);
  */
 void	draw_set(t_data *d);
 void	draw(t_data *d, int x);
-int		color_side(t_data *d);
 /*
  * moves.c
  */

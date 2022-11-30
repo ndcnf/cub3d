@@ -43,7 +43,10 @@ int	main_parsing(int ac, char **av, t_data *data)
 	printf("✅ args_error(ac)\n");
 	fd = safe_open_map_name_cub(av[1]);
 	if (fd == -1)
-		return (ERROR);
+	{
+		close(fd);
+		exit(0);
+	}
 	close(fd);
 	if (load_map(data, fd, av[1]) != SUCCESS)
 		return (ERROR);
